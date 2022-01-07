@@ -7,6 +7,7 @@ import { useQuery } from 'react-query'
 import type { StackDetail } from 'shared/types'
 import { useDetailQuery } from 'shared/queries'
 import { fetchUsers } from 'shared/utils'
+
 import { useSignInDialog } from 'contexts'
 import { useUsedByMutation } from 'hooks'
 

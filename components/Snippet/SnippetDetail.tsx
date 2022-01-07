@@ -41,7 +41,7 @@ export default function SnippetDetail({ body }: { body: MDX | undefined }) {
             scrollContainerRef={scrollContainerRef}
           />
           <div>
-            <article className="p-8 overflow-x-hidden">
+            <article className="px-3 lg:px-8 py-8 overflow-x-hidden">
               <div className="flex items-center space-x-4 flex-1">
                 <Image
                   src={`/logos/${snippetQuery.data.logo}`}

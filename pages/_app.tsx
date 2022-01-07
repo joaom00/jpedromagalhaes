@@ -1,5 +1,6 @@
 import 'styles/global.css'
 import 'styles/prose.css'
+import 'styles/nprogress.css'
 
 import React from 'react'
 import type { NextPage } from 'next'
@@ -15,7 +16,7 @@ import useSound from 'use-sound'
 
 import { SiteLayout } from 'layouts'
 import { NavigationProvider, SignInDialogProvider } from 'contexts'
-import { Toast, CommandBar } from 'components'
+import { Toast, CommandBar, NProgress } from 'components'
 
 import commandBarSound from '../public/sounds/command-bar.mp3'
 
@@ -92,6 +93,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                   <CommandBar>
                     <SiteLayout>
                       <Component {...pageProps} />
+                      <NProgress />
                     </SiteLayout>
                   </CommandBar>
                 </SignInDialogProvider>

@@ -8,6 +8,7 @@ import { PlusIcon, SpinnerIcon } from 'icons'
 import { Dialog, TextField, Textarea } from 'components'
 
 import { useCreateQuestionMutation } from './queries'
+import { useRouter } from 'next/router'
 
 export default function AddQuestionDialog() {
   const [open, setOpen] = React.useState(false)
@@ -16,6 +17,7 @@ export default function AddQuestionDialog() {
     description: ''
   })
 
+  const router = useRouter()
   const { data: session } = useSession()
   const signInDialog = useSignInDialog()
   const createQuestion = useCreateQuestionMutation()
@@ -30,7 +32,8 @@ export default function AddQuestionDialog() {
     if (createQuestion.isLoading) return
 
     createQuestion.mutate(values, {
-      onSuccess: () => {
+      onSuccess: (question) => {
+        router.push(`/guestbook/${question.id}`)
         toast.success('Comentário adicionado!')
         setOpen(false)
       }

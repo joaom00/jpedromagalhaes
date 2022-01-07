@@ -1,7 +1,9 @@
 import { useMutation, useQueryClient } from 'react-query'
+import { Question } from '@prisma/client'
+
 import { QuestionDetail } from 'shared/types'
 
-async function createQuestion(values: { title: string; description: string }) {
+async function createQuestion(values: { title: string; description: string }): Promise<Question> {
   const response = await fetch('/api/questions', {
     method: 'POST',
     body: JSON.stringify(values)
@@ -11,6 +13,9 @@ async function createQuestion(values: { title: string; description: string }) {
     const { message } = await response.json()
     throw new Error(message)
   }
+
+  const data = await response.json()
+  return data
 }
 
 export function useCreateQuestionMutation() {

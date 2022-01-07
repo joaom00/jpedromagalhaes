@@ -1,13 +1,21 @@
 import { useTheme } from 'next-themes'
 import { animated, useSpring } from 'react-spring'
+import useSound from 'use-sound'
+
+import toggleThemeSound from '../../public/sounds/toggle-theme.mp3'
 
 export default function ToggleThemeButton() {
   const { resolvedTheme, setTheme } = useTheme()
+  const [toggleThemeSoundPlay] = useSound(toggleThemeSound)
+
   return (
     <button
       aria-label={resolvedTheme === 'dark' ? 'Trocar para tema claro' : 'Trocar para tema escuro'}
       className="bg-gray-200 bg-opacity-0 hover:bg-opacity-100 transition duration-200 dark:bg-gray-800 dark:bg-opacity-0 dark:hover:bg-opacity-100 text-sm rounded-lg p-2 text-gray-700 dark:text-white"
-      onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+      onClick={() => {
+        setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
+        toggleThemeSoundPlay()
+      }}
     >
       <SunMoonIcon />
     </button>

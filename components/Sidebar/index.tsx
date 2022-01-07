@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { signOut, useSession } from 'next-auth/react'
+import { useMutation } from 'react-query'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog'
 
@@ -33,7 +34,6 @@ import { SidebarLink } from './SidebarLink'
 import { SidebarOverlay } from './SidebarOverlay'
 
 import commandBarSound from '../../public/sounds/command-bar.mp3'
-import { useMutation } from 'react-query'
 
 const glassEffect =
   'backdrop-filter dark:backdrop-filter backdrop-blur-lg dark:backdrop-blur-lg bg-opacity-20 dark:bg-opacity-50'
@@ -45,7 +45,7 @@ export default function Sidebar() {
   const { data: session } = useSession()
   const router = useRouter()
   const { query } = useKBar()
-  const [play] = useSound(commandBarSound)
+  const [commandBarSoundPlay] = useSound(commandBarSound)
 
   const navigation = useNavigation()
   const signInDialog = useSignInDialog()
@@ -191,11 +191,11 @@ export default function Sidebar() {
                   aria-hidden
                   className="ml-auto rounded-md p-1"
                   onClick={() => {
-                    play()
+                    commandBarSoundPlay()
                     query.toggle()
                   }}
                 >
-                  <RiCommandFill size={14} />
+                  <RiCommandFill size={14} aria-hidden />
                 </button>
               </Tooltip>
             </div>

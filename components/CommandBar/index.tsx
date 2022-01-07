@@ -10,9 +10,9 @@ import {
   Action,
   useMatches
 } from 'kbar'
+import { useTheme } from 'next-themes'
 
 import { GitbubIcon, LinkedinIcon, SteamIcon, TwitterIcon } from 'icons'
-import { useTheme } from 'next-themes'
 
 type CommandBarProps = {
   children: React.ReactNode

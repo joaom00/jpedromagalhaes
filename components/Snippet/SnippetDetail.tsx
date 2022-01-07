@@ -29,7 +29,7 @@ export default function SnippetDetail({ body }: { body: MDX | undefined }) {
         <Head>
           <title>{`Snippets | ${snippetQuery.data.title}`}</title>
         </Head>
-        <div ref={scrollContainerRef} className="relative max-h-screen overflow-y-auto w-full">
+        <div ref={scrollContainerRef} className="relative flex flex-col w-full max-h-screen overflow-y-auto">
           <TitleBar
             title={snippetQuery.data.title}
             globalMenu={false}

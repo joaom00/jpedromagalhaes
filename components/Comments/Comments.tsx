@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSession } from 'next-auth/react'
 import { useQuery } from 'react-query'
+import toast from 'react-hot-toast'
 
 import type { Scope } from 'shared/types'
 import { fetchComments } from 'shared/utils'
@@ -22,6 +23,7 @@ type CommentsProps = {
 export default function Comments({ scope, identifier, scrollContainerRef }: CommentsProps) {
   const commentsContainerRef = React.useRef<HTMLDivElement>(null)
   const [value, setValue] = React.useState('')
+  const [cachedValue, setCachedValue] = React.useState('')
 
   const { data: session } = useSession()
   const signInDialog = useSignInDialog()
@@ -37,15 +39,24 @@ export default function Comments({ scope, identifier, scrollContainerRef }: Comm
 
     if (createComment.isLoading) return
 
+    setCachedValue(value)
+    setValue('')
     createComment.mutate(
       { text: value, keys: { scope, identifier } },
       {
         onSuccess: () => {
-          setValue('')
+          setCachedValue('')
           scrollContainerRef.current?.scrollTo({
             behavior: 'smooth',
             top: scrollContainerRef.current.scrollHeight
           })
+        },
+        onError: (error) => {
+          if (error instanceof Error) {
+            toast.error(error.message)
+          }
+          setValue(cachedValue)
+          setCachedValue('')
         }
       }
     )

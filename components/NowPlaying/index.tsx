@@ -1,7 +1,5 @@
 import React from 'react'
 
-import { api } from 'lib/api'
-
 import { SpotifyIcon, AnimatedBars } from 'icons'
 
 type NowPlaying = {
@@ -17,7 +15,8 @@ export default function NowPlaying() {
 
   React.useEffect(() => {
     async function getNowPlaying() {
-      const data = await api(`/now-playing`)
+      const response = await fetch(`/api/now-playing`)
+      const data = await response.json()
 
       setNowPlaying(data)
     }

@@ -29,7 +29,7 @@ export default function SnippetDetail({ body }: { body: MDX | undefined }) {
         <Head>
           <title>{`Snippets | ${snippetQuery.data.title}`}</title>
         </Head>
-        <div ref={scrollContainerRef} className="relative flex flex-col w-full max-h-screen overflow-y-auto">
+        <div ref={scrollContainerRef} className="flex flex-col relative w-full max-h-screen overflow-y-auto">
           <TitleBar
             title={snippetQuery.data.title}
             globalMenu={false}
@@ -40,25 +40,27 @@ export default function SnippetDetail({ body }: { body: MDX | undefined }) {
             titleRef={titleRef}
             scrollContainerRef={scrollContainerRef}
           />
-          <article className="p-8 overflow-x-hidden">
-            <div className="flex items-center space-x-4 flex-1">
-              <Image
-                src={`/logos/${snippetQuery.data.logo}`}
-                alt={snippetQuery.data.title}
-                width={80}
-                height={80}
-                className="rounded-2xl"
-              />
-              <h1 ref={titleRef} className="text-3xl font-semibold flex-1">
-                {snippetQuery.data.title}
-              </h1>
-            </div>
-            <p className="text-gray-500 dark:text-gray-400 mt-6">{snippetQuery.data.description}</p>
+          <div>
+            <article className="p-8 overflow-x-hidden">
+              <div className="flex items-center space-x-4 flex-1">
+                <Image
+                  src={`/logos/${snippetQuery.data.logo}`}
+                  alt={snippetQuery.data.title}
+                  width={80}
+                  height={80}
+                  className="rounded-2xl"
+                />
+                <h1 ref={titleRef} className="text-3xl font-semibold flex-1">
+                  {snippetQuery.data.title}
+                </h1>
+              </div>
+              <p className="text-gray-500 dark:text-gray-400 mt-6">{snippetQuery.data.description}</p>
 
-            <div className="prose dark:prose-dark w-full">
-              <Component components={MDXComponents} />
-            </div>
-          </article>
+              <div className="prose dark:prose-dark w-full">
+                <Component components={MDXComponents} />
+              </div>
+            </article>
+          </div>
           <Comments scope="snippets" identifier={slug} scrollContainerRef={scrollContainerRef} />
         </div>
       </>

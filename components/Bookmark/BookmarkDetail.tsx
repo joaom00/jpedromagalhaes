@@ -42,14 +42,6 @@ export default function BookmarkDetail() {
               <h1 ref={titleRef} className="text-2xl lg:text-3xl font-semibold flex-1">
                 {bookmarkQuery.data.title}
               </h1>
-              <a
-                href={bookmarkQuery.data.url}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="bg-blue-600 px-5 py-1.5 rounded-md text-white"
-              >
-                Visitar
-              </a>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-4 h-4 rounded-2xl overflow-hidden">
@@ -64,6 +56,14 @@ export default function BookmarkDetail() {
               <span className="text-gray-400">{bookmarkQuery.data.host}</span>
             </div>
             <p className="text-gray-500 dark:text-gray-400 mt-6">{bookmarkQuery.data.description}</p>
+            <a
+              href={bookmarkQuery.data.url}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="bg-blue-600 py-1.5 rounded-md text-white text-center mt-5 w-full block hover:bg-opacity-80 transition-all duration-200"
+            >
+              Visitar
+            </a>
           </div>
           <Comments scope="bookmarks" identifier={id} scrollContainerRef={scrollContainerRef} />
         </div>

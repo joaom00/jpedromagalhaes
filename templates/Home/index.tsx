@@ -13,9 +13,9 @@ export default function HomeTemplate() {
     return (
       <div className="w-full">
         <TitleBar title="Início" />
-        <div className="pt-20">
-          <div className="flex justify-between items-center max-w-3xl mx-auto">
-            <h1 className="text-lg font-bold">Olá, eu sou João Pedro</h1>
+        <div className="pt-20 px-4 sm:px-0">
+          <div className="flex flex-wrap justify-between items-center max-w-3xl mx-auto">
+            <h1 className="text-lg font-bold mb-5 sm:mb-0">Olá, eu sou João Pedro</h1>
             <span className="text-sm font-semibold">
               Pressione <kbd className="p-1.5 bg-gray-250 dark:bg-gray-800 rounded-md">{isMac ? '⌘' : 'ctrl'}</kbd> +{' '}
               <kbd className="p-1.5 bg-gray-250 dark:bg-gray-800 rounded-md">k</kbd> para navegação rápida

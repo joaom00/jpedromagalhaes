@@ -4,7 +4,6 @@ import { useQuery } from 'react-query'
 
 import type { Scope } from 'shared/types'
 import { fetchComments } from 'shared/utils'
-import { useIntersectionObserver } from 'hooks'
 
 import { useSignInDialog } from 'contexts'
 
@@ -23,10 +22,6 @@ type CommentsProps = {
 export default function Comments({ scope, identifier, scrollContainerRef }: CommentsProps) {
   const commentsContainerRef = React.useRef<HTMLDivElement>(null)
   const [value, setValue] = React.useState('')
-  const [isVisible] = useIntersectionObserver({
-    elementRef: commentsContainerRef,
-    rootMargin: '-67px -67px -67px -67px'
-  })
 
   const { data: session } = useSession()
   const signInDialog = useSignInDialog()
@@ -108,11 +103,7 @@ export default function Comments({ scope, identifier, scrollContainerRef }: Comm
           </div>
         )}
       </div>
-      <div
-        className={`bg-white border-t border-gray-250 dark:border-gray-800 dark:bg-gray-900 pb-10 sm:pb-0 sticky bottom-0 flex flex-col transition duration-300 ease-in-out ${
-          isVisible ? 'translate-y-0' : 'translate-y-20'
-        }`}
-      >
+      <div className="bg-white border-t border-gray-250 dark:border-gray-800 dark:bg-gray-900 pb-10 sm:pb-0 sticky bottom-0 flex flex-col transition duration-300 ease-in-out">
         <form
           className="flex items-center flex-none w-full max-w-3xl px-4 py-4 mx-auto space-x-4 md:px-6"
           onSubmit={handleSubmit}

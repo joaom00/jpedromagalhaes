@@ -18,6 +18,7 @@ import {
 } from 'react-icons/hi'
 
 import { FaGithub, FaLinkedin, FaTwitter, FaSteam, FaJs, FaReact } from 'react-icons/fa'
+import { FiCompass } from 'react-icons/fi'
 
 import { RiArrowRightUpLine, RiEarthFill } from 'react-icons/ri'
 
@@ -49,5 +50,6 @@ export {
   FaTwitter as TwitterIcon,
   FaSteam as SteamIcon,
   RiArrowRightUpLine as ExternalLinkIcon,
-  RiEarthFill as WebsiteIcon
+  RiEarthFill as WebsiteIcon,
+  FiCompass as CompassIcon
 }

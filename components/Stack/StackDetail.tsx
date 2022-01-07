@@ -53,8 +53,8 @@ export default function StackDetail() {
             titleRef={titleRef}
             scrollContainerRef={scrollContainerRef}
           />
-          <div className="p-3 lg:px-8 py-8">
-            <div className="flex flex-wrap items-center">
+          <div className="px-3 lg:px-8 py-8">
+            <div className="flex items-center">
               <Image
                 src={toolQuery.data.image}
                 alt={toolQuery.data.name}
@@ -65,16 +65,17 @@ export default function StackDetail() {
               <h1 ref={titleRef} className="text-2xl xl:text-3xl tracking-wider font-semibold flex-1 ml-6">
                 {toolQuery.data.name}
               </h1>
-              <a
-                href={toolQuery.data.url}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="bg-blue-600 px-5 py-1.5 rounded-md text-white w-full md:w-auto mt-5 text-center"
-              >
-                Visitar
-              </a>
             </div>
             <p className="text-gray-500 dark:text-gray-400 mt-6">{toolQuery.data.description}</p>
+
+            <a
+              href={toolQuery.data.url}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="bg-blue-600 py-1.5 rounded-md text-white mt-5 text-center block hover:bg-opacity-80 transition-all duration-200"
+            >
+              Visitar
+            </a>
 
             <div className="bg-gray-150 dark:bg-gray-800 flex flex-col border border-gray-250 dark:border-gray-700 rounded-md overflow-hidden mt-5">
               <div className="p-4">

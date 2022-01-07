@@ -245,7 +245,7 @@ export default function Sidebar() {
                   <DropdownMenu.Trigger asChild>
                     <button
                       aria-label="Sair da conta"
-                      className="bg-gray-200 bg-opacity-0 hover:bg-opacity-100 transition duration-200 dark:bg-gray-800 dark:bg-opacity-0 dark:hover:bg-opacity-100 text-sm rounded-lg p-2 text-gray-700 dark:text-white"
+                      className="bg-gray-200 bg-opacity-0 hover:bg-opacity-100 transition duration-200 dark:bg-gray-800 dark:bg-opacity-0 dark:hover:bg-opacity-100 text-sm rounded-lg p-2 text-gray-600 dark:text-white"
                     >
                       <ConfigIcon aria-hidden />
                     </button>

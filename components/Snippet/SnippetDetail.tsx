@@ -1,6 +1,5 @@
 import React from 'react'
 import Head from 'next/head'
-import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useMDXComponent } from 'next-contentlayer/hooks'
 import { MDX } from '.contentlayer/types'
@@ -8,7 +7,7 @@ import { MDX } from '.contentlayer/types'
 import type { SnippetDetail } from 'shared/types'
 import { useDetailQuery } from 'shared/queries'
 
-import { TitleBar, MDXComponents } from 'components'
+import { TitleBar, MDXComponents, Image } from 'components'
 import { Comments } from 'components/Comments'
 
 import SnippetActions from './SnippetActions'

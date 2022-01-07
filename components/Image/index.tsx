@@ -1,6 +1,6 @@
 import NextImage, { ImageProps } from 'next/image'
 
-const shimmer = (width: number, height: number) => `
+const shimmer = (width?: string | number, height?: string | number) => `
 <svg width="${width}" height="${height}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <defs>
     <linearGradient id="g">
@@ -24,7 +24,7 @@ export default function Image({ width, height, alt, ...props }: ImageProps) {
       height={height}
       alt={alt}
       placeholder="blur"
-      blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(48, 48))}`}
+      blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(width, height))}`}
       {...props}
     />
   )

@@ -12,7 +12,19 @@ import {
 } from 'kbar'
 import { useTheme } from 'next-themes'
 
-import { GitbubIcon, LinkedinIcon, SteamIcon, TwitterIcon } from 'icons'
+import {
+  GitbubIcon,
+  LinkedinIcon,
+  StackIcon,
+  SteamIcon,
+  TwitterIcon,
+  HomeIcon,
+  BookmarkIcon,
+  GuestbookIcon,
+  SnippetIcon,
+  JSIcon,
+  ReactIcon
+} from 'icons'
 
 type CommandBarProps = {
   children: React.ReactNode
@@ -58,47 +70,70 @@ export default function CommandBar({ children }: CommandBarProps) {
       name: 'Início',
       shortcut: ['g', 'i'],
       keywords: 'go inicio',
-      section: 'Go To',
-      perform: () => router.push('/')
+      section: 'Eu',
+      perform: () => router.push('/'),
+      icon: <HomeIcon />
     },
     {
       id: 'bookmarks',
       name: 'Bookmarks',
       shortcut: ['g', 'b'],
       keywords: 'go bookmarks',
-      section: 'Go To',
-      perform: () => router.push('/bookmarks')
+      section: 'Eu',
+      perform: () => router.push('/bookmarks'),
+      icon: <BookmarkIcon />
     },
     {
       id: 'guestbook',
       name: 'Guestbook',
       shortcut: ['g', 'g'],
       keywords: 'go guestbook',
-      section: 'Go To',
-      perform: () => router.push('/guestbook')
+      section: 'Eu',
+      perform: () => router.push('/guestbook'),
+      icon: <GuestbookIcon />
     },
     {
       id: 'snippets',
       name: 'Snippets',
       shortcut: ['g', 's', 'p'],
       keywords: 'go snippets',
-      section: 'Go To',
-      perform: () => router.push('/snippets')
+      section: 'Eu',
+      perform: () => router.push('/snippets'),
+      icon: <SnippetIcon />
     },
     {
       id: 'stack',
       name: 'Stack',
       shortcut: ['g', 's'],
       keywords: 'go stack',
-      section: 'Go To',
-      perform: () => router.push('/stack')
+      section: 'Eu',
+      perform: () => router.push('/stack'),
+      icon: <StackIcon />
+    },
+    {
+      id: 'javascript-projects',
+      name: 'JavaScript',
+      shortcut: ['g', 'p', 'j'],
+      keywords: 'go javascript js projects',
+      section: 'Projetos',
+      perform: () => router.push('/projetos/javascript'),
+      icon: <JSIcon />
+    },
+    {
+      id: 'react-next-projects',
+      name: 'React & Next',
+      shortcut: ['g', 'p', 'r'],
+      keywords: 'go react next projects',
+      section: 'Projetos',
+      perform: () => router.push('/projetos/react-next'),
+      icon: <ReactIcon />
     },
     {
       id: 'github',
       name: 'GitHub',
       shortcut: ['f', 'g'],
       keywords: 'fallow-github',
-      section: 'Follow',
+      section: 'Sociais',
       perform: () => window.open('https://github.com/joaom00', '_blank'),
       icon: <GitbubIcon />
     },
@@ -107,7 +142,7 @@ export default function CommandBar({ children }: CommandBarProps) {
       name: 'Twitter',
       shortcut: ['f', 't'],
       keywords: 'fallow-twitter',
-      section: 'Follow',
+      section: 'Sociais',
       perform: () => window.open('https://twitter.com/joaom__00', '_blank'),
       icon: <TwitterIcon />
     },
@@ -116,7 +151,7 @@ export default function CommandBar({ children }: CommandBarProps) {
       name: 'LinkedIn',
       shortcut: ['f', 'l'],
       keywords: 'fallow-linkedin',
-      section: 'Follow',
+      section: 'Sociais',
       perform: () => window.open('https://linkedin.com/in/joaom00', '_blank'),
       icon: <LinkedinIcon />
     },
@@ -125,7 +160,7 @@ export default function CommandBar({ children }: CommandBarProps) {
       name: 'Steam',
       shortcut: ['f', 's'],
       keywords: 'fallow-steam',
-      section: 'Follow',
+      section: 'Sociais',
       perform: () => window.open('https://steamcommunity.com/id/negatlv3', '_blank'),
       icon: <SteamIcon />
     }

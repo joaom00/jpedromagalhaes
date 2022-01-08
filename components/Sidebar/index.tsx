@@ -207,7 +207,7 @@ export default function Sidebar() {
             {links.map((link, i) => {
               if (typeof link === 'string') {
                 return (
-                  <li key={i} className="px-2 pt-5 pb-2 text-xs font-medium text-gray-500">
+                  <li key={i} className="px-2 pt-5 pb-2 text-xs font-semibold text-gray-500">
                     {link}
                   </li>
                 )

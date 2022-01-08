@@ -54,7 +54,7 @@ export default function LikeButton({ id, hasReacted, count, loading, onClick }: 
     <button
       aria-label={hasReactedState ? 'Deixar de curtir' : 'Curtir'}
       onClick={handleClick}
-      className="flex space-x-2 flex-none items-center justify-center leading-none transition-all rounded-md border border-gray-250 dark:border-gray-700 px-4 py-2 overflow-hidden"
+      className="flex space-x-2 flex-none items-center justify-center leading-none transition-all rounded-md border bg-gray-250 dark:bg-gray-800 border-gray-250 dark:border-gray-600 px-4 py-2 overflow-hidden"
     >
       {hasReactedState ? (
         <span className="relative text-red-500">

@@ -5,6 +5,7 @@ import type { QueryKeys, Question } from 'shared/types'
 import { fetchList } from 'shared/utils'
 import { useIntersectionObserver } from 'hooks'
 
+import { SpinnerIcon } from 'icons'
 import { TitleBar } from 'components'
 
 import QuestionItem from './QuestionListItem'
@@ -43,6 +44,11 @@ export default function QuestionList() {
           </React.Fragment>
         ))}
       </ul>
+      {questionsQuery.isLoading && (
+        <div className="grid place-items-center pb-4">
+          <SpinnerIcon />
+        </div>
+      )}
       <div ref={endListRef} />
     </div>
   )

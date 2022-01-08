@@ -11,6 +11,7 @@ import { fetchUsers } from 'shared/utils'
 import { useSignInDialog } from 'contexts'
 import { useUsedByMutation } from 'hooks'
 
+import { SpinnerIcon } from 'icons'
 import { TitleBar, Image, Tooltip } from 'components'
 import { Comments } from 'components/Comments'
 
@@ -122,6 +123,14 @@ export default function StackDetail() {
           <Comments scope="stack" identifier={slug} scrollContainerRef={scrollContainerRef} />
         </div>
       </>
+    )
+  }
+
+  if (toolQuery.isLoading) {
+    return (
+      <div className="grid place-items-center w-full">
+        <SpinnerIcon />
+      </div>
     )
   }
 

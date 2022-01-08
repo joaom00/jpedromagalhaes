@@ -5,6 +5,7 @@ import Head from 'next/head'
 import type { BookmarkDetail } from 'shared/types'
 import { useDetailQuery } from 'shared/queries'
 
+import { SpinnerIcon } from 'icons'
 import { TitleBar } from 'components'
 import { Comments } from 'components/Comments'
 
@@ -68,6 +69,14 @@ export default function BookmarkDetail() {
           <Comments scope="bookmarks" identifier={id} scrollContainerRef={scrollContainerRef} />
         </div>
       </>
+    )
+  }
+
+  if (bookmarkQuery.isLoading) {
+    return (
+      <div className="grid place-items-center w-full">
+        <SpinnerIcon />
+      </div>
     )
   }
 

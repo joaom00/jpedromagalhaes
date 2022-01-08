@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import type { QuestionDetail } from 'shared/types'
 import { useDetailQuery } from 'shared/queries'
 
+import { SpinnerIcon } from 'icons'
 import { TitleBar } from 'components'
 import { Comments } from 'components/Comments'
 
@@ -60,6 +61,14 @@ export default function QuestionDetail() {
           <Comments scope="questions" identifier={id} scrollContainerRef={scrollContainerRef} />
         </div>
       </>
+    )
+  }
+
+  if (questionQuery.isLoading) {
+    return (
+      <div className="grid place-items-center w-full">
+        <SpinnerIcon />
+      </div>
     )
   }
 

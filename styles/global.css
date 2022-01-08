@@ -15,6 +15,10 @@
     @apply max-h-screen overflow-hidden text-base antialiased;
   }
 
+  body {
+    @apply dark:text-white;
+  }
+
   body:after {
     content: '';
     position: fixed;

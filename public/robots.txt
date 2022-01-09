@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://jpedromagalhaes.vercel.app/sitemap.xml

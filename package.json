@@ -8,7 +8,7 @@
     "analyze:server": "cross-env BUNDLE_ANALYZE=server next build",
     "dev": "next dev",
     "build": "next build",
-    "postbuild": "yarn prisma db push",
+    "postbuild": "NODE_OPTIONS='--experimental-json-modules' node ./scripts/generate-sitemap.mjs && yarn prisma db push",
     "start": "next start",
     "lint": "next lint"
   },
@@ -50,6 +50,7 @@
     "cross-env": "^7.0.3",
     "eslint": "7",
     "eslint-config-next": "12.0.4",
+    "globby": "^12.0.2",
     "postcss": "^8.4.5",
     "prettier": "^2.5.0",
     "prisma": "3.6.0",

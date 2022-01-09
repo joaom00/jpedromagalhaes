@@ -1,9 +1,14 @@
 {
-  "name": "portfolio20",
+  "name": "jpedromagalhaes",
+  "description": "João Pedro Magalhães - Desenvolvedor Front-End, UI/UX entusiasta & Gopher",
   "private": true,
   "scripts": {
+    "analyze": "cross-env ANALYZE=true next build",
+    "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build",
+    "analyze:server": "cross-env BUNDLE_ANALYZE=server next build",
     "dev": "next dev",
-    "build": "next build && yarn prisma db push",
+    "build": "next build",
+    "postbuild": "yarn prisma db push",
     "start": "next start",
     "lint": "next lint"
   },
@@ -22,6 +27,7 @@
     "motion": "^10.4.0",
     "next": "12.0.4",
     "next-auth": "^4.0.2",
+    "next-compose-plugins": "^2.2.1",
     "next-contentlayer": "^0.0.33",
     "next-themes": "^0.0.15",
     "nprogress": "^0.2.0",
@@ -36,10 +42,12 @@
     "use-sound": "^4.0.1"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^12.0.7",
     "@types/node": "16.11.10",
     "@types/nprogress": "^0.2.0",
     "@types/react": "17.0.37",
     "autoprefixer": "^10.4.0",
+    "cross-env": "^7.0.3",
     "eslint": "7",
     "eslint-config-next": "12.0.4",
     "postcss": "^8.4.5",

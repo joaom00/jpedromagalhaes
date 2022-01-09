@@ -1,18 +1,18 @@
 import React from 'react'
+import dynamic from 'next/dynamic'
 import { useSession } from 'next-auth/react'
 import { useQuery } from 'react-query'
 import toast from 'react-hot-toast'
 
 import type { Scope } from 'shared/types'
 import { fetchComments } from 'shared/utils'
-
 import { useSignInDialog } from 'contexts'
+import { useCreateCommentMutation } from './queries'
 
 import { SendIcon, SpinnerIcon } from 'icons'
 import { Textarea, Image } from 'components'
 
-import CommentMenu from './CommentMenu'
-import { useCreateCommentMutation } from './queries'
+const CommentMenu = dynamic(() => import('./CommentMenu'))
 
 type CommentsProps = {
   scope: Scope

@@ -1,13 +1,13 @@
 import React from 'react'
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { signOut, useSession } from 'next-auth/react'
 import { useMutation } from 'react-query'
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog'
-
 import { useKBar } from 'kbar'
 import useSound from 'use-sound'
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
+import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog'
 
 import { useNavigation, useSignInDialog } from 'contexts'
 
@@ -28,12 +28,15 @@ import {
   SpinnerIcon
 } from 'icons'
 import { RiCommandFill } from 'react-icons/ri'
-import { NowPlaying, ToggleThemeButton, Tooltip, AlertDialog } from 'components'
+import { NowPlaying, ToggleThemeButton } from 'components'
 
 import { SidebarLink } from './SidebarLink'
 import { SidebarOverlay } from './SidebarOverlay'
 
 import commandBarSound from '../../public/sounds/command-bar.mp3'
+
+const Tooltip = dynamic(() => import('components/Tooltip'))
+const AlertDialog = dynamic(() => import('components/AlertDialog'))
 
 const glassEffect =
   'backdrop-filter dark:backdrop-filter backdrop-blur-lg dark:backdrop-blur-lg bg-opacity-20 dark:bg-opacity-50'

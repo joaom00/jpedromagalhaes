@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import { useQuery } from 'react-query'
 
 import type { QueryKeys, Snippet } from 'shared/types'
@@ -6,7 +7,7 @@ import { fetchList } from 'shared/utils'
 import { TitleBar } from 'components'
 
 import SnippetItem from './SnippetListItem'
-import AddSnippetDialog from './AddSnippetDialog'
+const AddSnippetDialog = dynamic(() => import('./AddSnippetDialog'))
 
 export default function SnippetList() {
   const snippetsQuery = useQuery<Snippet[], unknown, Snippet[], QueryKeys>(

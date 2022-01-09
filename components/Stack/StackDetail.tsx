@@ -1,5 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react'
 import { useQuery } from 'react-query'
@@ -13,9 +14,9 @@ import { useUsedByMutation } from 'hooks'
 
 import { SpinnerIcon } from 'icons'
 import { TitleBar, Image, Tooltip } from 'components'
-import { Comments } from 'components/Comments'
 
-import StackActions from './StackActions'
+const Comments = dynamic(() => import('components/Comments/Comments'))
+const StackActions = dynamic(() => import('./StackActions'))
 
 export default function StackDetail() {
   const titleRef = React.useRef(null)

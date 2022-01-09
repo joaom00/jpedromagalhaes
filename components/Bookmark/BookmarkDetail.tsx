@@ -1,16 +1,17 @@
 import React from 'react'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 
 import type { BookmarkDetail } from 'shared/types'
 import { useDetailQuery } from 'shared/queries'
 
 import { SpinnerIcon } from 'icons'
 import { TitleBar } from 'components'
-import { Comments } from 'components/Comments'
 
-import BookmarkActions from './BookmarkActions'
-import { useRouter } from 'next/router'
+const BookmarkActions = dynamic(() => import('./BookmarkActions'))
+const Comments = dynamic(() => import('components/Comments/Comments'))
 
 export default function BookmarkDetail() {
   const titleRef = React.useRef<HTMLHeadingElement>(null)

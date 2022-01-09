@@ -1,4 +1,5 @@
 import React from 'react'
+import dynamic from 'next/dynamic'
 import { useInfiniteQuery } from 'react-query'
 
 import type { QueryKeys, Stack } from 'shared/types'
@@ -9,7 +10,7 @@ import { SpinnerIcon } from 'icons'
 import { TitleBar } from 'components'
 
 import StackItem from './StackListItem'
-import AddStackDialog from './AddStackDialog'
+const AddStackDialog = dynamic(() => import('./AddStackDialog'))
 
 type StackData = {
   stack: Stack[]

@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import { useQuery } from 'react-query'
 
 import type { QueryKeys, Bookmark } from 'shared/types'
@@ -7,7 +8,8 @@ import { SpinnerIcon } from 'icons'
 import { TitleBar } from 'components'
 
 import BookmarkItem from './BookmarkListItem'
-import AddBookmarkDialog from './AddBookmarkDialog'
+
+const AddBookmarkDialog = dynamic(() => import('./AddBookmarkDialog'))
 
 export default function BookmarkList() {
   const bookmarksQuery = useQuery<Bookmark[], unknown, Bookmark[], QueryKeys>(

@@ -1,15 +1,15 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react'
-import toast from 'react-hot-toast'
-import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog'
+import { toast } from 'react-hot-toast'
+import { Action as AlertDialogAction, Cancel as AlertDialogCancel } from '@radix-ui/react-alert-dialog'
 
-import { BookmarkDetail } from 'shared/types'
+import type { BookmarkDetail } from 'shared/types'
 import { useReactionMutation } from 'hooks'
 import { useUpdateBookmarkMutation, useDeleteBookmarkMutation } from './queries'
 
 import { DeleteIcon, EditIcon, SpinnerIcon } from 'icons'
-import { LikeButton, AlertDialog, TextField, Textarea, Dialog } from 'components'
+import { LikeButton, AlertDialog, Textarea, TextField, Dialog } from 'components'
 
 type BookmarkActionsProps = {
   bookmark: BookmarkDetail
@@ -82,20 +82,20 @@ export default function BookmarkActions({ bookmark }: BookmarkActionsProps) {
         onOpenChange={setDeleteDialogOpen}
       >
         <div className="flex justify-end mt-5 gap-5">
-          <AlertDialogPrimitive.Cancel
+          <AlertDialogCancel
             className="py-2 px-3 rounded-md bg-gray-250 dark:bg-gray-700 hover:opacity-90"
             disabled={deleteBookmark.isLoading}
           >
             Cancelar
-          </AlertDialogPrimitive.Cancel>
-          <AlertDialogPrimitive.Action
+          </AlertDialogCancel>
+          <AlertDialogAction
             className="py-2 px-3 rounded-md bg-red-700 text-white hover:opacity-90 flex items-center gap-3"
             disabled={deleteBookmark.isLoading}
             onClick={onDeleteBookmark}
           >
             {deleteBookmark.isLoading && <SpinnerIcon />}
             Deletar bookmark
-          </AlertDialogPrimitive.Action>
+          </AlertDialogAction>
         </div>
       </AlertDialog>
 

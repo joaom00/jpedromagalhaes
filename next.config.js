@@ -5,6 +5,7 @@ const { withContentlayer } = require('next-contentlayer')
  */
 module.exports = withContentlayer()({
   reactStrictMode: true,
+  swcMinify: true,
   images: {
     domains: [
       'pbs.twimg.com', // Twitter
@@ -14,7 +15,7 @@ module.exports = withContentlayer()({
       'camo.githubusercontent.com'
     ]
   },
-  webpack(config, { dev, isServer }) {
+  webpack(config) {
     config.module.rules.push({
       test: /\.(ogg|mp3|wav|mpe?g)$/i,
       use: [

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useKBar } from 'kbar'
 
-import { TitleBar } from 'components'
+import { Container, TitleBar } from 'components'
 
 export default function HomeTemplate() {
   const [mounted, setMounted] = React.useState(false)
@@ -16,7 +16,7 @@ export default function HomeTemplate() {
     const isMobile = /iPhone|iPad|Android/i.test(navigator.userAgent)
 
     return (
-      <div className="flex flex-col w-full max-h-screen overflow-y-auto">
+      <Container title="João Pedro Magalhães - Desenvolvedor Front-End, UI/UX entusiasta & Gopher">
         <TitleBar title="Início" />
         <div className="pt-20 px-4 sm:px-0 overflow-y-auto">
           <div className="flex flex-wrap justify-between items-center max-w-3xl mx-auto">
@@ -75,7 +75,7 @@ export default function HomeTemplate() {
             </li>
           </ul>
         </div>
-      </div>
+      </Container>
     )
   }
 

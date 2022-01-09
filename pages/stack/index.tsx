@@ -20,5 +20,3 @@ export async function getServerSideProps() {
     }
   }
 }
-
-StackPage.title = 'Stack - João Pedro Magalhães'

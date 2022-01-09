@@ -3,9 +3,7 @@ import 'styles/prose.css'
 import 'styles/nprogress.css'
 
 import React from 'react'
-import type { NextPage } from 'next'
-import type { AppProps as NextAppProps } from 'next/app'
-import Head from 'next/head'
+import type { AppProps } from 'next/app'
 import { SessionProvider } from 'next-auth/react'
 import { ThemeProvider } from 'next-themes'
 import { Hydrate, MutationCache, QueryClient, QueryClientProvider } from 'react-query'
@@ -19,12 +17,6 @@ import { NavigationProvider, SignInDialogProvider } from 'contexts'
 import { Toast, CommandBar, NProgress } from 'components'
 
 import commandBarSound from '../public/sounds/command-bar.mp3'
-
-type AppProps = NextAppProps & {
-  Component: NextPage & {
-    title: string
-  }
-}
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = React.useState(
@@ -79,10 +71,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <Head>
-        <title>{Component.title}</title>
-      </Head>
-
       <Toast />
       <SessionProvider session={pageProps.session}>
         <QueryClientProvider client={queryClient}>

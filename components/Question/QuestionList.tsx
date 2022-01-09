@@ -6,7 +6,7 @@ import { fetchList } from 'shared/utils'
 import { useIntersectionObserver } from 'hooks'
 
 import { SpinnerIcon } from 'icons'
-import { TitleBar } from 'components'
+import { Container, TitleBar } from 'components'
 
 import QuestionItem from './QuestionListItem'
 import AddQuestionDialog from './AddQuestionDialog'
@@ -33,7 +33,10 @@ export default function QuestionList() {
   })
 
   return (
-    <div className="relative flex-none w-full h-full max-h-screen min-h-screen overflow-y-auto border-r border-gray-200 md:w-80 xl:w-96 dark:border-gray-800 dark:bg-gray-900">
+    <Container
+      title="Guestbook - João Pedro Magalhães"
+      customClassname="h-full border-r border-gray-200 md:w-80 xl:w-96 dark:border-gray-800 dark:bg-gray-900"
+    >
       <TitleBar title="Guestbook" trailingAccessory={<AddQuestionDialog />} />
       <ul className="p-3 space-y-1">
         {questionsQuery.data?.pages.map((page, index) => (
@@ -50,6 +53,6 @@ export default function QuestionList() {
         </div>
       )}
       <div ref={endListRef} />
-    </div>
+    </Container>
   )
 }

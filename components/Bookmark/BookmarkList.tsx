@@ -5,7 +5,7 @@ import type { QueryKeys, Bookmark } from 'shared/types'
 import { fetchList } from 'shared/utils'
 
 import { SpinnerIcon } from 'icons'
-import { TitleBar } from 'components'
+import { Container, TitleBar } from 'components'
 
 import BookmarkItem from './BookmarkListItem'
 
@@ -19,7 +19,10 @@ export default function BookmarkList() {
   )
 
   return (
-    <div className="relative flex-none w-full h-full max-h-screen min-h-screen overflow-y-auto border-r border-gray-200 md:w-80 xl:w-96 dark:border-gray-800 dark:bg-gray-900">
+    <Container
+      title="Bookmarks - João Pedro Magalhães"
+      customClassname="h-full border-r border-gray-200 md:w-80 xl:w-96 dark:border-gray-800 dark:bg-gray-900"
+    >
       <TitleBar title="Bookmarks" trailingAccessory={<AddBookmarkDialog />} />
 
       {bookmarksQuery.isLoading && (
@@ -35,6 +38,6 @@ export default function BookmarkList() {
           ))}
         </ul>
       )}
-    </div>
+    </Container>
   )
 }

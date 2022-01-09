@@ -20,5 +20,3 @@ export async function getServerSideProps() {
     }
   }
 }
-
-BookmarksPage.title = 'Bookmarks - João Pedro Magalhães'

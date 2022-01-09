@@ -20,5 +20,3 @@ export async function getServerSideProps() {
     }
   }
 }
-
-GuestbookPage.title = 'Guestbook - João Pedro Magalhães'

@@ -7,7 +7,7 @@ import { fetchList } from 'shared/utils'
 import { useIntersectionObserver } from 'hooks'
 
 import { SpinnerIcon } from 'icons'
-import { TitleBar } from 'components'
+import { Container, TitleBar } from 'components'
 
 import StackItem from './StackListItem'
 const AddStackDialog = dynamic(() => import('./AddStackDialog'))
@@ -34,7 +34,10 @@ export default function StackList() {
   })
 
   return (
-    <div className="relative flex-none w-full h-full max-h-screen min-h-screen overflow-y-auto border-r border-gray-200 md:w-80 xl:w-96 dark:border-gray-800 dark:bg-gray-900">
+    <Container
+      title="Stack - João Pedro Magalhães"
+      customClassname="h-full border-r border-gray-200 md:w-80 xl:w-96 dark:border-gray-800 dark:bg-gray-900"
+    >
       <TitleBar title="Stack" trailingAccessory={<AddStackDialog />} />
 
       <ul className="p-3 space-y-2">
@@ -52,6 +55,6 @@ export default function StackList() {
         </div>
       )}
       <div ref={endListRef} />
-    </div>
+    </Container>
   )
 }

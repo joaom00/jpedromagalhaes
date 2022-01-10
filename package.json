@@ -8,7 +8,7 @@
     "analyze:server": "cross-env BUNDLE_ANALYZE=server next build",
     "dev": "next dev",
     "build": "next build",
-    "postbuild": "NODE_OPTIONS='--experimental-json-modules' node ./scripts/generate-sitemap.mjs && yarn prisma db push",
+    "postbuild": "NODE_OPTIONS='--experimental-json-modules' node ./scripts/generate-sitemap.mjs && yarn prisma migrate deploy",
     "start": "next start",
     "lint": "next lint"
   },

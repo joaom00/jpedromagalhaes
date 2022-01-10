@@ -75,9 +75,9 @@ model Comment {
   bookmarkId String?    @map("bookmark_id")
   questionId String?    @map("question_id")
   stackId    String?    @map("stack_id")
+  snippetId  String?    @map("snippet_id")
   createdAt  DateTime   @default(now()) @map("created_at")
   updatedAt  DateTime   @updatedAt @map("updated_at")
-  snippetId  String?    @map("snippet_id")
   author     User       @relation(fields: [authorId], references: [id], onDelete: Cascade)
   bookmark   Bookmark?  @relation(fields: [bookmarkId], references: [id], onDelete: Cascade)
   question   Question?  @relation(fields: [questionId], references: [id], onDelete: Cascade)
@@ -85,6 +85,9 @@ model Comment {
   stack      Stack?     @relation(fields: [stackId], references: [id], onDelete: Cascade)
   reactions  Reaction[]
 
+  @@index([bookmarkId])
+  @@index([questionId])
+  @@index([stackId])
   @@map("comments")
 }
 
@@ -132,6 +135,10 @@ model Reaction {
   stack      Stack?    @relation(fields: [stackId], references: [id], onDelete: Cascade)
   user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  @@index([commentId])
+  @@index([bookmarkId])
+  @@index([questionId])
+  @@index([stackId])
   @@map("reactions")
 }
 
@@ -147,6 +154,7 @@ model Bookmark {
   comments    Comment[]
   reactions   Reaction[]
 
+  @@index([host])
   @@map("bookmarks")
 }
 

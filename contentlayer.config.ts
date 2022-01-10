@@ -37,7 +37,7 @@ const projectFields: FieldDefs = {
 
 const JavaScriptProject = defineDocumentType(() => ({
   name: 'JSProject',
-  filePathPattern: 'projects/javascript/*.mdx',
+  filePathPattern: 'projetos/javascript/*.mdx',
   bodyType: 'mdx',
   fields: projectFields,
   computedFields
@@ -45,7 +45,7 @@ const JavaScriptProject = defineDocumentType(() => ({
 
 const ReactNextProject = defineDocumentType(() => ({
   name: 'RNProject',
-  filePathPattern: 'projects/react-next/*.mdx',
+  filePathPattern: 'projetos/react-next/*.mdx',
   bodyType: 'mdx',
   fields: projectFields,
   computedFields

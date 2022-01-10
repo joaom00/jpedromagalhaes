@@ -2,17 +2,15 @@ import React from 'react'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react'
-import { useQuery } from 'react-query'
 
 import type { StackDetail } from 'shared/types'
-import { useDetailQuery } from 'shared/queries'
-import { fetchUsers } from 'shared/utils'
+import { useDetailQuery, useUsersQuery } from 'shared/queries'
 
 import { useSignInDialog } from 'contexts'
 import { useUsedByMutation } from 'hooks'
 
 import { SpinnerIcon } from 'icons'
-import { TitleBar, Image, Tooltip, Container } from 'components'
+import { TitleBar, Image, Tooltip, Container, Error } from 'components'
 
 const Comments = dynamic(() => import('components/Comments/Comments'))
 const StackActions = dynamic(() => import('./StackActions'))
@@ -21,15 +19,14 @@ export default function StackDetail() {
   const titleRef = React.useRef(null)
   const scrollContainerRef = React.useRef<HTMLDivElement>(null)
 
+  const { data: session } = useSession()
   const router = useRouter()
   const slug = router.query.slug as string
 
-  const usersQuery = useQuery([{ scope: 'stack', type: 'users', identifier: slug }], fetchUsers)
-
-  const { data: session } = useSession()
-  const signInDialog = useSignInDialog()
   const toolQuery = useDetailQuery<StackDetail>('stack', slug)
+  const usersQuery = useUsersQuery(slug)
   const usedByMutation = useUsedByMutation()
+  const signInDialog = useSignInDialog()
 
   function onUsedByChange() {
     if (session) {
@@ -121,13 +118,13 @@ export default function StackDetail() {
     )
   }
 
-  if (toolQuery.isLoading) {
-    return (
-      <div className="grid place-items-center w-full">
-        <SpinnerIcon />
-      </div>
-    )
+  if (toolQuery.isError) {
+    return <Error />
   }
 
-  return null
+  return (
+    <div className="grid place-items-center w-full">
+      <SpinnerIcon />
+    </div>
+  )
 }

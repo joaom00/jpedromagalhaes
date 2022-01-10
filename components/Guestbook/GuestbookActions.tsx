@@ -14,7 +14,7 @@ type QuestionActionsProps = {
   question: QuestionDetail
 }
 
-export default function QuestionsActions({ question }: QuestionActionsProps) {
+export default function GuestbookActions({ question }: QuestionActionsProps) {
   const router = useRouter()
   const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false)
   const [editDialogOpen, setEditDialogOpen] = React.useState(false)
@@ -34,7 +34,7 @@ export default function QuestionsActions({ question }: QuestionActionsProps) {
 
   function onReactionChange() {
     if (reactionMutation.isLoading) return
-    reactionMutation.mutate({ scope: 'questions', identifier: question.id })
+    reactionMutation.mutate({ scope: 'guestbook', identifier: question.id })
   }
 
   function handleInput(field: string, value: string) {

@@ -3,18 +3,45 @@ import { getSession } from 'next-auth/react'
 import { Prisma } from '@prisma/client'
 
 import { prisma } from 'lib/prisma'
+
+import type { Bookmark } from 'shared/types'
 import { bookmarksQuery } from 'shared/queries'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
-    const bookmarks = await prisma.bookmark.findMany({
-      select: bookmarksQuery.select,
-      orderBy: {
-        createdAt: 'desc'
-      }
-    })
+    const { cursor } = req.query
+    const take = 20
 
-    return res.status(200).json(bookmarks)
+    let bookmarks: Bookmark[]
+
+    if (cursor) {
+      bookmarks = await prisma.bookmark.findMany({
+        take,
+        skip: 1,
+        cursor: {
+          id: cursor as string
+        },
+        select: bookmarksQuery.select,
+        orderBy: {
+          createdAt: 'desc'
+        }
+      })
+    } else {
+      bookmarks = await prisma.bookmark.findMany({
+        take,
+        select: bookmarksQuery.select,
+        orderBy: {
+          createdAt: 'desc'
+        }
+      })
+    }
+
+    const nextCursor = bookmarks.length < take ? null : bookmarks[bookmarks.length - 1].id
+
+    return res.status(200).json({
+      bookmarks,
+      nextCursor
+    })
   }
 
   if (req.method === 'POST') {

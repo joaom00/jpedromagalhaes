@@ -1,6 +1,6 @@
 import { dehydrate, QueryClient } from 'react-query'
 
-import { fetchList } from 'shared/utils'
+import { fetchList } from 'shared/queries'
 
 import { ListDetailView } from 'layouts'
 import { SnippetList } from 'components/Snippet'
@@ -20,5 +20,3 @@ export async function getServerSideProps() {
     }
   }
 }
-
-SnippetsPage.title = 'Snippets - João Pedro Magalhães'

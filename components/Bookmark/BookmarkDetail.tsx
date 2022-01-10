@@ -7,7 +7,7 @@ import type { BookmarkDetail } from 'shared/types'
 import { useDetailQuery } from 'shared/queries'
 
 import { SpinnerIcon } from 'icons'
-import { Container, TitleBar } from 'components'
+import { Container, TitleBar, Error } from 'components'
 
 const BookmarkActions = dynamic(() => import('./BookmarkActions'))
 const Comments = dynamic(() => import('components/Comments/Comments'))
@@ -67,13 +67,13 @@ export default function BookmarkDetail() {
     )
   }
 
-  if (bookmarkQuery.isLoading) {
-    return (
-      <div className="grid place-items-center w-full">
-        <SpinnerIcon />
-      </div>
-    )
+  if (bookmarkQuery.isError) {
+    return <Error />
   }
 
-  return null
+  return (
+    <div className="grid place-items-center w-full">
+      <SpinnerIcon />
+    </div>
+  )
 }

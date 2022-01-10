@@ -3,18 +3,45 @@ import { getSession } from 'next-auth/react'
 import { Prisma } from '@prisma/client'
 
 import { prisma } from 'lib/prisma'
+
+import type { Snippet } from 'shared/types'
 import { snippetsQuery } from 'shared/queries'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
-    const snippets = await prisma.snippet.findMany({
-      select: snippetsQuery.select,
-      orderBy: {
-        title: 'asc'
-      }
-    })
+    const { cursor } = req.query
+    const take = 20
 
-    return res.status(200).json(snippets)
+    let snippets: Snippet[]
+
+    if (cursor) {
+      snippets = await prisma.snippet.findMany({
+        take,
+        skip: 1,
+        cursor: {
+          slug: cursor as string
+        },
+        select: snippetsQuery.select,
+        orderBy: {
+          title: 'asc'
+        }
+      })
+    } else {
+      snippets = await prisma.snippet.findMany({
+        take,
+        select: snippetsQuery.select,
+        orderBy: {
+          title: 'asc'
+        }
+      })
+    }
+
+    const nextCursor = snippets.length < take ? null : snippets[snippets.length - 1].slug
+
+    return res.status(200).json({
+      snippets,
+      nextCursor
+    })
   }
 
   if (req.method === 'POST') {

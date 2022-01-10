@@ -1,8 +1,7 @@
 import { GetServerSidePropsContext } from 'next'
 import { dehydrate, QueryClient } from 'react-query'
 
-import { fetchComments } from 'shared/utils'
-import { fetchDetail } from 'shared/queries'
+import { fetchDetail, fetchComments } from 'shared/queries'
 
 import { ListDetailView } from 'layouts'
 import { BookmarkList, BookmarkDetail } from 'components/Bookmark'

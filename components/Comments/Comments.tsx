@@ -1,11 +1,10 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
 import { useSession } from 'next-auth/react'
-import { useQuery } from 'react-query'
-import toast from 'react-hot-toast'
+import { toast } from 'react-hot-toast'
 
 import type { Scope } from 'shared/types'
-import { fetchComments } from 'shared/utils'
+import { useCommentsQuery } from 'shared/queries'
 import { useSignInDialog } from 'contexts'
 import { useCreateCommentMutation } from './queries'
 
@@ -26,9 +25,8 @@ export default function Comments({ scope, identifier, scrollContainerRef }: Comm
   const [cachedValue, setCachedValue] = React.useState('')
 
   const { data: session } = useSession()
+  const commentsQuery = useCommentsQuery(scope, identifier)
   const signInDialog = useSignInDialog()
-
-  const commentsQuery = useQuery([{ scope, type: 'comments', identifier }], fetchComments)
 
   const createComment = useCreateCommentMutation()
 

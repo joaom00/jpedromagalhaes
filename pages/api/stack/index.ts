@@ -3,6 +3,7 @@ import { getSession } from 'next-auth/react'
 import { Prisma } from '@prisma/client'
 
 import { prisma } from 'lib/prisma'
+
 import type { Stack } from 'shared/types'
 import { stackQuery } from 'shared/queries'
 

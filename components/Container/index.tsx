@@ -17,7 +17,7 @@ export const Container = React.forwardRef<HTMLDivElement, ContainerProps>(
     const meta = {
       title: 'João Pedro Magalhães - Desenvolvedor frontend, UI/UX entusiasta & Gopher',
       description: 'Desenvolvedor frontend, UI/UX entusiasta & Gopher',
-      image: '/static/images/banner.png',
+      image: 'https://jpedromagalhaes.vercel.app/static/images/banner.png',
       type: 'website',
       ...customMeta
     }

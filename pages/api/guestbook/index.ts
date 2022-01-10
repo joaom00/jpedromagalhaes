@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
 
 import { prisma } from 'lib/prisma'
+
 import type { Question } from 'shared/types'
 import { questionsQuery } from 'shared/queries'
 
@@ -11,6 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const take = 20
 
     let questions: Question[]
+
     if (cursor) {
       questions = await prisma.question.findMany({
         take,

@@ -1,14 +1,13 @@
 import { GetServerSidePropsContext } from 'next'
 import { dehydrate, QueryClient } from 'react-query'
 
-import { fetchComments } from 'shared/utils'
-import { fetchDetail } from 'shared/queries'
+import { fetchDetail, fetchComments } from 'shared/queries'
 
 import { ListDetailView } from 'layouts'
-import { QuestionList, QuestionDetail } from 'components/Question'
+import { GuestbookList, GuestbookDetail } from 'components/Guestbook'
 
 export default function QuestionDetailPage() {
-  return <ListDetailView list={<QuestionList />} hasDetail detail={<QuestionDetail />} />
+  return <ListDetailView list={<GuestbookList />} hasDetail detail={<GuestbookDetail />} />
 }
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext<{ id: string }>) {
@@ -16,8 +15,8 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext<{ id: st
 
   const queryClient = new QueryClient()
 
-  await queryClient.prefetchQuery([{ scope: 'questions', type: 'detail', identifier: id }], fetchDetail)
-  await queryClient.prefetchQuery([{ scope: 'questions', type: 'comments', identifier: id }], fetchComments)
+  await queryClient.prefetchQuery([{ scope: 'guestbook', type: 'detail', identifier: id }], fetchDetail)
+  await queryClient.prefetchQuery([{ scope: 'guestbook', type: 'comments', identifier: id }], fetchComments)
 
   return {
     props: {

@@ -1,6 +1,6 @@
 import { dehydrate, QueryClient } from 'react-query'
 
-import { fetchList } from 'shared/utils'
+import { fetchList } from 'shared/queries'
 
 import { ListDetailView } from 'layouts'
 import { StackList } from 'components/Stack'

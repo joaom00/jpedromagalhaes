@@ -11,7 +11,11 @@ export default function Document() {
         <link color="#4a9885" href="/static/favicons/safari-pinned-tab.svg" rel="mask-icon" />
         <meta content="#ffffff" name="theme-color" />
         <meta content="#ffffff" name="msapplication-TileColor" />
-        <meta property="og:image" content="/static/images/banner.png" />
+        <meta property="og:image" content="https://jpedromagalhaes.vercel.app/static/images/banner.png" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="João Pedro Magalhães" />
+        <meta property="og:description" content="Desenvolvedor frontend, UI/UX entusiasta & Gopher" />
+        <meta property="og:title" content="João Pedro Magalhães - Desenvolvedor frontend, UI/UX entusiasta & Gopher" />
       </Head>
       <body>
         <Main />

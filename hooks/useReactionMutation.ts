@@ -1,7 +1,8 @@
 import { useMutation, useQueryClient } from 'react-query'
+import type { Scope } from 'shared/types'
 
 type ToggleReactionData = {
-  scope: 'stack' | 'bookmarks' | 'questions' | 'snippets'
+  scope: Scope
   identifier: string
 }
 

@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 
 import { Question } from 'shared/types'
 
-export default function QuestionItem({ id, title, author }: Question) {
+export default function GuestbookItem({ id, title, author }: Question) {
   const router = useRouter()
   const isActive = router.asPath.indexOf(id) >= 0
 

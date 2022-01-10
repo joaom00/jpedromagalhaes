@@ -11,14 +11,8 @@ import {
   commentsQuery
 } from 'shared/queries'
 
-export type Scope = 'stack' | 'bookmarks' | 'questions' | 'snippets'
+export type Scope = 'stack' | 'bookmarks' | 'guestbook' | 'snippets'
 export type List = 'list' | 'detail' | 'comments' | 'users'
-
-export type QueryKeys = Array<{
-  scope: Scope
-  type: List
-  identifier?: string
-}>
 
 export type Stack = Prisma.StackGetPayload<typeof stackQuery>
 export type Bookmark = Prisma.BookmarkGetPayload<typeof bookmarksQuery>

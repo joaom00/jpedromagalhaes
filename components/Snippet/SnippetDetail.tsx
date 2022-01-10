@@ -6,7 +6,8 @@ import { MDX } from '.contentlayer/types'
 import type { SnippetDetail } from 'shared/types'
 import { useDetailQuery } from 'shared/queries'
 
-import { TitleBar, MDXComponents, Image, Container } from 'components'
+import { SpinnerIcon } from 'icons'
+import { TitleBar, MDXComponents, Image, Container, Error } from 'components'
 import { Comments } from 'components/Comments'
 
 import SnippetActions from './SnippetActions'
@@ -61,5 +62,13 @@ export default function SnippetDetail({ body }: { body: MDX | undefined }) {
     )
   }
 
-  return null
+  if (snippetQuery.isError) {
+    return <Error />
+  }
+
+  return (
+    <div className="grid place-items-center w-full">
+      <SpinnerIcon />
+    </div>
+  )
 }

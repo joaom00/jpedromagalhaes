@@ -4,7 +4,7 @@ import { Question } from '@prisma/client'
 import { QuestionDetail } from 'shared/types'
 
 async function createQuestion(values: { title: string; description: string }): Promise<Question> {
-  const response = await fetch('/api/questions', {
+  const response = await fetch('/api/guestbook', {
     method: 'POST',
     body: JSON.stringify(values)
   })
@@ -22,12 +22,12 @@ export function useCreateQuestionMutation() {
   const queryClient = useQueryClient()
 
   return useMutation(createQuestion, {
-    onSuccess: () => queryClient.invalidateQueries([{ scope: 'questions', type: 'list' }])
+    onSuccess: () => queryClient.invalidateQueries([{ scope: 'guestbook', type: 'list' }])
   })
 }
 
-async function updateQuestion(question: Pick<QuestionDetail, 'id' | 'title' | 'description'>) {
-  const response = await fetch(`/api/questions/${question.id}`, {
+async function updateQuestion(question: Partial<QuestionDetail>) {
+  const response = await fetch(`/api/guestbook/${question.id}`, {
     method: 'PATCH',
     body: JSON.stringify({
       title: question.title,
@@ -46,13 +46,13 @@ export function useUpdateQuestionMutation() {
 
   return useMutation(updateQuestion, {
     onSuccess: (_data, args) => {
-      queryClient.invalidateQueries([{ scope: 'questions', type: 'detail', identifier: args.id }])
+      queryClient.invalidateQueries([{ scope: 'guestbook', type: 'detail', identifier: args.id }])
     }
   })
 }
 
 async function deleteQuestion(questionId: string) {
-  const response = await fetch(`/api/questions/${questionId}`, {
+  const response = await fetch(`/api/guestbook/${questionId}`, {
     method: 'DELETE'
   })
 
@@ -66,6 +66,6 @@ export function useDeleteQuestionMutation() {
   const queryClient = useQueryClient()
 
   return useMutation(deleteQuestion, {
-    onSuccess: () => queryClient.invalidateQueries([{ scope: 'questions', type: 'list' }])
+    onSuccess: () => queryClient.invalidateQueries([{ scope: 'guestbook', type: 'list' }])
   })
 }

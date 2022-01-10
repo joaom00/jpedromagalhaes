@@ -2,8 +2,7 @@ import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import { dehydrate, QueryClient } from 'react-query'
 import { allSnippets } from '.contentlayer/data'
 
-import { fetchComments } from 'shared/utils'
-import { fetchDetail } from 'shared/queries'
+import { fetchDetail, fetchComments } from 'shared/queries'
 
 import { ListDetailView } from 'layouts'
 import { SnippetList, SnippetDetail } from 'components/Snippet'

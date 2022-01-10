@@ -1,7 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
-import { TitleBar } from 'components'
+
 import { CompassIcon } from 'icons'
+import { Container, TitleBar } from 'components'
 
 export default function NotFoundTemplate() {
   const [mounted, setMounted] = React.useState(false)
@@ -14,8 +15,8 @@ export default function NotFoundTemplate() {
     const isMac = /(Mac)/i.test(navigator.userAgent)
 
     return (
-      <div className="w-full">
-        <TitleBar title="Página não existe" />
+      <Container title="João Pedro Magalhães - Desenvolvedor Front-End, UI/UX entusiasta & Gopher">
+        <TitleBar title="Página não encontrada" />
         <div className="flex flex-col items-center justify-center flex-1 px-8 space-y-6 text-center lg:px-16 h-full">
           <CompassIcon size={32} aria-hidden />
           <div className="flex flex-col space-y-1 max-w-3xl">
@@ -37,7 +38,7 @@ export default function NotFoundTemplate() {
             <kbd className="p-1.5 bg-gray-250 dark:bg-gray-800 rounded-md">k</kbd>
           </span>
         </div>
-      </div>
+      </Container>
     )
   }
 

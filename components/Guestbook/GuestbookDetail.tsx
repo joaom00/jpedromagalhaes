@@ -7,19 +7,19 @@ import type { QuestionDetail } from 'shared/types'
 import { useDetailQuery } from 'shared/queries'
 
 import { SpinnerIcon } from 'icons'
-import { Container, TitleBar } from 'components'
+import { Container, TitleBar, Error } from 'components'
 
 const Comments = dynamic(() => import('components/Comments/Comments'))
-const QuestionActions = dynamic(() => import('./QuestionActions'))
+const QuestionActions = dynamic(() => import('./GuestbookActions'))
 
-export default function QuestionDetail() {
+export default function GuestbookDetail() {
   const titleRef = React.useRef<HTMLHeadingElement>(null)
   const scrollContainerRef = React.useRef<HTMLDivElement>(null)
 
   const router = useRouter()
   const id = router.query.id as string
 
-  const questionQuery = useDetailQuery<QuestionDetail>('questions', id)
+  const questionQuery = useDetailQuery<QuestionDetail>('guestbook', id)
 
   if (questionQuery.isSuccess) {
     return (
@@ -52,18 +52,18 @@ export default function QuestionDetail() {
           </div>
           <p className="mt-3 text-gray-500 dark:text-gray-400 whitespace-pre-line">{questionQuery.data.description}</p>
         </div>
-        <Comments scope="questions" identifier={id} scrollContainerRef={scrollContainerRef} />
+        <Comments scope="guestbook" identifier={id} scrollContainerRef={scrollContainerRef} />
       </Container>
     )
   }
 
-  if (questionQuery.isLoading) {
-    return (
-      <div className="grid place-items-center w-full">
-        <SpinnerIcon />
-      </div>
-    )
+  if (questionQuery.isError) {
+    return <Error />
   }
 
-  return null
+  return (
+    <div className="grid place-items-center w-full">
+      <SpinnerIcon />
+    </div>
+  )
 }

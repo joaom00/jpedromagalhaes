@@ -1,5 +1,4 @@
 import NextAuth from 'next-auth'
-import { QueryKeys } from '.'
 
 type Role = 'USER' | 'ADMIN'
 

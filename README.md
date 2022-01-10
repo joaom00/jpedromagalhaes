@@ -6,6 +6,7 @@
 - **Autenticação**: [NextAuth.js](https://next-auth.js.org/)
 - **Deploy**: [Vercel](https://vercel.com)
 - **Estilo**: [Tailwind CSS](https://tailwindcss.com/)
+- **Componentes**: [Radix UI](https://www.radix-ui.com/docs/primitives/overview/introduction)
 
 ## Como executar
 

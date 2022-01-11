@@ -1,9 +1,22 @@
-import type { JSProject } from '.contentlayer/types'
 import { TitleBar } from 'components'
 
 import ProjectListItem from './ProjectListItem'
 
-export type Project = Omit<JSProject, 'type'>
+export type Project = {
+  _id: string
+  title: string
+  shortDescription: string | undefined
+  tech: string
+  githubURL: string
+  livePreviewURL: string | undefined
+  body: {
+    raw: string
+    code: string
+  }
+  readingTime: JSON
+  wordCount: number
+  slug: string
+}
 
 export default function ProjectList({ title, projects }: { title: string; projects: Project[] }) {
   return (

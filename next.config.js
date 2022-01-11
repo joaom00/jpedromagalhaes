@@ -10,7 +10,6 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
  */
 module.exports = withPlugins([[withBundleAnalyzer], [withContentlayer]], {
   reactStrictMode: true,
-  swcMinify: true,
   images: {
     domains: [
       'pbs.twimg.com', // Twitter

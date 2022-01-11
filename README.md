@@ -16,3 +16,11 @@ cd jpedromagalhaes
 yarn
 yarn dev
 ```
+
+Criar um arquivo `.env` similar a `.env.example`
+
+## Referências
+
+- [Brian Lovin](https://brianlovin.com/)
+- [Lee Robinson](https://leerob.io/)
+- [Rychillie](https://rychillie.net/)

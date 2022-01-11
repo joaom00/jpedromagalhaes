@@ -6,8 +6,9 @@ import { signOut, useSession } from 'next-auth/react'
 import { useMutation } from 'react-query'
 import { useKBar } from 'kbar'
 import useSound from 'use-sound'
+// TODO: create DropdownMenu component
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog'
+import { Action as AlertDialogAction, Cancel as AlertDialogCancel } from '@radix-ui/react-alert-dialog'
 
 import { useNavigation, useSignInDialog } from 'contexts'
 
@@ -198,7 +199,7 @@ export default function Sidebar() {
                     query.toggle()
                   }}
                 >
-                  <RiCommandFill size={14} aria-hidden />
+                  <RiCommandFill size={14} />
                 </button>
               </Tooltip>
             </div>
@@ -284,19 +285,19 @@ export default function Sidebar() {
           onOpenChange={setDeleteDialogOpen}
         >
           <div className="flex justify-end mt-5 gap-5">
-            <AlertDialogPrimitive.Cancel
+            <AlertDialogCancel
               className="py-2 px-3 rounded-md bg-gray-250 dark:bg-gray-700 hover:opacity-90"
               disabled={deleteAccount.isLoading}
             >
               Cancelar
-            </AlertDialogPrimitive.Cancel>
-            <AlertDialogPrimitive.Action
+            </AlertDialogCancel>
+            <AlertDialogAction
               className="py-2 px-3 rounded-md bg-red-700 text-white hover:opacity-90 flex items-center gap-3"
               onClick={onDeleteAccount}
             >
               {deleteAccount.isLoading && <SpinnerIcon />}
               Deletar conta
-            </AlertDialogPrimitive.Action>
+            </AlertDialogAction>
           </div>
         </AlertDialog>
       </>

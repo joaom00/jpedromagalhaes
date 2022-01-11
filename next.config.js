@@ -1,6 +1,7 @@
 const withPlugins = require('next-compose-plugins')
 
 const { withContentlayer } = require('next-contentlayer')
+
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true'
 })

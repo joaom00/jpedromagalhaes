@@ -1,7 +1,8 @@
 import React from 'react'
 import toast from 'react-hot-toast'
+// TODO: create DropdownMenu component
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog'
+import { Action as AlertDialogAction, Cancel as AlertDialogCancel } from '@radix-ui/react-alert-dialog'
 
 import type { Scope } from 'shared/types'
 
@@ -71,19 +72,19 @@ export default function CommentMenu({ scope, identifier, comment }: CommentMenuP
         onOpenChange={setDeleteDialogOpen}
       >
         <div className="flex justify-end mt-5 gap-5">
-          <AlertDialogPrimitive.Cancel
+          <AlertDialogCancel
             className="py-2 px-3 rounded-md bg-gray-250 dark:bg-gray-700 hover:opacity-90"
             disabled={deleteComment.isLoading}
           >
             Cancelar
-          </AlertDialogPrimitive.Cancel>
-          <AlertDialogPrimitive.Action
+          </AlertDialogCancel>
+          <AlertDialogAction
             className="py-2 px-3 rounded-md bg-red-700 text-white hover:opacity-90 flex items-center gap-3"
             onClick={onDeleteComment}
           >
             {deleteComment.isLoading && <SpinnerIcon />}
             Deletar comentário
-          </AlertDialogPrimitive.Action>
+          </AlertDialogAction>
         </div>
       </AlertDialog>
 

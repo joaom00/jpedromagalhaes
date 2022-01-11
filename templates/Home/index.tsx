@@ -70,9 +70,7 @@ export default function HomeTemplate() {
                   className="bg-gray-250 dark:bg-gray-800 p-5 rounded-md transform transition-all duration-200 ease-in-out hover:-translate-y-1 w-full"
                 >
                   <p className="font-semibold inline-block">{project.title}</p>
-                  {!!project.description && (
-                    <span className="ml-3 text-sm text-gray-400">Instagram para cachorros</span>
-                  )}
+                  {!!project.description && <span className="ml-3 text-sm text-gray-300">{project.description}</span>}
                 </a>
               </li>
             ))}

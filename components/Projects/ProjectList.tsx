@@ -1,5 +1,4 @@
-import { JSProject } from '.contentlayer/types'
-
+import type { JSProject } from '.contentlayer/types'
 import { TitleBar } from 'components'
 
 import ProjectListItem from './ProjectListItem'

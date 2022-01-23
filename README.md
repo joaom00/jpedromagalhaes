@@ -28,7 +28,7 @@ Criar um arquivo `.env` similar a `.env.example`
 
 ## Supabase
 
-Você pode usar o supabase **localmente** (self-hosted) ou usar **remotamente** (hosted
+Você pode usar o supabase **local** (self-hosted) ou **remotamente** (hosted
 by supabase).
 
 ### Supabase Remoto

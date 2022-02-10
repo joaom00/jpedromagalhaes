@@ -1,0 +1,11 @@
+[Créditos](https://twitter.com/TkDodo/status/1382266296168030208)
+
+```ts
+const useToggle = (initialValue = false) => React.useReducer((previousValue) => !previousValue, initialValue)
+
+// usage
+
+const [value, toggleValue] = useToggle()
+
+<button onClick={toggleValue}>Click me</button>
+```

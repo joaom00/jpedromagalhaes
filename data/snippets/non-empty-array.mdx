@@ -1,0 +1,20 @@
+[Créditos](https://twitter.com/TkDodo/status/1466081401476943885)
+
+```ts
+type NonEmptyArray<T> = readonly [T, ...ReadonlyArray<T>]
+
+const isNonEmpty = <T>(array: ReadonlyArray<T> | undefined): array is NonEmptyArray<T> => !!array && array.length > 0
+
+// usage
+
+function myFunction(input: ReadonlyArray<string>) {
+  if (isNonEmpty(input)) {
+    // ✅ TypeScript is fine with that
+    console.log(input[0].toUpperCase())
+    // 🚨 but not with that
+    console.log(input[1].toUpperCase())
+  }
+
+  console.log(input[0].toLowerCase())
+}
+```

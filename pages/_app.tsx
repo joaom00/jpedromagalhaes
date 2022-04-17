@@ -1,6 +1,7 @@
 import 'styles/global.css'
 import 'styles/prose.css'
 import 'styles/nprogress.css'
+import '../components/ToggleThemeButton/sun-and-moon.css'
 
 import React from 'react'
 import type { AppProps } from 'next/app'

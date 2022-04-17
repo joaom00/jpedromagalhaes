@@ -1,0 +1,45 @@
+.sun-and-moon > :is(.moon, .sun, .sun-beams) {
+  transform-origin: center center;
+}
+
+html.light .sun-and-moon > .sun {
+  transform: scale(1.75);
+}
+
+html.light .sun-and-moon > .sun-beams {
+  opacity: 0;
+}
+
+html.light .sun-and-moon > .moon > circle {
+  transform: translateX(-7px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .sun-and-moon > .sun {
+    transition: transform 0.5s cubic-bezier(0.5, 1.25, 0.75, 1.25);
+  }
+
+  .sun-and-moon > .sun-beams {
+    transition: transform 0.5s cubic-bezier(0.5, 1.5, 0.75, 1.25), opacity 0.5s cubic-bezier(0.25, 0, 0.3, 1);
+  }
+
+  .sun-and-moon .moon > circle {
+    transition: transform 0.25s cubic-bezier(0, 0, 0, 1);
+  }
+
+  html.light .sun-and-moon > .sun {
+    transform: scale(1.75);
+    transition-timing-function: cubic-bezier(0.25, 0, 0.3, 1);
+    transition-duration: 0.25s;
+  }
+
+  html.light .sun-and-moon > .sun-beams {
+    transform: rotateZ(-25deg);
+    transition-duration: 0.15s;
+  }
+
+  html.light .sun-and-moon > .moon > circle {
+    transition-delay: 0.25s;
+    transition-duration: 0.5s;
+  }
+}

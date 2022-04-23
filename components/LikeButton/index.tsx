@@ -54,19 +54,19 @@ export default function LikeButton({ id, hasReacted, count, loading, onClick }: 
     <button
       aria-label={hasReactedState ? 'Deixar de curtir' : 'Curtir'}
       onClick={handleClick}
-      className="flex space-x-2 flex-none items-center justify-center leading-none transition-all rounded-md border bg-gray-250 dark:bg-gray-800 border-gray-250 dark:border-gray-600 px-4 py-2 overflow-hidden"
+      className="flex space-x-2 flex-none items-center justify-center leading-none transition-all rounded-md border bg-mauve3 dark:bg-mauveDark3 border-mauve6 dark:border-mauveDark6 px-4 py-2 overflow-hidden hover:bg-mauve4 dark:hover:bg-mauveDark4"
     >
       {hasReactedState ? (
         <span className="relative text-red-500">
           {ping && (
             <span className="absolute top-0 left-0 animate-ping">
-              <HeartFillIcon />
+              <HeartFillIcon aria-hidden />
             </span>
           )}
-          <HeartFillIcon />
+          <HeartFillIcon aria-hidden />
         </span>
       ) : (
-        <span className="text-gray-500">
+        <span className="text-mauve9 dark:text-mauveDark9">
           <HeartIcon />
         </span>
       )}

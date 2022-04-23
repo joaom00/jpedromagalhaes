@@ -12,8 +12,8 @@ export default function BookmarkListItem({ id, title, faviconUrl, host }: Bookma
     <li>
       <Link href={`/bookmarks/${id}`}>
         <a
-          className={`flex flex-col gap-1 dark:hover:bg-gray-800 rounded-md px-3 py-2 ${
-            isActive ? 'bg-black text-white dark:bg-gray-800' : 'hover:bg-gray-200'
+          className={`flex flex-col gap-1 hover:bg-mauve4 dark:hover:bg-mauveDark4 rounded-md px-3 py-2 ${
+            isActive ? 'bg-mauve5 dark:bg-mauveDark5' : 'hover:bg-mauve4 dark:hover:bg-mauveDark4'
           }`}
         >
           <p className="font-medium text-sm">{title}</p>
@@ -27,7 +27,7 @@ export default function BookmarkListItem({ id, title, faviconUrl, host }: Bookma
                 className="w-full h-full object-cover"
               />
             </div>
-            <span className="text-sm text-gray-400">{host}</span>
+            <span className="text-sm text-slate11 dark:text-slateDark11">{host}</span>
           </div>
         </a>
       </Link>

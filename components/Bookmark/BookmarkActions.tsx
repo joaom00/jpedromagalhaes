@@ -81,15 +81,15 @@ export default function BookmarkActions({ bookmark }: BookmarkActionsProps) {
         open={deleteDialogOpen}
         onOpenChange={setDeleteDialogOpen}
       >
-        <div className="flex justify-end mt-5 gap-5">
+        <div className="mt-5 flex justify-end gap-5">
           <AlertDialogCancel
-            className="py-2 px-3 rounded-md bg-gray-250 dark:bg-gray-700 hover:opacity-90"
+            className="rounded-md bg-gray-250 py-2 px-3 hover:opacity-90 dark:bg-gray-700"
             disabled={deleteBookmark.isLoading}
           >
             Cancelar
           </AlertDialogCancel>
           <AlertDialogAction
-            className="py-2 px-3 rounded-md bg-red-700 text-white hover:opacity-90 flex items-center gap-3"
+            className="flex items-center gap-3 rounded-md bg-red-700 py-2 px-3 text-white hover:opacity-90"
             disabled={deleteBookmark.isLoading}
             onClick={onDeleteBookmark}
           >
@@ -140,12 +140,12 @@ export default function BookmarkActions({ bookmark }: BookmarkActionsProps) {
             placeholder="Descrição"
             required
             onInputChange={(v) => handleInput('description', v)}
-            className="rounded-md bg-gray-200 dark:bg-gray-900 border-gray-250 dark:border-gray-700 col-span-2"
+            className="col-span-2 rounded-md border-gray-250 bg-gray-200 dark:border-gray-700 dark:bg-gray-900"
           />
-          <div className="flex col-span-2 justify-end">
+          <div className="col-span-2 flex justify-end">
             <button
               disabled={JSON.stringify(bookmark) === JSON.stringify(values)}
-              className="bg-blue-500 text-white rounded-md py-2 px-4 flex items-center gap-3 disabled:bg-gray-600 disabled:cursor-not-allowed disabled:opacity-50 hover:opacity-95"
+              className="flex items-center gap-3 rounded-md bg-blue-500 py-2 px-4 text-white hover:opacity-95 disabled:cursor-not-allowed disabled:bg-gray-600 disabled:opacity-50"
             >
               {updateBookmark.isLoading && <SpinnerIcon />}
               Salvar alterações
@@ -159,13 +159,13 @@ export default function BookmarkActions({ bookmark }: BookmarkActionsProps) {
           <>
             <button
               onClick={() => setDeleteDialogOpen(true)}
-              className="hover:bg-red-700 text-sm rounded-md text-white px-3 transition duration-100"
+              className="rounded-md px-3 text-sm text-slate11 transition duration-100 hover:bg-red-700 hover:text-white dark:text-slateDark11 dark:hover:text-white"
             >
               <DeleteIcon size={16} />
             </button>
             <button
               onClick={() => setEditDialogOpen(true)}
-              className="hover:bg-gray-900 text-sm rounded-md px-3 transition duration-100"
+              className="rounded-md px-3 text-sm text-slate11 transition duration-100 hover:bg-mauve4 dark:text-slateDark11 dark:hover:bg-mauveDark4"
             >
               <EditIcon size={16} />
             </button>

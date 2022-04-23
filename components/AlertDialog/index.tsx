@@ -22,9 +22,11 @@ export default function AlertDialog({
       <AlertDialogPrimitive.Trigger asChild>{trigger}</AlertDialogPrimitive.Trigger>
       <AlertDialogPrimitive.Portal>
         <AlertDialogPrimitive.Overlay className="inset-0 fixed bg-black bg-opacity-60 animate-overlayShow z-40 backdrop-filter backdrop-blur-sm" />
-        <AlertDialogPrimitive.Content className="max-w-lg shadow-2xl rounded-md fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-full bg-white dark:bg-gray-900 p-7 animate-contentShow z-50">
+        <AlertDialogPrimitive.Content className="max-w-lg shadow-2xl rounded-md fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-full bg-white dark:bg-mauveDark1 p-7 animate-contentShow z-50">
           <AlertDialogPrimitive.Title className="text-lg font-semibold mb-2">{title}</AlertDialogPrimitive.Title>
-          <AlertDialogPrimitive.Description className="text-gray-500">{description}</AlertDialogPrimitive.Description>
+          <AlertDialogPrimitive.Description className="text-slate11 dark:text-slateDark11">
+            {description}
+          </AlertDialogPrimitive.Description>
           {children}
         </AlertDialogPrimitive.Content>
       </AlertDialogPrimitive.Portal>

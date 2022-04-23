@@ -71,15 +71,15 @@ export default function CommentMenu({ scope, identifier, comment }: CommentMenuP
         open={deleteDialogOpen}
         onOpenChange={setDeleteDialogOpen}
       >
-        <div className="flex justify-end mt-5 gap-5">
+        <div className="mt-5 flex justify-end gap-5">
           <AlertDialogCancel
-            className="py-2 px-3 rounded-md bg-gray-250 dark:bg-gray-700 hover:opacity-90"
+            className="rounded-md bg-gray-250 py-2 px-3 hover:opacity-90 dark:bg-gray-700"
             disabled={deleteComment.isLoading}
           >
             Cancelar
           </AlertDialogCancel>
           <AlertDialogAction
-            className="py-2 px-3 rounded-md bg-red-700 text-white hover:opacity-90 flex items-center gap-3"
+            className="flex items-center gap-3 rounded-md bg-red-700 py-2 px-3 text-white hover:opacity-90"
             onClick={onDeleteComment}
           >
             {deleteComment.isLoading && <SpinnerIcon />}
@@ -102,9 +102,9 @@ export default function CommentMenu({ scope, identifier, comment }: CommentMenuP
             initialValue={comment.text}
             onInputChange={(v) => setValues((s) => ({ ...s, text: v }))}
           />
-          <div className="flex col-span-2 justify-end">
+          <div className="col-span-2 flex justify-end">
             <button
-              className="bg-blue-500 text-white rounded-md py-2 px-4 flex items-center gap-3 disabled:bg-gray-600 disabled:cursor-not-allowed disabled:opacity-50 hover:opacity-95"
+              className="flex items-center gap-3 rounded-md bg-blue-500 py-2 px-4 text-white hover:opacity-95 disabled:cursor-not-allowed disabled:bg-gray-600 disabled:opacity-50"
               disabled={values.text === comment.text || !Boolean(values.text.trim())}
             >
               {updateComment.isLoading && <SpinnerIcon />}
@@ -115,27 +115,27 @@ export default function CommentMenu({ scope, identifier, comment }: CommentMenuP
       </Dialog>
 
       <DropdownMenu.Root>
-        <DropdownMenu.Trigger className="ml-auto cursor-pointer hover:bg-gray-250 dark:hover:bg-gray-800 p-1 rounded-md">
+        <DropdownMenu.Trigger className="ml-auto cursor-pointer rounded-md p-1 text-slate11 hover:bg-mauve4 dark:text-slateDark11 dark:hover:bg-mauveDark4">
           <OptionsIcon />
         </DropdownMenu.Trigger>
         <DropdownMenu.Content
           side="left"
           align="start"
-          className="bg-neutral-200 dark:bg-gray-900 rounded-md py-1.5 w-32 border border-neutral-300 dark:border-gray-800 animate-dropdownMenuShow"
+          className="w-32 animate-dropdownMenuShow rounded-md border border-mauve6 bg-mauve3 py-1.5 dark:border-mauveDark6 dark:bg-mauveDark3"
         >
           <DropdownMenu.Item
-            className="text-sm cursor-pointer focus:bg-blue-600 focus:text-white pl-4 pr-7 py-1.5 outline-none rounded-sm flex items-center"
+            className="flex cursor-pointer items-center rounded-sm py-1.5 pl-4 pr-7 text-sm outline-none focus:bg-violet4 dark:focus:bg-violetDark4"
             onSelect={() => setEditDialogOpen(true)}
           >
             Editar
           </DropdownMenu.Item>
           <DropdownMenu.Item
-            className="text-sm cursor-pointer focus:bg-blue-600 focus:text-white pl-4 pr-7 py-1.5 outline-none rounded-sm flex items-center"
+            className="flex cursor-pointer items-center rounded-sm py-1.5 pl-4 pr-7 text-sm outline-none focus:bg-violet4 dark:focus:bg-violetDark4"
             onSelect={() => setDeleteDialogOpen(true)}
           >
             Deletar
           </DropdownMenu.Item>
-          <DropdownMenu.Arrow className="fill-gray-250 dark:fill-gray-900" width={13} height={8} offset={7} />
+          <DropdownMenu.Arrow className="fill-mauve3 dark:fill-mauveDark3" width={13} height={8} offset={7} />
         </DropdownMenu.Content>
       </DropdownMenu.Root>
     </>

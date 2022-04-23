@@ -45,8 +45,8 @@ export default function HomeTemplate() {
                 <>Toque para navegação rápida</>
               ) : (
                 <>
-                  Pressione <kbd className="p-1.5 bg-gray-250 dark:bg-gray-800 rounded-md">{isMac ? '⌘' : 'ctrl'}</kbd>{' '}
-                  + <kbd className="p-1.5 bg-gray-250 dark:bg-gray-800 rounded-md">k</kbd> para navegação rápida
+                  Pressione <kbd className="p-1.5 bg-mauve3 dark:bg-mauveDark3 rounded-md">{isMac ? '⌘' : 'ctrl'}</kbd>{' '}
+                  + <kbd className="p-1.5 bg-mauve3 dark:bg-mauveDark3 rounded-md">k</kbd> para navegação rápida
                 </>
               )}
             </span>
@@ -67,10 +67,12 @@ export default function HomeTemplate() {
                   href={project.href}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="bg-gray-250 dark:bg-gray-800 p-5 rounded-md transform transition-all duration-200 ease-in-out hover:-translate-y-1 w-full"
+                  className="bg-mauve3 dark:bg-mauveDark3 p-5 rounded-md transform transition-all duration-200 ease-in-out hover:-translate-y-1 w-full"
                 >
                   <p className="font-semibold inline-block">{project.title}</p>
-                  {!!project.description && <span className="ml-3 text-sm text-gray-300">{project.description}</span>}
+                  {!!project.description && (
+                    <span className="ml-3 text-sm text-slate11 dark:text-slateDark11">{project.description}</span>
+                  )}
                 </a>
               </li>
             ))}

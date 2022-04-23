@@ -11,13 +11,13 @@ export default function ProjectListItem({ title, shortDescription, tech, slug }:
     <li>
       <Link href={`/projetos/${tech}/${slug}`}>
         <a
-          className={`flex items-center space-x-4 dark:hover:bg-gray-800 rounded-md px-3 py-4 ${
-            isActive ? 'bg-black text-white dark:bg-gray-800' : 'hover:bg-gray-200'
+          className={`flex items-center space-x-4 rounded-md px-3 py-4 hover:bg-mauve4 dark:hover:bg-mauveDark4 ${
+            isActive ? 'bg-mauve5 dark:bg-mauveDark5' : 'hover:bg-mauve4 dark:hover:bg-mauveDark4'
           }`}
         >
           <div>
             <p className="font-medium">{title}</p>
-            <p className="text-sm text-gray-400">{shortDescription}</p>
+            <p className="text-sm text-slate11 dark:text-slateDark11">{shortDescription}</p>
           </div>
         </a>
       </Link>

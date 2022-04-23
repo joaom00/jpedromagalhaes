@@ -30,7 +30,7 @@ export default function StackList() {
   return (
     <Container
       title="Stack - João Pedro Magalhães"
-      customClassname="h-full border-r border-gray-200 md:w-80 xl:w-96 dark:border-gray-800 dark:bg-gray-900"
+      customClassname="h-full border-r border-mauve6 dark:border-mauveDark6 md:w-80 xl:w-96 bg-mauve1 dark:bg-mauveDark1"
     >
       <TitleBar title="Stack" trailingAccessory={<AddStackDialog />} />
 

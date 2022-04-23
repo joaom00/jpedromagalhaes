@@ -74,7 +74,7 @@ export default function Comments({ scope, identifier, scrollContainerRef }: Comm
     <>
       <div
         ref={commentsContainerRef}
-        className="border-t border-gray-250 dark:border-gray-800 px-8 py-10 flex flex-col space-y-10 flex-1 relative"
+        className="border-t border-mauve6 dark:border-mauveDark6 px-8 py-10 flex flex-col space-y-10 flex-1 relative"
       >
         {Boolean(commentsQuery.data?.length) ? (
           <>
@@ -92,7 +92,9 @@ export default function Comments({ scope, identifier, scrollContainerRef }: Comm
                 <div className="flex-1">
                   <div className="flex flex-nowrap items-center">
                     <span className="font-medium whitespace-nowrap">{comment.author.name}</span>
-                    <span className="text-gray-300 shrink ml-3 line-clamp-1">{formatDate(comment.createdAt)}</span>
+                    <span className="text-slate11 dark:text-slateDark11 shrink ml-3 line-clamp-1">
+                      {formatDate(comment.createdAt)}
+                    </span>
                     {comment.canEdit && (
                       <CommentMenu
                         scope={scope}
@@ -101,18 +103,18 @@ export default function Comments({ scope, identifier, scrollContainerRef }: Comm
                       />
                     )}
                   </div>
-                  <p className="text-gray-500 dark:text-gray-300 mt-1 whitespace-pre-line">{comment.text}</p>
+                  <p className="text-slate12 dark:text-slateDark12 mt-1 whitespace-pre-line">{comment.text}</p>
                 </div>
               </div>
             ))}
           </>
         ) : (
           <div className="text-center">
-            <p className="text-gray-500">Seja o primeiro a comentar...</p>
+            <p className="text-slate11 dark:text-slateDark11">Seja o primeiro a comentar...</p>
           </div>
         )}
       </div>
-      <div className="bg-white border-t border-gray-250 dark:border-gray-800 dark:bg-gray-900 pb-10 sm:pb-0 sticky bottom-0 flex flex-col transition duration-300 ease-in-out">
+      <div className="bg-mauve2 border-t border-mauve6 dark:border-mauveDark6 dark:bg-mauveDark2 pb-10 sm:pb-0 sticky bottom-0 flex flex-col transition duration-300 ease-in-out">
         <form
           className="flex items-center flex-none w-full max-w-3xl px-4 py-4 mx-auto space-x-4 md:px-6"
           onSubmit={handleSubmit}
@@ -125,7 +127,7 @@ export default function Comments({ scope, identifier, scrollContainerRef }: Comm
               value={value}
               onKeyDown={onKeyDown}
               style={{ paddingRight: '48px' }}
-              className="w-full px-4 py-2 bg-gray-200 dark:bg-gray-800 rounded-md"
+              className="w-full px-4 py-2 bg-mauve3 dark:bg-mauveDark3 rounded-md placeholder-slate11 dark:placeholder-slateDark11"
             />
             <button
               className="absolute right-1 bottom-1 rounded-md bg-blue-500 p-2 disabled:bg-gray-300 dark:disabled:bg-gray-600 disabled:cursor-not-allowed disabled:opacity-30 text-white"

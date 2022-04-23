@@ -16,7 +16,11 @@
   }
 
   body {
-    @apply dark:text-white;
+    @apply bg-mauve1 dark:bg-mauveDark1 text-slate12 dark:text-slateDark12;
+  }
+
+  ::selection {
+    @apply text-violet12 dark:text-violetDark12 bg-violetA5 dark:bg-violetDarkA5;
   }
 
   body:after {
@@ -27,7 +31,7 @@
     bottom: -50%;
     left: -50%;
     z-index: -1;
-    @apply bg-gray-50 dark:bg-black;
+    @apply bg-mauve1 dark:bg-mauveDark1;
   }
 
   ::-webkit-scrollbar {

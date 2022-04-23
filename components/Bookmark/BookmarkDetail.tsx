@@ -50,14 +50,14 @@ export default function BookmarkDetail() {
                 className="w-full h-full object-cover"
               />
             </div>
-            <span className="text-gray-400">{bookmarkQuery.data.host}</span>
+            <span className="text-slate11 dark:text-slateDark11">{bookmarkQuery.data.host}</span>
           </div>
-          <p className="text-gray-500 dark:text-gray-400 mt-6">{bookmarkQuery.data.description}</p>
+          <p className="text-slate11 dark:text-slateDark11 mt-6">{bookmarkQuery.data.description}</p>
           <a
             href={bookmarkQuery.data.url}
             target="_blank"
             rel="noreferrer noopener"
-            className="bg-blue-600 py-1.5 rounded-md text-white text-center mt-5 w-full block hover:bg-opacity-80 transition-all duration-200"
+            className="bg-violet9 hover:bg-violet10 dark:bg-violetDark9 dark:hover:bg-violetDark10 text-violet12 dark:text-violetDark12 py-1.5 rounded-md text-center mt-5 w-full block  transition-all duration-200"
           >
             Visitar
           </a>

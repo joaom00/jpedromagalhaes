@@ -61,20 +61,22 @@ export default function StackDetail() {
               {toolQuery.data.name}
             </h1>
           </div>
-          <p className="text-gray-500 dark:text-gray-400 mt-6">{toolQuery.data.description}</p>
+          <p className="text-slate11 dark:text-slateDark11 mt-6">{toolQuery.data.description}</p>
 
           <a
             href={toolQuery.data.url}
             target="_blank"
             rel="noreferrer noopener"
-            className="bg-blue-600 py-1.5 rounded-md text-white mt-5 text-center block hover:bg-opacity-80 transition-all duration-200"
+            className="bg-violet9 hover:bg-violet10 dark:bg-violetDark9 dark:hover:bg-violetDark10 text-violet12 dark:text-violetDark12 py-1.5 rounded-md mt-5 text-center block transition-all duration-200"
           >
             Visitar
           </a>
 
-          <div className="bg-gray-150 dark:bg-gray-800 flex flex-col border border-gray-250 dark:border-gray-700 rounded-md overflow-hidden mt-5">
+          <div className="bg-mauve2 dark:bg-mauveDark2 flex flex-col border border-mauve6 dark:border-mauveDark6 rounded-md overflow-hidden mt-5">
             <div className="p-4">
-              <span className="text-sm text-gray-400">{usersQuery.data?.users.length} pessoas também usam</span>
+              <span className="text-sm text-slate11 dark:text-slateDark11">
+                {usersQuery.data?.users.length} pessoas também usam
+              </span>
               <div className="mt-3 flex space-x-2">
                 {usersQuery.isSuccess && (
                   <>
@@ -83,8 +85,8 @@ export default function StackDetail() {
                         key={index}
                         content={<span className="text-sm">{user.name}</span>}
                         side="top"
-                        contentClassName="bg-gray-250 dark:bg-gray-900"
-                        arrowClassName="fill-gray-250 dark:fill-gray-900"
+                        contentClassName="bg-mauve3 dark:bg-mauveDark3"
+                        arrowClassName="fill-mauve3 dark:fill-mauveDark3"
                       >
                         <div className="rounded-full overflow-hidden w-8 h-8">
                           <Image
@@ -100,13 +102,13 @@ export default function StackDetail() {
                 )}
               </div>
             </div>
-            <div className="bg-gray-100 dark:bg-gray-900 px-4 py-2 border-t border-gray-250 dark:border-gray-700">
+            <div className="bg-mauve3 dark:bg-mauveDark3 px-4 py-2 border-t border-mauve6 dark:border-mauveDark6">
               <label className="flex items-center space-x-3">
                 <input
                   type="checkbox"
                   onChange={onUsedByChange}
                   checked={usersQuery.data?.userAlreadyUse}
-                  className="rounded bg-gray-250 dark:bg-gray-700 text-blue-600 border-transparent shadow-sm focus:border-transparent focus:ring focus:ring-offset-0 focus:ring-blue-600 focus:ring-opacity-30"
+                  className="rounded bg-mauve2 dark:bg-mauveDark2 text-violet6 dark:text-violetDark6 border border-mauve6 dark:border-mauveDark6 shadow-sm focus:ring focus:ring-offset-0 focus:ring-blue-600 focus:ring-opacity-30 checked:bg-violet9 dark:checked:bg-violetDark9"
                 />
                 <span className="text-sm">Eu uso</span>
               </label>

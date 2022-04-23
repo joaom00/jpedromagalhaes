@@ -13,8 +13,8 @@ export default function SnippetItem({ title, slug, logo }: Snippet) {
     <li>
       <Link href={`/snippets/${slug}`}>
         <a
-          className={`flex items-center space-x-4 dark:hover:bg-gray-800 rounded-md px-3 py-2 ${
-            isActive ? 'bg-black text-white dark:bg-gray-800' : 'hover:bg-gray-200'
+          className={`flex items-center space-x-4 hover:bg-mauve4 dark:hover:bg-mauveDark4 rounded-md px-3 py-2 ${
+            isActive ? 'bg-mauve5 dark:bg-mauveDark5' : 'hover:bg-mauve4 dark:hover:bg-mauveDark4'
           }`}
         >
           <div className="rounded-xl overflow-hidden w-12 h-12">

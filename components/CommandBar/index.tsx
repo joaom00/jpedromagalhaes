@@ -173,9 +173,9 @@ export default function CommandBar({ children }: CommandBarProps) {
       }}
     >
       <KBarPortal>
-        <KBarPositioner className="bg-black bg-opacity-60 fixed inset-0 animate-overlayShow backdrop-filter backdrop-blur-sm z-50">
-          <KBarAnimator className="max-w-2xl w-full rounded-md overflow-hidden">
-            <KBarSearch className="w-full p-4 bg-white dark:bg-gray-900" placeholder="Tente github..." />
+        <KBarPositioner className="fixed inset-0 z-50 animate-overlayShow bg-black bg-opacity-60 backdrop-blur-sm backdrop-filter">
+          <KBarAnimator className="w-full max-w-2xl overflow-hidden rounded-md">
+            <KBarSearch className="w-full bg-white p-4 dark:bg-mauveDark1" placeholder="Tente github..." />
 
             <RenderResults />
           </KBarAnimator>
@@ -194,18 +194,20 @@ function RenderResults() {
       items={results}
       onRender={({ item, active }) =>
         typeof item === 'string' ? (
-          <div className="bg-white dark:bg-gray-900 px-3 py-1">
-            <span className="text-xs uppercase font-medium tracking-widest">{item}</span>
+          <div className="bg-white px-3 py-1 dark:bg-mauveDark1">
+            <span className="text-xs font-medium uppercase tracking-widest text-slate12 dark:text-slateDark12">
+              {item}
+            </span>
           </div>
         ) : (
           <div
-            className={`flex justify-between items-center p-5 cursor-pointer ${
+            className={`flex cursor-pointer items-center justify-between p-5 ${
               active
-                ? 'bg-gray-250 dark:bg-gray-800 border-l-2 border-blue-600'
-                : 'bg-white dark:bg-gray-900 text-gray-500'
+                ? 'border-l-2 border-blue-600 bg-mauve4 dark:bg-mauveDark4'
+                : 'bg-white text-slate11 dark:bg-mauveDark1 dark:text-slateDark11'
             }`}
           >
-            <span className="flex items-center gap-3 leading-none font-medium">
+            <span className="flex items-center gap-3 font-medium leading-none">
               {item.icon && item.icon}
               {item.name}
             </span>
@@ -213,7 +215,7 @@ function RenderResults() {
               <div className="space-x-2">
                 {item.shortcut?.map((key: string, index) => (
                   <span
-                    className="py-1 px-2 text-blue-600 uppercase bg-slate-200 dark:bg-slate-900 text-xs rounded-md font-medium"
+                    className="rounded-md bg-violet4 py-1 px-2 text-xs font-medium uppercase text-violet11 dark:bg-violetDark4 dark:text-violetDark11"
                     key={index}
                   >
                     {key}

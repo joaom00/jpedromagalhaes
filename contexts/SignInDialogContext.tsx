@@ -15,6 +15,7 @@ type SignInDialogContextData = {
 
 const SignInDialogContext = React.createContext<SignInDialogContextData | undefined>(undefined)
 
+// TODO: Move dialog outside provider
 export default function SignInDialogProvider({ children }: SignInDialogProviderProps) {
   const [open, setOpen] = React.useState(false)
 
@@ -22,43 +23,43 @@ export default function SignInDialogProvider({ children }: SignInDialogProviderP
     <SignInDialogContext.Provider value={{ open, setOpen }}>
       <Root open={open} onOpenChange={setOpen}>
         <Portal>
-          <Overlay className="bg-black bg-opacity-60 fixed inset-0 animate-overlayShow backdrop-filter backdrop-blur-sm z-40" />
-          <Content className="bg-white shadow-2xl dark:bg-gray-900 rounded-md max-w-lg w-full pt-10 pb-1 px-5 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animate-contentShow z-50">
+          <Overlay className="fixed inset-0 z-40 animate-overlayShow bg-black bg-opacity-60 backdrop-blur-sm backdrop-filter" />
+          <Content className="fixed top-1/2 left-1/2 z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 transform animate-contentShow rounded-md bg-white px-5 pt-10 pb-1 shadow-2xl dark:bg-mauveDark1">
             <Description>Ao criar uma conta, você poderá:</Description>
-            <div className="grid grid-cols-2 gap-5 text-center mt-5">
-              <p className="bg-zinc-200 dark:bg-gray-800 rounded-md p-6 grid place-items-center font-semibold text-gray-700 dark:text-white">
-                <HeartFillIcon size={24} aria-hidden className="text-gray-300 mb-2" />
+            <div className="mt-5 grid grid-cols-2 gap-5 text-center">
+              <p className="grid place-items-center rounded-md bg-mauve3 p-6 font-semibold dark:bg-mauveDark3">
+                <HeartFillIcon size={24} aria-hidden className="mb-2 text-slate11 dark:text-slateDark11" />
                 Comentar e Curtir
               </p>
-              <p className="bg-zinc-200 dark:bg-gray-800 rounded-md p-6 grid place-items-center font-semibold text-gray-700 dark:text-white">
-                <GuestbookIcon size={24} aria-hidden className="text-gray-300 mb-2" />
+              <p className="grid place-items-center rounded-md bg-mauve3 p-6 font-semibold dark:bg-mauveDark3">
+                <GuestbookIcon size={24} aria-hidden className="mb-2 text-slate11 dark:text-slateDark11" />
                 Utilizar Guestbook
               </p>
             </div>
-            <div className="space-y-5 mt-7">
+            <div className="mt-7 space-y-5">
               <button
-                className="flex items-center justify-center w-full gap-3 bg-zinc-200 dark:bg-gray-800 rounded-md py-3 text-gray-700 font-semibold dark:text-white"
+                className="flex w-full items-center justify-center gap-3 rounded-md bg-mauve3 py-3 font-semibold dark:bg-mauveDark3"
                 onClick={() => signIn('github')}
               >
                 <GitbubIcon aria-hidden />
                 Entrar com GitHub
               </button>
               <button
-                className="flex items-center justify-center w-full gap-3 bg-zinc-200 dark:bg-gray-800 rounded-md py-3 text-gray-700 font-semibold dark:text-white"
+                className="flex w-full items-center justify-center gap-3 rounded-md bg-mauve3 py-3 font-semibold dark:bg-mauveDark3"
                 onClick={() => signIn('twitter')}
               >
                 <TwitterIcon aria-hidden />
                 Entrar com Twitter
               </button>
             </div>
-            <div className="border-t border-zinc-300 dark:border-gray-700 my-7">
-              <p className="text-sm font-semibold text-gray-500 mt-5">
+            <div className="my-7 border-t border-mauve6 dark:border-mauveDark6">
+              <p className="mt-5 text-sm font-semibold text-slate11 dark:text-slateDark11">
                 Você poderá deletar sua conta a qualquer momento.
               </p>
             </div>
 
             <Close asChild>
-              <button className="absolute top-3 right-3 rounded-md p-2 text-gray-700 dark:text-white bg-gray-200 bg-opacity-0 hover:bg-opacity-100 dark:bg-gray-700 dark:bg-opacity-0 dark:hover:bg-opacity-100 transition duration-200">
+              <button className="absolute top-3 right-3 rounded-md bg-mauve4 bg-opacity-0 p-2 transition duration-200 hover:bg-opacity-100 dark:bg-mauveDark4 dark:bg-opacity-0 dark:hover:bg-opacity-100">
                 <CloseIcon />
               </button>
             </Close>

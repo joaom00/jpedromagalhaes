@@ -48,9 +48,11 @@ export default function GuestbookDetail() {
                 className="w-full h-full object-cover"
               />
             </div>
-            <span className="text-gray-400">{questionQuery.data.author.name}</span>
+            <span className="text-slate11 dark:text-slateDark11">{questionQuery.data.author.name}</span>
           </div>
-          <p className="mt-3 text-gray-500 dark:text-gray-400 whitespace-pre-line">{questionQuery.data.description}</p>
+          <p className="mt-3 text-slate11 dark:text-slateDark11 whitespace-pre-line">
+            {questionQuery.data.description}
+          </p>
         </div>
         <Comments scope="guestbook" identifier={id} scrollContainerRef={scrollContainerRef} />
       </Container>

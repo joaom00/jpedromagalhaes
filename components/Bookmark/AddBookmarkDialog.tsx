@@ -62,10 +62,10 @@ export default function AddBookmarkDialog() {
             placeholder="Descrição"
             required
             onInputChange={(v) => handleInput('description', v)}
-            className="rounded-md bg-gray-200 dark:bg-gray-900 border-gray-250 dark:border-gray-700 col-span-2"
+            className="col-span-2 rounded-md"
           />
-          <div className="flex col-span-2">
-            <button className="bg-blue-600 text-white rounded-md py-2 px-4 ml-auto flex items-center gap-3">
+          <div className="col-span-2 flex">
+            <button className="ml-auto flex items-center gap-3 rounded-md bg-blue-600 py-2 px-4 text-white">
               {createBookmark.isLoading && <SpinnerIcon />}
               Criar bookmark
             </button>
@@ -82,7 +82,7 @@ const Trigger = React.forwardRef<HTMLButtonElement>((props, ref) => (
   <button
     {...props}
     ref={ref}
-    className="p-2 rounded-md text-gray-700 dark:text-white bg-gray-200 bg-opacity-0 hover:bg-opacity-100 dark:bg-gray-800 dark:bg-opacity-0 dark:hover:bg-opacity-100 transition duration-200"
+    className="rounded-md bg-gray-200 bg-opacity-0 p-2 text-gray-700 transition duration-200 hover:bg-opacity-100 dark:bg-gray-800 dark:bg-opacity-0 dark:text-white dark:hover:bg-opacity-100"
   >
     <PlusIcon />
   </button>

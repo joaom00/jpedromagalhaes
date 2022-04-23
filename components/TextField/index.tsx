@@ -21,7 +21,7 @@ export default function TextField({ className, initialValue = '', onInputChange,
       type="text"
       value={value}
       onChange={onChange}
-      className={`rounded-md bg-gray-200 dark:bg-gray-800 ring-offset-white dark:focus:ring-offset-black focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${className}`}
+      className={`rounded-md bg-mauve3 ring-offset-white placeholder:text-slate11 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:bg-mauveDark3 dark:placeholder:text-slateDark11 dark:focus:ring-offset-black ${className}`}
       {...props}
     />
   )

@@ -95,8 +95,8 @@ export default function TitleBar({
         boxShadow: `0 1px 3px rgba(0,0,0,${currentScrollOffset})`,
         minHeight: '48px'
       }}
-      className={`flex items-center justify-between px-3 h-[60px] sticky top-0 backdrop-filter backdrop-blur-xl bg-opacity-40 dark:bg-opacity-70 z-10 ${
-        globalMenu ? 'bg-gray-100 dark:bg-gray-900' : 'bg-gray-250 dark:bg-gray-800'
+      className={`flex items-center justify-between px-3 h-[60px] sticky top-0 backdrop-filter backdrop-blur-xl z-10 ${
+        globalMenu ? 'bg-mauve3 dark:bg-mauveDark2' : 'bg-mauve3 dark:bg-mauveDark2'
       }`}
     >
       <div className="flex flex-1 items-center justify-between">

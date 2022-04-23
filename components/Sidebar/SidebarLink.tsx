@@ -20,15 +20,15 @@ export function SidebarLink({ icon: Icon, label, href, isActive = false, isExter
         <a
           target={isExternal ? '_blank' : undefined}
           rel={isExternal ? 'noopener noreferrer' : undefined}
-          className={`flex items-center px-2 py-1.5 rounded-md space-x-3 ${
+          className={`flex items-center px-2 py-1.5 rounded-md space-x-3  ${
             isActive
-              ? 'bg-black text-white hover:bg-black hover:text-white dark:bg-gray-700'
-              : 'text-gray-700 dark:text-white hover:bg-gray-200 hover:text-black dark:hover:bg-gray-700'
+              ? 'bg-mauve5 dark:bg-mauveDark5'
+              : 'text-slate12 dark:text-slateDark12 hover:bg-mauve4 dark:hover:bg-mauveDark4'
           }`}
         >
           <Icon />
           <span className="text-sm flex-1">{label}</span>
-          {isExternal && <ExternalLinkIcon className="text-gray-500" />}
+          {isExternal && <ExternalLinkIcon className="text-slate11 dark:text-slateDark11" />}
         </a>
       </Link>
     </li>

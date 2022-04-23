@@ -172,34 +172,34 @@ export default function Sidebar() {
         <nav
           className={`${
             navigation.open ? 'absolute inset-y-0 left-0 translate-x-0 shadow-lg' : 'absolute -translate-x-full'
-          } lg:relative flex flex-none flex-col lg:translate-x-0 w-3/4 sm:w-1/2 md:w-1/3 lg:w-56 2xl:w-72 3xl:w-80 z-30 lg:z-auto max-h-screen h-full min-h-screen overflow-y-auto transition duration-200 ease-in-out transform border-r pb-10 sm:pb-0 border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900`}
+          } lg:relative flex flex-none flex-col lg:translate-x-0 w-3/4 sm:w-1/2 md:w-1/3 lg:w-56 2xl:w-72 3xl:w-80 z-30 lg:z-auto max-h-screen h-full min-h-screen overflow-y-auto transition duration-200 ease-in-out transform border-r pb-10 sm:pb-0 border-mauve6 dark:border-mauveDark6 bg-white dark:bg-mauveDark1`}
         >
           <div
-            className={`sticky top-0 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 p-3 space-y-3 ${glassEffect}`}
+            className={`sticky top-0 bg-mauve1 dark:bg-mauveDark1 border-b border-mauve6 dark:border-mauveDark6 p-3 space-y-3 ${glassEffect}`}
           >
             <div className="flex items-center gap-3">
-              <span
-                className="text-gray-300 p-2 rounded-md lg:hidden dark:hover:bg-gray-800"
+              <button
+                aria-label="Close menu"
+                className="p-2 rounded-md lg:hidden hover:bg-mauve4 dark:hover:bg-mauveDark4 text-slate12 dark:text-slateDark12"
                 onClick={() => navigation.setOpen(false)}
               >
-                <CloseIcon />
-              </span>
-              <p className="text-sm font-medium text-gray-700 dark:text-white">João Pedro Magalhães</p>
+                <CloseIcon aria-hidden />
+              </button>
+              <p className="text-sm font-medium">João Pedro Magalhães</p>
               <Tooltip
                 content={<KeyboardInput isMac={isMac} />}
                 side="right"
-                contentClassName="bg-gray-250 dark:bg-gray-800"
-                arrowClassName="fill-gray-250 dark:fill-gray-800"
+                contentClassName="bg-mauve3 dark:bg-mauveDark3"
+                arrowClassName="fill-mauve3 dark:fill-mauveDark3"
               >
                 <button
-                  aria-hidden
                   className="ml-auto rounded-md p-1"
                   onClick={() => {
                     commandBarSoundPlay()
                     query.toggle()
                   }}
                 >
-                  <RiCommandFill size={14} />
+                  <RiCommandFill size={14} aria-hidden />
                 </button>
               </Tooltip>
             </div>
@@ -211,7 +211,7 @@ export default function Sidebar() {
             {links.map((link, i) => {
               if (typeof link === 'string') {
                 return (
-                  <li key={i} className="px-2 pt-5 pb-2 text-xs font-semibold text-gray-500">
+                  <li key={i} className="px-2 pt-5 pb-2 text-xs font-semibold text-slate11 dark:text-slateDark11">
                     {link}
                   </li>
                 )
@@ -222,7 +222,7 @@ export default function Sidebar() {
           </ul>
 
           <div
-            className={`sticky p-3 bottom-0 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 flex justify-between items-center ${glassEffect}`}
+            className={`sticky p-3 bottom-0 bg-mauve1 dark:bg-mauveDark1 border-t border-mauve6 dark:border-mauveDark6 flex justify-between items-center ${glassEffect}`}
           >
             {session ? (
               <div className="w-6 h-6 rounded-full overflow-hidden">
@@ -236,7 +236,7 @@ export default function Sidebar() {
               </div>
             ) : (
               <button
-                className="relative bg-zinc-200 dark:bg-gray-800 text-sm rounded-md px-5 py-1.5 dark:text-gray-300 group-hover:text-gray-50 transition duration-200"
+                className="relative bg-mauve2 dark:bg-mauveDark2 text-sm rounded-md px-5 py-1.5 transition duration-200"
                 onClick={() => signInDialog.setOpen(true)}
               >
                 Fazer login
@@ -248,8 +248,8 @@ export default function Sidebar() {
                 <DropdownMenu.Root>
                   <DropdownMenu.Trigger asChild>
                     <button
-                      aria-label="Sair da conta"
-                      className="bg-gray-200 bg-opacity-0 hover:bg-opacity-100 transition duration-200 dark:bg-gray-800 dark:bg-opacity-0 dark:hover:bg-opacity-100 text-sm rounded-lg p-2 text-gray-600 dark:text-white"
+                      aria-label="Configurações"
+                      className="bg-mauve4 dark:bg-mauveDark4 bg-opacity-0 hover:bg-opacity-100 transition duration-200 dark:bg-opacity-0 dark:hover:bg-opacity-100 text-sm rounded-lg p-2"
                     >
                       <ConfigIcon aria-hidden />
                     </button>
@@ -257,16 +257,16 @@ export default function Sidebar() {
                   <DropdownMenu.Content
                     side="right"
                     align="end"
-                    className="bg-neutral-200 dark:bg-gray-900 rounded-md py-1.5 w-36 border border-neutral-300 dark:border-gray-800 animate-dropdownMenuShow"
+                    className="bg-mauve3 dark:bg-mauveDark3 rounded-md py-1.5 w-36 border border-mauve6 dark:border-mauveDark6 animate-dropdownMenuShow"
                   >
                     <DropdownMenu.Item
-                      className="text-sm cursor-pointer focus:bg-blue-600 focus:text-white pl-4 pr-7 py-1.5 outline-none rounded-sm flex items-center"
+                      className="text-sm cursor-pointer focus:bg-violet4 dark:focus:bg-violetDark4 pl-4 pr-7 py-1.5 outline-none rounded-sm flex items-center"
                       onSelect={() => setDeleteDialogOpen(true)}
                     >
                       Deletar conta
                     </DropdownMenu.Item>
                     <DropdownMenu.Item
-                      className="text-sm cursor-pointer focus:bg-blue-600 focus:text-white pl-4 pr-7 py-1.5 outline-none rounded-sm flex items-center"
+                      className="text-sm cursor-pointer focus:bg-violet4 dark:focus:bg-violetDark4 pl-4 pr-7 py-1.5 outline-none rounded-sm flex items-center"
                       onSelect={() => signOut()}
                     >
                       Sair da conta
@@ -286,7 +286,7 @@ export default function Sidebar() {
         >
           <div className="flex justify-end mt-5 gap-5">
             <AlertDialogCancel
-              className="py-2 px-3 rounded-md bg-gray-250 dark:bg-gray-700 hover:opacity-90"
+              className="py-2 px-3 rounded-md bg-mauve3 hover:bg-mauve4 dark:bg-mauveDark3 dark:hover:bg-mauveDark4"
               disabled={deleteAccount.isLoading}
             >
               Cancelar

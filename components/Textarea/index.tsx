@@ -31,7 +31,7 @@ export default function Textarea({
       rows={rows}
       value={value}
       onChange={onChange}
-      className={`rounded-md bg-gray-200 dark:bg-gray-800 ${className}`}
+      className={`rounded-md bg-mauve3 placeholder-slate11 dark:bg-mauveDark3 dark:placeholder-slateDark11 ${className}`}
       {...props}
     />
   )

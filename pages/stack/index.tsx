@@ -1,18 +1,24 @@
 import { dehydrate, QueryClient } from 'react-query'
 
-import { fetchList } from 'shared/queries'
+import { fetchList } from '@/lib/useListQuery'
 
-import { ListDetailView } from 'layouts'
-import { StackList } from 'components/Stack'
+import { MainLayout } from '@/layouts'
+import { Stack } from '@/components/Stack'
 
 export default function StackPage() {
-  return <ListDetailView list={<StackList />} />
+  return (
+    <MainLayout.Root>
+      <MainLayout.List>
+        <Stack />
+      </MainLayout.List>
+    </MainLayout.Root>
+  )
 }
 
 export async function getServerSideProps() {
   const queryClient = new QueryClient()
 
-  await queryClient.prefetchInfiniteQuery([{ scope: 'stack', type: 'list' }], fetchList)
+  await queryClient.prefetchInfiniteQuery([{ entity: 'stack', scope: 'list' }], fetchList)
 
   return {
     props: {

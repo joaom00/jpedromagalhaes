@@ -3,19 +3,20 @@ import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react'
 
-import type { StackDetail } from 'shared/types'
-import { useDetailQuery, useUsersQuery } from 'shared/queries'
+import type { StackDetail } from '@/shared/types'
+import { useUsersQuery } from '@/shared/queries'
+import { useDetailQuery } from '@/lib/useDetailQuery'
 
-import { useSignInDialog } from 'contexts'
-import { useUsedByMutation } from 'hooks'
+import { useSignInDialog } from '@/contexts'
+import { useUsedByMutation } from '@/hooks'
 
-import { SpinnerIcon } from 'icons'
-import { TitleBar, Image, Tooltip, Container, Error } from 'components'
+import { SpinnerIcon } from '@/icons'
+import { TitleBar, Image, Tooltip, Container, Error } from '@/components'
 
+import { StackActions } from './StackActions'
 const Comments = dynamic(() => import('components/Comments/Comments'))
-const StackActions = dynamic(() => import('./StackActions'))
 
-export default function StackDetail() {
+export function StackDetail() {
   const titleRef = React.useRef(null)
   const scrollContainerRef = React.useRef<HTMLDivElement>(null)
 
@@ -48,7 +49,7 @@ export default function StackDetail() {
           titleRef={titleRef}
           scrollContainerRef={scrollContainerRef}
         />
-        <div className="px-3 lg:px-8 py-8">
+        <div className="px-3 py-8 lg:px-8">
           <div className="flex items-center">
             <Image
               src={toolQuery.data.image}
@@ -57,22 +58,25 @@ export default function StackDetail() {
               height={80}
               className="rounded-2xl"
             />
-            <h1 ref={titleRef} className="text-2xl xl:text-3xl tracking-wider font-semibold flex-1 ml-6">
+            <h1
+              ref={titleRef}
+              className="ml-6 flex-1 text-2xl font-semibold tracking-wider xl:text-3xl"
+            >
               {toolQuery.data.name}
             </h1>
           </div>
-          <p className="text-slate11 dark:text-slateDark11 mt-6">{toolQuery.data.description}</p>
+          <p className="mt-6 text-slate11 dark:text-slateDark11">{toolQuery.data.description}</p>
 
           <a
             href={toolQuery.data.url}
             target="_blank"
             rel="noreferrer noopener"
-            className="bg-violet9 hover:bg-violet10 dark:bg-violetDark9 dark:hover:bg-violetDark10 text-violet12 dark:text-violetDark12 py-1.5 rounded-md mt-5 text-center block transition-all duration-200"
+            className="mt-5 block rounded-md bg-violet9 py-1.5 text-center text-violet12 transition-all duration-200 hover:bg-violet10 dark:bg-violetDark9 dark:text-violetDark12 dark:hover:bg-violetDark10"
           >
             Visitar
           </a>
 
-          <div className="bg-mauve2 dark:bg-mauveDark2 flex flex-col border border-mauve6 dark:border-mauveDark6 rounded-md overflow-hidden mt-5">
+          <div className="mt-5 flex flex-col overflow-hidden rounded-md border border-mauve6 bg-mauve2 dark:border-mauveDark6 dark:bg-mauveDark2">
             <div className="p-4">
               <span className="text-sm text-slate11 dark:text-slateDark11">
                 {usersQuery.data?.users.length} pessoas também usam
@@ -88,7 +92,7 @@ export default function StackDetail() {
                         contentClassName="bg-mauve3 dark:bg-mauveDark3"
                         arrowClassName="fill-mauve3 dark:fill-mauveDark3"
                       >
-                        <div className="rounded-full overflow-hidden w-8 h-8">
+                        <div className="h-8 w-8 overflow-hidden rounded-full">
                           <Image
                             src={user.image as string}
                             alt={`Foto de perfil de ${user.name}`}
@@ -102,13 +106,13 @@ export default function StackDetail() {
                 )}
               </div>
             </div>
-            <div className="bg-mauve3 dark:bg-mauveDark3 px-4 py-2 border-t border-mauve6 dark:border-mauveDark6">
+            <div className="border-t border-mauve6 bg-mauve3 px-4 py-2 dark:border-mauveDark6 dark:bg-mauveDark3">
               <label className="flex items-center space-x-3">
                 <input
                   type="checkbox"
                   onChange={onUsedByChange}
                   checked={usersQuery.data?.userAlreadyUse}
-                  className="rounded bg-mauve2 dark:bg-mauveDark2 text-violet6 dark:text-violetDark6 border border-mauve6 dark:border-mauveDark6 shadow-sm focus:ring focus:ring-offset-0 focus:ring-blue-600 focus:ring-opacity-30 checked:bg-violet9 dark:checked:bg-violetDark9"
+                  className="rounded border border-mauve6 bg-mauve2 text-violet6 shadow-sm checked:bg-violet9 focus:ring focus:ring-blue-600 focus:ring-opacity-30 focus:ring-offset-0 dark:border-mauveDark6 dark:bg-mauveDark2 dark:text-violetDark6 dark:checked:bg-violetDark9"
                 />
                 <span className="text-sm">Eu uso</span>
               </label>
@@ -125,7 +129,7 @@ export default function StackDetail() {
   }
 
   return (
-    <div className="grid place-items-center w-full">
+    <div className="grid w-full place-items-center">
       <SpinnerIcon />
     </div>
   )

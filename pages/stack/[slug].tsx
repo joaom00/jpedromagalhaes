@@ -1,13 +1,23 @@
 import { GetServerSidePropsContext } from 'next'
 import { dehydrate, QueryClient } from 'react-query'
 
-import { fetchDetail, fetchUsers, fetchComments } from 'shared/queries'
+import { fetchUsers, fetchComments } from '@/shared/queries'
+import { fetchDetail } from '@/lib/useDetailQuery'
 
-import { ListDetailView } from 'layouts'
-import { StackList, StackDetail } from 'components/Stack'
+import { MainLayout } from '@/layouts'
+import { Stack, StackDetail } from '@/components/Stack'
 
 export default function StackDetailPage() {
-  return <ListDetailView list={<StackList />} hasDetail detail={<StackDetail />} />
+  return (
+    <MainLayout.Root>
+      <MainLayout.List hasDetail>
+        <Stack />
+      </MainLayout.List>
+      <MainLayout.Detail>
+        <StackDetail />
+      </MainLayout.Detail>
+    </MainLayout.Root>
+  )
 }
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext<{ slug: string }>) {
@@ -15,9 +25,18 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext<{ slug: 
 
   const queryClient = new QueryClient()
 
-  await queryClient.prefetchQuery([{ scope: 'stack', type: 'detail', identifier: slug }], fetchDetail)
-  await queryClient.prefetchQuery([{ scope: 'stack', type: 'users', identifier: slug }], fetchUsers)
-  await queryClient.prefetchQuery([{ scope: 'stack', type: 'comments', identifier: slug }], fetchComments)
+  await queryClient.prefetchQuery(
+    [{ entity: 'stack', scope: 'detail', identifier: slug }],
+    fetchDetail
+  )
+  await queryClient.prefetchQuery(
+    [{ entity: 'stack', scope: 'users', identifier: slug }],
+    fetchUsers
+  )
+  await queryClient.prefetchQuery(
+    [{ entity: 'stack', scope: 'comments', identifier: slug }],
+    fetchComments
+  )
 
   return {
     props: {

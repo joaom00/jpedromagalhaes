@@ -17,7 +17,7 @@ export function useCreateStackMutation() {
   const queryClient = useQueryClient()
 
   return useMutation(createStack, {
-    onSuccess: () => queryClient.invalidateQueries([{ scope: 'stack', type: 'list' }])
+    onSuccess: () => queryClient.invalidateQueries([{ entity: 'stack', scope: 'list' }])
   })
 }
 
@@ -44,7 +44,7 @@ export function useUpdateStackMutation() {
 
   return useMutation(updateStack, {
     onSuccess: (_data, args) =>
-      queryClient.invalidateQueries([{ scope: 'stack', type: 'detail', identifier: args.slug }])
+      queryClient.invalidateQueries([{ entity: 'stack', scope: 'detail', identifier: args.slug }])
   })
 }
 
@@ -63,6 +63,6 @@ export function useDeleteStackMutation() {
   const queryClient = useQueryClient()
 
   return useMutation(deleteStack, {
-    onSuccess: () => queryClient.invalidateQueries([{ scope: 'stack', type: 'list' }])
+    onSuccess: () => queryClient.invalidateQueries([{ entity: 'stack', scope: 'list' }])
   })
 }

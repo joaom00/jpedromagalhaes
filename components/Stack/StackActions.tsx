@@ -2,43 +2,32 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react'
 import { toast } from 'react-hot-toast'
-import { Action as AlertDialogAction, Cancel as AlertDialogCancel } from '@radix-ui/react-alert-dialog'
+import {
+  Action as AlertDialogAction,
+  Cancel as AlertDialogCancel
+} from '@radix-ui/react-alert-dialog'
 
-import type { StackDetail } from 'shared/types'
-import { useReactionMutation } from 'hooks'
-import { useUpdateStackMutation, useDeleteStackMutation } from './queries'
+import type { StackDetail } from '@/shared/types'
+import { useReactionMutation } from '@/hooks'
 
-import { DeleteIcon, EditIcon, SpinnerIcon } from 'icons'
-import { LikeButton, AlertDialog, TextField, Textarea, Dialog } from 'components'
+import { DeleteIcon, EditIcon, SpinnerIcon } from '@/icons'
+import { LikeButton, AlertDialog, TextField, Textarea, Dialog } from '@/components'
+
+import { useUpdateStackMutation, useDeleteStackMutation } from './Stack.queries'
 
 type StackActionsProps = {
   stack: StackDetail
 }
 
-export default function StackActions({ stack }: StackActionsProps) {
+export function StackActions({ stack }: StackActionsProps) {
   const router = useRouter()
   const { data: session } = useSession()
   const [editDialogOpen, setEditDialogOpen] = React.useState(false)
   const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false)
-  const [values, setValues] = React.useState({
-    name: stack.name,
-    slug: stack.slug,
-    image: stack.image,
-    url: stack.url,
-    description: stack.description
-  })
 
   const reactionMutation = useReactionMutation()
   const updateStack = useUpdateStackMutation()
   const deleteStack = useDeleteStackMutation()
-
-  React.useEffect(() => {
-    setValues(stack)
-  }, [editDialogOpen, stack])
-
-  function handleInput(field: string, value: string) {
-    setValues((s) => ({ ...s, [field]: value }))
-  }
 
   function onReactionChange() {
     if (reactionMutation.isLoading) return
@@ -46,10 +35,13 @@ export default function StackActions({ stack }: StackActionsProps) {
     reactionMutation.mutate({ scope: 'stack', identifier: stack.slug })
   }
 
-  function onUpdateStack(event: React.FormEvent) {
+  function onUpdateStack(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
     if (updateStack.isLoading) return
+
+    const formData = new FormData(event.currentTarget)
+    const values = Object.fromEntries(formData.entries())
 
     updateStack.mutate(values, {
       onSuccess: () => {
@@ -81,15 +73,15 @@ export default function StackActions({ stack }: StackActionsProps) {
         open={deleteDialogOpen}
         onOpenChange={setDeleteDialogOpen}
       >
-        <div className="flex justify-end mt-5 gap-5">
+        <div className="mt-5 flex justify-end gap-5">
           <AlertDialogCancel
-            className="py-2 px-3 rounded-md bg-gray-250 dark:bg-gray-700 hover:opacity-90"
+            className="rounded-md bg-gray-250 py-2 px-3 hover:opacity-90 dark:bg-gray-700"
             disabled={deleteStack.isLoading}
           >
             Cancelar
           </AlertDialogCancel>
           <AlertDialogAction
-            className="py-2 px-3 rounded-md bg-red-700 text-white hover:opacity-90 flex items-center gap-3"
+            className="flex items-center gap-3 rounded-md bg-red-700 py-2 px-3 text-white hover:opacity-90"
             disabled={deleteStack.isLoading}
             onClick={onDeleteStack}
           >
@@ -106,45 +98,22 @@ export default function StackActions({ stack }: StackActionsProps) {
         onOpenChange={setEditDialogOpen}
       >
         <form className="grid grid-cols-2 gap-5" onSubmit={onUpdateStack}>
-          <TextField
-            initialValue={stack.name}
-            name="name"
-            placeholder="Nome"
-            required
-            onInputChange={(v) => handleInput('name', v)}
-          />
-          <TextField
-            initialValue={stack.slug}
-            name="slug"
-            placeholder="Slug"
-            required
-            onInputChange={(v) => handleInput('slug', v)}
-          />
-          <TextField
-            initialValue={stack.image}
-            name="image"
-            placeholder="Imagem"
-            onInputChange={(v) => handleInput('image', v)}
-          />
-          <TextField
-            initialValue={stack.url}
-            name="url"
-            placeholder="URL"
-            required
-            onInputChange={(v) => handleInput('url', v)}
-          />
+          <TextField defaultValue={stack.name} name="name" placeholder="Nome" required />
+          <TextField defaultValue={stack.slug} name="slug" placeholder="Slug" required />
+          <TextField defaultValue={stack.image} name="image" placeholder="Imagem" />
+          <TextField defaultValue={stack.url} name="url" placeholder="URL" required />
           <Textarea
             initialValue={stack.description}
             name="description"
             placeholder="Descrição"
             rows={3}
-            onInputChange={(v) => handleInput('description', v)}
             className="col-span-2"
           />
-          <div className="flex col-span-2 justify-end">
+          <div className="col-span-2 flex justify-end">
             <button
-              className="bg-blue-500 text-white rounded-md py-2 px-4 flex items-center gap-3 disabled:bg-gray-600 disabled:cursor-not-allowed disabled:opacity-50 hover:opacity-95"
-              disabled={JSON.stringify(stack) === JSON.stringify(values)}
+              className="flex items-center gap-3 rounded-md bg-blue-500 py-2 px-4 text-white hover:opacity-95 disabled:cursor-not-allowed disabled:bg-gray-600 disabled:opacity-50"
+              // TODO:
+              // disabled={JSON.stringify(stack) === JSON.stringify(values)}
             >
               {updateStack.isLoading && <SpinnerIcon />}
               Salvar alterações
@@ -158,13 +127,13 @@ export default function StackActions({ stack }: StackActionsProps) {
           <>
             <button
               onClick={() => setDeleteDialogOpen(true)}
-              className="hover:bg-red-700 text-sm rounded-md text-white px-3 transition duration-100"
+              className="rounded-md px-3 text-sm text-white transition duration-100 hover:bg-red-700"
             >
               <DeleteIcon size={16} />
             </button>
             <button
               onClick={() => setEditDialogOpen(true)}
-              className="hover:bg-gray-900 text-sm rounded-md px-3 transition duration-100"
+              className="rounded-md px-3 text-sm transition duration-100 hover:bg-gray-900"
             >
               <EditIcon size={16} />
             </button>

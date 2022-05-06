@@ -1,22 +1,23 @@
 import React from 'react'
-import dynamic from 'next/dynamic'
+import { useRouter } from 'next/router'
 
-import type { Stack } from 'shared/types'
-import { useListQuery } from 'shared/queries'
-import { useIntersectionObserver } from 'hooks'
+import type { Stack } from '@/shared/types'
+import { useIntersectionObserver } from '@/hooks'
+import { useListQuery } from '@/lib/useListQuery'
 
-import { SpinnerIcon } from 'icons'
-import { Container, TitleBar, Error } from 'components'
+import { SpinnerIcon } from '@/icons'
+import { Container, TitleBar, Error, List } from '@/components'
 
-import StackItem from './StackListItem'
-const AddStackDialog = dynamic(() => import('./AddStackDialog'))
+import { StackItem } from './StackItem'
+import { AddStackDialog } from './AddStackDialog'
 
 type StackData = {
   stack: Stack[]
   nextCursor: string
 }
 
-export default function StackList() {
+export function Stack() {
+  const router = useRouter()
   const endListRef = React.useRef<HTMLDivElement>(null)
 
   const stackQuery = useListQuery<StackData>('stack')
@@ -34,15 +35,22 @@ export default function StackList() {
     >
       <TitleBar title="Stack" trailingAccessory={<AddStackDialog />} />
 
-      <ul className="p-3 space-y-2">
-        {stackQuery.data?.pages.map((page, index) => (
+      <List.Root>
+        {stackQuery.data?.pages?.map((page, index) => (
           <React.Fragment key={index}>
             {page.stack.map((stack) => (
-              <StackItem key={stack.slug} {...stack} />
+              <List.Item
+                key={stack.slug}
+                href={`/stack/${stack.slug}`}
+                isActive={router.asPath.indexOf(stack.slug) >= 0}
+                className="!flex-row items-center gap-4"
+              >
+                <StackItem {...stack} />
+              </List.Item>
             ))}
           </React.Fragment>
         ))}
-      </ul>
+      </List.Root>
 
       {stackQuery.isLoading && (
         <div className="grid place-items-center pb-4">

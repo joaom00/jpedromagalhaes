@@ -1,22 +1,23 @@
 import React from 'react'
-import dynamic from 'next/dynamic'
+import { useRouter } from 'next/router'
 
-import type { Question } from 'shared/types'
-import { useListQuery } from 'shared/queries'
-import { useIntersectionObserver } from 'hooks'
+import type { Question } from '@/shared/types'
+import { useIntersectionObserver } from '@/hooks'
+import { useListQuery } from '@/lib/useListQuery'
 
-import { SpinnerIcon } from 'icons'
-import { Container, TitleBar, Error } from 'components'
+import { SpinnerIcon } from '@/icons'
+import { Container, List, TitleBar, Error } from '@/components'
 
-import GuestbookListItem from './GuestbookListItem'
-const AddQuestionDialog = dynamic(() => import('./AddQuestionDialog'))
+import { GuestbookItem } from './GuestbookItem'
+import { AddQuestionDialog } from './AddQuestionDialog'
 
 type QuestionListData = {
   questions: Question[]
   nextCursor: string
 }
 
-export default function GuestbookList() {
+export function Guestbook() {
+  const router = useRouter()
   const endListRef = React.useRef<HTMLDivElement>(null)
 
   const questionsQuery = useListQuery<QuestionListData>('guestbook')
@@ -33,15 +34,22 @@ export default function GuestbookList() {
       customClassname="h-full border-r border-mauve6 dark:border-mauveDark6 md:w-80 xl:w-96 dark:bg-mauveDark1"
     >
       <TitleBar title="Guestbook" trailingAccessory={<AddQuestionDialog />} />
-      <ul className="p-3 space-y-1">
-        {questionsQuery.data?.pages.map((page, index) => (
+
+      <List.Root>
+        {questionsQuery.data?.pages?.map((page, index) => (
           <React.Fragment key={index}>
             {page.questions.map((question) => (
-              <GuestbookListItem key={question.id} {...question} />
+              <List.Item
+                key={question.id}
+                href={`/guestbook/${question.id}`}
+                isActive={router.asPath.indexOf(question.id) >= 0}
+              >
+                <GuestbookItem {...question} />
+              </List.Item>
             ))}
           </React.Fragment>
         ))}
-      </ul>
+      </List.Root>
 
       {questionsQuery.isLoading && (
         <div className="grid place-items-center pb-4">

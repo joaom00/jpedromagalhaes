@@ -3,16 +3,16 @@ import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
-import type { QuestionDetail } from 'shared/types'
-import { useDetailQuery } from 'shared/queries'
+import type { QuestionDetail } from '@/shared/types'
 
-import { SpinnerIcon } from 'icons'
-import { Container, TitleBar, Error } from 'components'
+import { SpinnerIcon } from '@/icons'
+import { Container, TitleBar, Error } from '@/components'
+import { useDetailQuery } from '@/lib/useDetailQuery'
 
-const Comments = dynamic(() => import('components/Comments/Comments'))
+const Comments = dynamic(() => import('@/components/Comments/Comments'))
 const QuestionActions = dynamic(() => import('./GuestbookActions'))
 
-export default function GuestbookDetail() {
+export function GuestbookDetail() {
   const titleRef = React.useRef<HTMLHeadingElement>(null)
   const scrollContainerRef = React.useRef<HTMLDivElement>(null)
 
@@ -35,22 +35,24 @@ export default function GuestbookDetail() {
           scrollContainerRef={scrollContainerRef}
         />
         <div className="p-8">
-          <h1 ref={titleRef} className="text-3xl font-semibold flex-1">
+          <h1 ref={titleRef} className="flex-1 text-3xl font-semibold">
             {questionQuery.data.title}
           </h1>
           <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded-full overflow-hidden flex">
+            <div className="flex h-4 w-4 overflow-hidden rounded-full">
               <Image
                 src={questionQuery.data.author.image as string}
                 alt={`Foto de perfil de ${questionQuery.data.author.name}`}
                 width={24}
                 height={24}
-                className="w-full h-full object-cover"
+                className="h-full w-full object-cover"
               />
             </div>
-            <span className="text-slate11 dark:text-slateDark11">{questionQuery.data.author.name}</span>
+            <span className="text-slate11 dark:text-slateDark11">
+              {questionQuery.data.author.name}
+            </span>
           </div>
-          <p className="mt-3 text-slate11 dark:text-slateDark11 whitespace-pre-line">
+          <p className="mt-3 whitespace-pre-line text-slate11 dark:text-slateDark11">
             {questionQuery.data.description}
           </p>
         </div>
@@ -64,7 +66,7 @@ export default function GuestbookDetail() {
   }
 
   return (
-    <div className="grid place-items-center w-full">
+    <div className="grid w-full place-items-center">
       <SpinnerIcon />
     </div>
   )

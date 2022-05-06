@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from 'react-query'
-import { Question } from '@prisma/client'
+import { Prisma, Question } from '@prisma/client'
 
-import { QuestionDetail } from 'shared/types'
+import { QuestionDetail } from '@/shared/types'
 
-async function createQuestion(values: { title: string; description: string }): Promise<Question> {
+async function createQuestion(values: Prisma.QuestionCreateInput): Promise<Question> {
   const response = await fetch('/api/guestbook', {
     method: 'POST',
     body: JSON.stringify(values)
@@ -22,7 +22,7 @@ export function useCreateQuestionMutation() {
   const queryClient = useQueryClient()
 
   return useMutation(createQuestion, {
-    onSuccess: () => queryClient.invalidateQueries([{ scope: 'guestbook', type: 'list' }])
+    onSuccess: () => queryClient.invalidateQueries([{ entity: 'guestbook', scope: 'list' }])
   })
 }
 
@@ -46,7 +46,7 @@ export function useUpdateQuestionMutation() {
 
   return useMutation(updateQuestion, {
     onSuccess: (_data, args) => {
-      queryClient.invalidateQueries([{ scope: 'guestbook', type: 'detail', identifier: args.id }])
+      queryClient.invalidateQueries([{ entity: 'guestbook', scope: 'detail', identifier: args.id }])
     }
   })
 }
@@ -66,6 +66,6 @@ export function useDeleteQuestionMutation() {
   const queryClient = useQueryClient()
 
   return useMutation(deleteQuestion, {
-    onSuccess: () => queryClient.invalidateQueries([{ scope: 'guestbook', type: 'list' }])
+    onSuccess: () => queryClient.invalidateQueries([{ entity: 'guestbook', scope: 'list' }])
   })
 }

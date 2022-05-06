@@ -1,2 +1,2 @@
-export { default as GuestbookList } from './GuestbookList'
-export { default as GuestbookDetail } from './GuestbookDetail'
+export { Guestbook } from './Guestbook'
+export { GuestbookDetail } from './GuestbookDetail'

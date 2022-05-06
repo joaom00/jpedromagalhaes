@@ -11,7 +11,14 @@
     "build": "next build",
     "postbuild": "NODE_OPTIONS='--experimental-json-modules' node ./scripts/generate-sitemap.mjs && yarn prisma migrate deploy",
     "start": "next start",
-    "lint": "next lint"
+    "format": "prettier --write \"./**/*.{js,jsx,ts,tsx}\"",
+    "lint": "eslint --fix --cache --cache-location ./node_modules/.cache/eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "jest",
+    "cy:open": "cypress open",
+    "test:e2e": "cross-env TESTING=true start-server-and-test dev 3000 cy:open",
+    "prepare": "husky install",
+    "validate": "./scripts/validate"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^0.5.2-next.19",
@@ -23,6 +30,7 @@
     "@tailwindcss/forms": "^0.4.0",
     "@tailwindcss/line-clamp": "^0.3.0",
     "@tailwindcss/typography": "^0.5.0",
+    "classnames": "^2.3.1",
     "contentlayer": "^0.0.33",
     "kbar": "^0.1.0-beta.24",
     "motion": "^10.4.0",
@@ -39,18 +47,30 @@
     "react-icons": "^4.3.1",
     "react-query": "^3.34.0",
     "tailwindcss": "^3.0.1",
-    "use-sound": "^4.0.1"
+    "use-sound": "^4.0.1",
+    "whatwg-fetch": "^3.6.2"
   },
   "devDependencies": {
+    "@faker-js/faker": "^6.3.1",
     "@next/bundle-analyzer": "^12.0.7",
+    "@testing-library/cypress": "^8.0.2",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^12.1.5",
+    "@testing-library/react-hooks": "^8.0.0",
     "@types/node": "16.11.10",
     "@types/nprogress": "^0.2.0",
     "@types/react": "17.0.37",
     "autoprefixer": "^10.4.0",
     "cross-env": "^7.0.3",
+    "cypress": "^9.6.0",
     "eslint": "7",
     "eslint-config-next": "12.0.4",
     "globby": "^12.0.2",
+    "husky": ">=6",
+    "jest": "^27.5.1",
+    "lint-staged": ">=10",
+    "msw": "^0.39.2",
+    "next-router-mock": "^0.6.7",
     "postcss": "^8.4.5",
     "prettier": "^2.5.0",
     "prettier-plugin-tailwindcss": "^0.1.8",
@@ -62,6 +82,7 @@
     "rehype-prism-plus": "^1.1.3",
     "rehype-slug": "^5.0.0",
     "remark-gfm": "^3.0.1",
+    "start-server-and-test": "^1.14.0",
     "typescript": "4.5.2",
     "url-loader": "^4.1.1"
   },
@@ -70,6 +91,9 @@
     "trailingComma": "none",
     "singleQuote": true,
     "semi": false,
-    "printWidth": 120
+    "printWidth": 100
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "yarn validate"
   }
 }

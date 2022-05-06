@@ -1,8 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
 
-import { ArrowLeftIcon, MenuIcon } from 'icons'
-import { useNavigation } from 'contexts'
+import { ArrowLeftIcon, MenuIcon } from '@/icons'
+import { useNavigation } from '@/contexts'
 
 type TitleBarProps = {
   title: string
@@ -76,6 +76,7 @@ export default function TitleBar({
 
   React.useEffect(() => {
     scrollContainerRef?.current?.addEventListener('scroll', handler)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     return () => scrollContainerRef?.current?.removeEventListener('scroll', handler)
   }, [titleRef, scrollContainerRef, handler])
 
@@ -95,7 +96,7 @@ export default function TitleBar({
         boxShadow: `0 1px 3px rgba(0,0,0,${currentScrollOffset})`,
         minHeight: '48px'
       }}
-      className={`flex items-center justify-between px-3 h-[60px] sticky top-0 backdrop-filter backdrop-blur-xl z-10 ${
+      className={`sticky top-0 z-10 flex h-[60px] items-center justify-between px-3 backdrop-blur-xl backdrop-filter ${
         globalMenu ? 'bg-mauve3 dark:bg-mauveDark2' : 'bg-mauve3 dark:bg-mauveDark2'
       }`}
     >
@@ -104,7 +105,7 @@ export default function TitleBar({
           {globalMenu && (
             <span
               onClick={() => setOpen(true)}
-              className="flex items-center justify-center p-2 rounded-md cursor-pointer lg:hidden dark:hover:bg-gray-800"
+              className="flex cursor-pointer items-center justify-center rounded-md p-2 dark:hover:bg-gray-800 lg:hidden"
             >
               <MenuIcon />
             </span>
@@ -112,7 +113,7 @@ export default function TitleBar({
 
           {backButton && (
             <Link href={backButtonHref}>
-              <a className="flex items-center justify-center p-2 rounded-md dark:hover:bg-gray-800 lg:hidden">
+              <a className="flex items-center justify-center rounded-md p-2 dark:hover:bg-gray-800 lg:hidden">
                 <ArrowLeftIcon />
               </a>
             </Link>

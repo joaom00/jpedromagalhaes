@@ -1,6 +1,13 @@
-import { ListDetailView } from 'layouts'
-import { NotFoundTemplate } from 'templates'
+import { MainLayout } from '@/layouts'
+import { NotFoundTemplate } from '@/templates'
 
 export default function NotFound() {
-  return <ListDetailView list={null} hasDetail detail={<NotFoundTemplate />} />
+  return (
+    <MainLayout.Root>
+      <MainLayout.List hasDetail />
+      <MainLayout.Detail>
+        <NotFoundTemplate />
+      </MainLayout.Detail>
+    </MainLayout.Root>
+  )
 }

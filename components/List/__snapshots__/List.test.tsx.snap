@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<List /> should render correctly 1`] = `
+<ul
+  class="space-y-3 px-3 py-4"
+>
+  <li>
+    <a
+      class="flex flex-col gap-2 rounded-md px-3 py-2 hover:bg-mauve4 dark:hover:bg-mauveDark4 bg-mauve5 dark:bg-mauveDark5"
+      href="/item1"
+    >
+      Item 1
+    </a>
+  </li>
+  <li>
+    <a
+      class="flex flex-col gap-2 rounded-md px-3 py-2 hover:bg-mauve4 dark:hover:bg-mauveDark4 hover:bg-mauve4 dark:hover:bg-mauveDark4"
+      href="/item2"
+    >
+      Item 2
+    </a>
+  </li>
+</ul>
+`;

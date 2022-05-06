@@ -1,9 +1,9 @@
 import React from 'react'
 import { useSession } from 'next-auth/react'
 
-import { useSignInDialog } from 'contexts'
+import { useSignInDialog } from '@/contexts'
 
-import { HeartFillIcon, HeartIcon } from 'icons'
+import { HeartFillIcon, HeartIcon } from '@/icons'
 
 type LikeButtonProps = {
   id: string
@@ -15,8 +15,12 @@ type LikeButtonProps = {
 export default function LikeButton({ id, hasReacted, count, loading, onClick }: LikeButtonProps) {
   const [ping, setPing] = React.useState(false)
   const [hasReactedState, setHasReactedState] = React.useState(hasReacted)
-  const [currTranslate, setCurrTranslate] = React.useState(hasReactedState ? '-translate-y-4' : 'translate-y-0')
-  const [nextTranslate, setNextTranslate] = React.useState(hasReactedState ? 'translate-y-0' : '-translate-y-4')
+  const [currTranslate, setCurrTranslate] = React.useState(
+    hasReactedState ? '-translate-y-4' : 'translate-y-0'
+  )
+  const [nextTranslate, setNextTranslate] = React.useState(
+    hasReactedState ? 'translate-y-0' : '-translate-y-4'
+  )
 
   const { data: session } = useSession()
   const signInDialog = useSignInDialog()
@@ -29,7 +33,9 @@ export default function LikeButton({ id, hasReacted, count, loading, onClick }: 
 
   React.useEffect(() => {
     setHasReactedState(hasReacted)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     currCount = count
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     nextCount = hasReacted ? count - 1 : count + 1
     setCurrTranslate(hasReacted ? '-translate-y-4' : 'translate-y-0')
     setNextTranslate(hasReacted ? 'translate-y-0' : '-translate-y-4')
@@ -54,7 +60,7 @@ export default function LikeButton({ id, hasReacted, count, loading, onClick }: 
     <button
       aria-label={hasReactedState ? 'Deixar de curtir' : 'Curtir'}
       onClick={handleClick}
-      className="flex space-x-2 flex-none items-center justify-center leading-none transition-all rounded-md border bg-mauve3 dark:bg-mauveDark3 border-mauve6 dark:border-mauveDark6 px-4 py-2 overflow-hidden hover:bg-mauve4 dark:hover:bg-mauveDark4"
+      className="flex flex-none items-center justify-center space-x-2 overflow-hidden rounded-md border border-mauve6 bg-mauve3 px-4 py-2 leading-none transition-all hover:bg-mauve4 dark:border-mauveDark6 dark:bg-mauveDark3 dark:hover:bg-mauveDark4"
     >
       {hasReactedState ? (
         <span className="relative text-red-500">
@@ -70,9 +76,9 @@ export default function LikeButton({ id, hasReacted, count, loading, onClick }: 
           <HeartIcon />
         </span>
       )}
-      <div className="relative h-3 -top-px">
+      <div className="relative -top-px h-3">
         <div
-          className={`flex space-y-2 duration-300 flex-col items-center justify-center ${currTranslate} transform transition-all`}
+          className={`flex flex-col items-center justify-center space-y-2 duration-300 ${currTranslate} transform transition-all`}
         >
           {hasReactedState ? (
             <>

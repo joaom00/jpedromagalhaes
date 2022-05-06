@@ -37,41 +37,48 @@ export default function HomeTemplate() {
     return (
       <Container title="João Pedro Magalhães - Desenvolvedor Front-End, UI/UX entusiasta & Gopher">
         <TitleBar title="Início" />
-        <div className="py-12 px-4 sm:px-0 overflow-y-auto">
-          <div className="flex flex-wrap justify-between items-center max-w-3xl mx-auto">
-            <h2 className="text-lg font-bold mb-5 sm:mb-0">Olá, eu sou João Pedro</h2>
-            <span className="text-sm font-semibold cursor-pointer" onClick={() => query.toggle()}>
+        <div className="overflow-y-auto py-12 px-4 sm:px-0">
+          <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-between">
+            <h2 className="mb-5 text-lg font-bold sm:mb-0">Olá, eu sou João Pedro</h2>
+            <span className="cursor-pointer text-sm font-semibold" onClick={() => query.toggle()}>
               {isMobile ? (
                 <>Toque para navegação rápida</>
               ) : (
                 <>
-                  Pressione <kbd className="p-1.5 bg-mauve3 dark:bg-mauveDark3 rounded-md">{isMac ? '⌘' : 'ctrl'}</kbd>{' '}
-                  + <kbd className="p-1.5 bg-mauve3 dark:bg-mauveDark3 rounded-md">k</kbd> para navegação rápida
+                  Pressione{' '}
+                  <kbd className="rounded-md bg-mauve3 p-1.5 dark:bg-mauveDark3">
+                    {isMac ? '⌘' : 'ctrl'}
+                  </kbd>{' '}
+                  + <kbd className="rounded-md bg-mauve3 p-1.5 dark:bg-mauveDark3">k</kbd> para
+                  navegação rápida
                 </>
               )}
             </span>
           </div>
-          <div className="prose dark:prose-dark mt-10 w-full max-w-3xl mx-auto">
+          <div className="prose mx-auto mt-10 w-full max-w-3xl dark:prose-dark">
             <p>
-              Desenvolvedor Front End que gosta de UI/UX design e às vezes brincar um pouco no backend, principalmente
-              com Go. Além de, desenvolver e contribuir em projetos, vou para a academia, ouço música enquanto estou
-              codando, assisto séries, animes e algumas lives de código.
+              Desenvolvedor Front End que gosta de UI/UX design e às vezes brincar um pouco no
+              backend, principalmente com Go. Além de, desenvolver e contribuir em projetos, vou
+              para a academia, ouço música enquanto estou codando, assisto séries, animes e algumas
+              lives de código.
             </p>
             <hr />
             <h3>Principais Projetos</h3>
           </div>
-          <ul className="flex flex-col gap-3 max-w-3xl mx-auto mt-6">
+          <ul className="mx-auto mt-6 flex max-w-3xl flex-col gap-3">
             {featuredProjects.map((project) => (
               <li key={project.id} className="flex">
                 <a
                   href={project.href}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="bg-mauve3 dark:bg-mauveDark3 p-5 rounded-md transform transition-all duration-200 ease-in-out hover:-translate-y-1 w-full"
+                  className="w-full transform rounded-md bg-mauve3 p-5 transition-all duration-200 ease-in-out hover:-translate-y-1 dark:bg-mauveDark3"
                 >
-                  <p className="font-semibold inline-block">{project.title}</p>
+                  <p className="inline-block font-semibold">{project.title}</p>
                   {!!project.description && (
-                    <span className="ml-3 text-sm text-slate11 dark:text-slateDark11">{project.description}</span>
+                    <span className="ml-3 text-sm text-slate11 dark:text-slateDark11">
+                      {project.description}
+                    </span>
                   )}
                 </a>
               </li>

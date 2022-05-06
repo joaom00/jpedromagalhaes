@@ -3,10 +3,12 @@ import { useRouter } from 'next/router'
 import { allJSProjects } from '.contentlayer/data'
 import { useRegisterActions } from 'kbar'
 
-import { ListDetailView } from 'layouts'
-import { ProjectList } from 'components/Projects'
+import { MainLayout } from '@/layouts'
+import { ProjectList } from '@/components/Projects'
 
-export default function JavaScriptProjects({ projects }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function JavaScriptProjects({
+  projects
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter()
   useRegisterActions(
     projects.map((project) => ({
@@ -17,7 +19,13 @@ export default function JavaScriptProjects({ projects }: InferGetStaticPropsType
       perform: () => router.push(`javascript/${project.slug}`)
     }))
   )
-  return <ListDetailView list={<ProjectList title="Projetos JavaScript" projects={projects} />} />
+  return (
+    <MainLayout.Root>
+      <MainLayout.List>
+        <ProjectList title="Projetos JavaScript" projects={projects} />
+      </MainLayout.List>
+    </MainLayout.Root>
+  )
 }
 
 export async function getStaticProps() {

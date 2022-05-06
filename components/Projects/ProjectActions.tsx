@@ -8,7 +8,7 @@ export default function ProjectActions({ githubUrl, livePreviewUrl }: ProjectAct
   return (
     <div className="flex gap-2 md:gap-5">
       <a
-        className="bg-gray-250 dark:bg-gray-900 py-2 px-3 rounded-md text-sm flex gap-2 items-center"
+        className="flex items-center gap-2 rounded-md bg-gray-250 py-2 px-3 text-sm dark:bg-gray-900"
         href={githubUrl}
         target="_blank"
         rel="noreferrer noopener"
@@ -19,7 +19,7 @@ export default function ProjectActions({ githubUrl, livePreviewUrl }: ProjectAct
 
       {livePreviewUrl && (
         <a
-          className="bg-gray-250 dark:bg-gray-900 py-2 px-3 rounded-md text-sm flex gap-2 items-center"
+          className="flex items-center gap-2 rounded-md bg-gray-250 py-2 px-3 text-sm dark:bg-gray-900"
           target="_blank"
           rel="noreferrer noopener"
           href={livePreviewUrl}

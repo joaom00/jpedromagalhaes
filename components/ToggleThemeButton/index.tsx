@@ -10,7 +10,7 @@ export default function ToggleThemeButton() {
   return (
     <button
       aria-label={resolvedTheme === 'dark' ? 'Trocar para tema claro' : 'Trocar para tema escuro'}
-      className="theme-toggle bg-gray-200 bg-opacity-0 hover:bg-opacity-100 transition duration-200 dark:bg-gray-800 dark:bg-opacity-0 dark:hover:bg-opacity-100 text-sm rounded-lg p-2 text-gray-700 dark:text-white"
+      className="theme-toggle rounded-lg bg-gray-200 bg-opacity-0 p-2 text-sm text-gray-700 transition duration-200 hover:bg-opacity-100 dark:bg-gray-800 dark:bg-opacity-0 dark:text-white dark:hover:bg-opacity-100"
       onClick={() => {
         setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
         toggleThemeSoundPlay()

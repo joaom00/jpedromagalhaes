@@ -1,16 +1,22 @@
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
 import { allRNProjects } from '.contentlayer/data'
 
-import { ListDetailView } from 'layouts'
-import { ProjectDetail, ProjectList } from 'components/Projects'
+import { MainLayout } from '@/layouts'
+import { ProjectDetail, ProjectList } from '@/components/Projects'
 
-export default function GOProjectDetail({ projects, project }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function GOProjectDetail({
+  projects,
+  project
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <ListDetailView
-      list={<ProjectList title="Projetos React & Next" projects={projects} />}
-      hasDetail
-      detail={<ProjectDetail project={project!} />}
-    />
+    <MainLayout.Root>
+      <MainLayout.List hasDetail>
+        <ProjectList title="Projetos React & Next" projects={projects} />
+      </MainLayout.List>
+      <MainLayout.Detail>
+        <ProjectDetail project={project!} />
+      </MainLayout.Detail>
+    </MainLayout.Root>
   )
 }
 

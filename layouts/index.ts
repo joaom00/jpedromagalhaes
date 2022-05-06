@@ -1,2 +1,2 @@
 export * from './SiteLayout'
-export * from './ListDetailView'
+export * as MainLayout from './MainLayout'

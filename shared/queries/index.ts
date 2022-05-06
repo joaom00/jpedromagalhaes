@@ -1,5 +1,5 @@
 import { Prisma } from '@prisma/client'
-import { QueryFunctionContext, useInfiniteQuery, useQuery } from 'react-query'
+import { QueryFunctionContext, useQuery } from 'react-query'
 import type { Scope, Comment } from 'shared/types'
 
 // Prisma
@@ -9,15 +9,6 @@ export const stackQuery = Prisma.validator<Prisma.StackArgs>()({
     name: true,
     slug: true,
     image: true
-  }
-})
-
-export const bookmarksQuery = Prisma.validator<Prisma.BookmarkArgs>()({
-  select: {
-    id: true,
-    title: true,
-    faviconUrl: true,
-    host: true
   }
 })
 
@@ -73,22 +64,6 @@ export const stackDetailQuery = Prisma.validator<Prisma.StackArgs>()({
   }
 })
 
-export const bookmarkDetailQuery = Prisma.validator<Prisma.BookmarkArgs>()({
-  select: {
-    id: true,
-    title: true,
-    description: true,
-    faviconUrl: true,
-    host: true,
-    url: true,
-    _count: {
-      select: {
-        reactions: true
-      }
-    }
-  }
-})
-
 export const questionDetailQuery = Prisma.validator<Prisma.QuestionArgs>()({
   select: {
     id: true,
@@ -126,50 +101,9 @@ export const snippetDetailQuery = Prisma.validator<Prisma.SnippetArgs>()({
 
 // React Query
 
-const listKeys = (scope: Scope) => [{ scope, type: 'list' }] as const
-const detailKeys = (scope: Scope, identifier: string) => [{ scope, identifier, type: 'detail' }] as const
-const usersKeys = (identifier: string) => [{ scope: 'stack', identifier, type: 'users' }] as const
-const commentsKeys = (scope: Scope, identifier: string) => [{ scope, identifier, type: 'comments' }] as const
-
-export async function fetchList({
-  queryKey: [{ scope }],
-  pageParam
-}: QueryFunctionContext<ReturnType<typeof listKeys>, string>) {
-  const apiUrl = pageParam ? `/api/${scope}?cursor=${pageParam}` : `/api/${scope}`
-  const response = await fetch(apiUrl)
-
-  if (!response.ok) {
-    throw new Error()
-  }
-
-  const data = await response.json()
-
-  return data
-}
-
-export function useListQuery<T extends { nextCursor: string }>(scope: Scope) {
-  return useInfiniteQuery<T, Error, T, ReturnType<typeof listKeys>>(listKeys(scope), fetchList, {
-    getNextPageParam: (lastPage) => lastPage.nextCursor
-  })
-}
-
-export async function fetchDetail({
-  queryKey: [{ scope, identifier }]
-}: QueryFunctionContext<ReturnType<typeof detailKeys>>) {
-  const response = await fetch(`/api/${scope}/${identifier}`)
-
-  if (!response.ok) {
-    throw new Error()
-  }
-
-  const data = await response.json()
-
-  return data
-}
-
-export function useDetailQuery<T = any>(scope: Scope, identifier: string) {
-  return useQuery<T, Error, T, ReturnType<typeof detailKeys>>(detailKeys(scope, identifier), fetchDetail)
-}
+const usersKeys = (identifier: string) => [{ entity: 'stack', identifier, scope: 'users' }] as const
+const commentsKeys = (entity: Scope, identifier: string) =>
+  [{ entity, identifier, scope: 'comments' }] as const
 
 type PrismaUser = Prisma.UserGetPayload<{
   select: {
@@ -194,13 +128,16 @@ export async function fetchUsers({
 }
 
 export function useUsersQuery(identifier: string) {
-  return useQuery<Users, Error, Users, ReturnType<typeof usersKeys>>(usersKeys(identifier), fetchUsers)
+  return useQuery<Users, Error, Users, ReturnType<typeof usersKeys>>(
+    usersKeys(identifier),
+    fetchUsers
+  )
 }
 
 export async function fetchComments({
-  queryKey: [{ scope, identifier }]
+  queryKey: [{ entity, identifier }]
 }: QueryFunctionContext<ReturnType<typeof commentsKeys>>): Promise<Comment[]> {
-  const response = await fetch(`/api/${scope}/comments?identifier=${identifier}`)
+  const response = await fetch(`/api/${entity}/comments?identifier=${identifier}`)
   const data = await response.json()
 
   return data

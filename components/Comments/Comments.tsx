@@ -3,13 +3,13 @@ import dynamic from 'next/dynamic'
 import { useSession } from 'next-auth/react'
 import { toast } from 'react-hot-toast'
 
-import type { Scope } from 'shared/types'
-import { useCommentsQuery } from 'shared/queries'
-import { useSignInDialog } from 'contexts'
+import type { Scope } from '@/shared/types'
+import { useCommentsQuery } from '@/shared/queries'
+import { useSignInDialog } from '@/contexts'
 import { useCreateCommentMutation } from './queries'
 
-import { SendIcon, SpinnerIcon } from 'icons'
-import { Textarea, Image } from 'components'
+import { SendIcon, SpinnerIcon } from '@/icons'
+import { Textarea, Image } from '@/components'
 
 const CommentMenu = dynamic(() => import('./CommentMenu'))
 
@@ -74,13 +74,13 @@ export default function Comments({ scope, identifier, scrollContainerRef }: Comm
     <>
       <div
         ref={commentsContainerRef}
-        className="border-t border-mauve6 dark:border-mauveDark6 px-8 py-10 flex flex-col space-y-10 flex-1 relative"
+        className="relative flex flex-1 flex-col space-y-10 border-t border-mauve6 px-8 py-10 dark:border-mauveDark6"
       >
         {Boolean(commentsQuery.data?.length) ? (
           <>
             {commentsQuery.data?.map((comment, index) => (
               <div className="flex space-x-4" key={index}>
-                <div className="rounded-full overflow-hidden w-10 h-10">
+                <div className="h-10 w-10 overflow-hidden rounded-full">
                   <Image
                     src={comment.author.image as string}
                     width={50}
@@ -91,8 +91,8 @@ export default function Comments({ scope, identifier, scrollContainerRef }: Comm
 
                 <div className="flex-1">
                   <div className="flex flex-nowrap items-center">
-                    <span className="font-medium whitespace-nowrap">{comment.author.name}</span>
-                    <span className="text-slate11 dark:text-slateDark11 shrink ml-3 line-clamp-1">
+                    <span className="whitespace-nowrap font-medium">{comment.author.name}</span>
+                    <span className="ml-3 shrink text-slate11 line-clamp-1 dark:text-slateDark11">
                       {formatDate(comment.createdAt)}
                     </span>
                     {comment.canEdit && (
@@ -103,7 +103,9 @@ export default function Comments({ scope, identifier, scrollContainerRef }: Comm
                       />
                     )}
                   </div>
-                  <p className="text-slate12 dark:text-slateDark12 mt-1 whitespace-pre-line">{comment.text}</p>
+                  <p className="mt-1 whitespace-pre-line text-slate12 dark:text-slateDark12">
+                    {comment.text}
+                  </p>
                 </div>
               </div>
             ))}
@@ -114,23 +116,23 @@ export default function Comments({ scope, identifier, scrollContainerRef }: Comm
           </div>
         )}
       </div>
-      <div className="bg-mauve2 border-t border-mauve6 dark:border-mauveDark6 dark:bg-mauveDark2 pb-10 sm:pb-0 sticky bottom-0 flex flex-col transition duration-300 ease-in-out">
+      <div className="sticky bottom-0 flex flex-col border-t border-mauve6 bg-mauve2 pb-10 transition duration-300 ease-in-out dark:border-mauveDark6 dark:bg-mauveDark2 sm:pb-0">
         <form
-          className="flex items-center flex-none w-full max-w-3xl px-4 py-4 mx-auto space-x-4 md:px-6"
+          className="mx-auto flex w-full max-w-3xl flex-none items-center space-x-4 px-4 py-4 md:px-6"
           onSubmit={handleSubmit}
         >
-          <div className="relative flex flex-none w-full">
+          <div className="relative flex w-full flex-none">
             <Textarea
               name="comment"
               placeholder="Escreva um comentário..."
-              onInputChange={(v) => setValue(v)}
+              onChange={(event) => setValue(event.target.value)}
               value={value}
               onKeyDown={onKeyDown}
               style={{ paddingRight: '48px' }}
-              className="w-full px-4 py-2 bg-mauve3 dark:bg-mauveDark3 rounded-md placeholder-slate11 dark:placeholder-slateDark11"
+              className="w-full rounded-md bg-mauve3 px-4 py-2 placeholder-slate11 dark:bg-mauveDark3 dark:placeholder-slateDark11"
             />
             <button
-              className="absolute right-1 bottom-1 rounded-md bg-blue-500 p-2 disabled:bg-gray-300 dark:disabled:bg-gray-600 disabled:cursor-not-allowed disabled:opacity-30 text-white"
+              className="absolute right-1 bottom-1 rounded-md bg-blue-500 p-2 text-white disabled:cursor-not-allowed disabled:bg-gray-300 disabled:opacity-30 dark:disabled:bg-gray-600"
               disabled={!Boolean(value.trim())}
             >
               {createComment.isLoading ? <SpinnerIcon /> : <SendIcon className="rotate-90" />}

@@ -15,16 +15,18 @@ export default function ProjectDetail({ project }: { project: Project }) {
       <Head>
         <title>{`Projetos | ${project.title}`}</title>
       </Head>
-      <div className="max-h-screen overflow-y-auto w-full">
+      <div className="max-h-screen w-full overflow-y-auto">
         <TitleBar
           title={project.title}
           globalMenu={false}
           backButton
           backButtonHref="/projetos/javascript"
-          trailingAccessory={<ProjectActions githubUrl={project.githubURL} livePreviewUrl={project.livePreviewURL} />}
+          trailingAccessory={
+            <ProjectActions githubUrl={project.githubURL} livePreviewUrl={project.livePreviewURL} />
+          }
         />
         <article className="p-8">
-          <div className="prose dark:prose-dark w-full">
+          <div className="prose w-full dark:prose-dark">
             <Component components={MDXComponents} />
           </div>
         </article>

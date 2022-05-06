@@ -1,7 +1,7 @@
 import React from 'react'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 
-import { CloseIcon } from 'icons'
+import { CloseIcon } from '@/icons'
 
 type DialogProps = {
   title: string
@@ -12,7 +12,14 @@ type DialogProps = {
   onOpenChange?: (open: boolean) => void
 }
 
-export default function Dialog({ title, description, trigger = null, open, onOpenChange, children }: DialogProps) {
+export default function Dialog({
+  title,
+  description,
+  trigger = null,
+  open,
+  onOpenChange,
+  children
+}: DialogProps) {
   return (
     <DialogPrimitive.Root open={open} onOpenChange={onOpenChange}>
       <DialogPrimitive.Trigger asChild>{trigger}</DialogPrimitive.Trigger>

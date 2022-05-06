@@ -1,4 +1,9 @@
-import { ComputedFields, defineDocumentType, FieldDefs, makeSource } from 'contentlayer/source-files'
+import {
+  ComputedFields,
+  defineDocumentType,
+  FieldDefs,
+  makeSource
+} from 'contentlayer/source-files'
 
 import readingTime from 'reading-time'
 import remarkGfm from 'remark-gfm'

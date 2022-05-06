@@ -36,7 +36,11 @@ export default function useUsedByMutation() {
               ? old.users.filter((user) => user.email !== session?.user.email)
               : [
                   ...(old?.users as PrismaUser[]),
-                  { name: session?.user.name, email: session?.user.email, image: session?.user.image }
+                  {
+                    name: session?.user.name,
+                    email: session?.user.email,
+                    image: session?.user.image
+                  }
                 ]
           } as Users)
       )

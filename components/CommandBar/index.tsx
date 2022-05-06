@@ -24,7 +24,7 @@ import {
   SnippetIcon,
   JSIcon,
   ReactIcon
-} from 'icons'
+} from '@/icons'
 
 type CommandBarProps = {
   children: React.ReactNode
@@ -175,7 +175,10 @@ export default function CommandBar({ children }: CommandBarProps) {
       <KBarPortal>
         <KBarPositioner className="fixed inset-0 z-50 animate-overlayShow bg-black bg-opacity-60 backdrop-blur-sm backdrop-filter">
           <KBarAnimator className="w-full max-w-2xl overflow-hidden rounded-md">
-            <KBarSearch className="w-full bg-white p-4 dark:bg-mauveDark1" placeholder="Tente github..." />
+            <KBarSearch
+              className="w-full bg-white p-4 dark:bg-mauveDark1"
+              placeholder="Tente github..."
+            />
 
             <RenderResults />
           </KBarAnimator>

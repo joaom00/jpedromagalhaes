@@ -26,11 +26,11 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext<{ id: st
   const queryClient = new QueryClient()
 
   await queryClient.prefetchQuery(
-    [{ scope: 'bookmarks', type: 'detail', identifier: id }],
+    [{ entity: 'bookmarks', scope: 'detail', identifier: id }],
     fetchDetail
   )
   await queryClient.prefetchQuery(
-    [{ scope: 'bookmarks', type: 'comments', identifier: id }],
+    [{ entity: 'bookmarks', scope: 'comments', identifier: id }],
     fetchComments
   )
 

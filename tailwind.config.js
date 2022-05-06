@@ -30,6 +30,7 @@ module.exports = {
           800: '#222222',
           900: '#111111'
         },
+
         slate1: 'hsl(206, 30.0%, 98.8%)',
         slate2: 'hsl(210, 16.7%, 97.6%)',
         slate3: 'hsl(209, 13.3%, 95.3%)',
@@ -222,7 +223,11 @@ module.exports = {
       })
     }
   },
-  plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography'), require('@tailwindcss/line-clamp')],
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/line-clamp')
+  ],
   variants: {
     typography: ['dark'],
     extend: {

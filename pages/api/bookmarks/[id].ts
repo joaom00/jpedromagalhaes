@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
 
 import { prisma } from 'lib/prisma'
-import { bookmarkDetailQuery } from 'shared/queries'
+import { bookmarkDetailQuery } from '@/components/Bookmarks'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {

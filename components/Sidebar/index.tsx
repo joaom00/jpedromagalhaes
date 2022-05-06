@@ -8,9 +8,12 @@ import { useKBar } from 'kbar'
 import useSound from 'use-sound'
 // TODO: create DropdownMenu component
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-import { Action as AlertDialogAction, Cancel as AlertDialogCancel } from '@radix-ui/react-alert-dialog'
+import {
+  Action as AlertDialogAction,
+  Cancel as AlertDialogCancel
+} from '@radix-ui/react-alert-dialog'
 
-import { useNavigation, useSignInDialog } from 'contexts'
+import { useNavigation, useSignInDialog } from '@/contexts'
 
 import {
   HomeIcon,
@@ -27,9 +30,9 @@ import {
   CloseIcon,
   ConfigIcon,
   SpinnerIcon
-} from 'icons'
+} from '@/icons'
 import { RiCommandFill } from 'react-icons/ri'
-import { NowPlaying, ToggleThemeButton } from 'components'
+import { NowPlaying, ToggleThemeButton } from '@/components'
 
 import { SidebarLink } from './SidebarLink'
 import { SidebarOverlay } from './SidebarOverlay'
@@ -171,16 +174,18 @@ export default function Sidebar() {
       <>
         <nav
           className={`${
-            navigation.open ? 'absolute inset-y-0 left-0 translate-x-0 shadow-lg' : 'absolute -translate-x-full'
-          } lg:relative flex flex-none flex-col lg:translate-x-0 w-3/4 sm:w-1/2 md:w-1/3 lg:w-56 2xl:w-72 3xl:w-80 z-30 lg:z-auto max-h-screen h-full min-h-screen overflow-y-auto transition duration-200 ease-in-out transform border-r pb-10 sm:pb-0 border-mauve6 dark:border-mauveDark6 bg-white dark:bg-mauveDark1`}
+            navigation.open
+              ? 'absolute inset-y-0 left-0 translate-x-0 shadow-lg'
+              : 'absolute -translate-x-full'
+          } 3xl:w-80 z-30 flex h-full max-h-screen min-h-screen w-3/4 flex-none transform flex-col overflow-y-auto border-r border-mauve6 bg-white pb-10 transition duration-200 ease-in-out dark:border-mauveDark6 dark:bg-mauveDark1 sm:w-1/2 sm:pb-0 md:w-1/3 lg:relative lg:z-auto lg:w-56 lg:translate-x-0 2xl:w-72`}
         >
           <div
-            className={`sticky top-0 bg-mauve1 dark:bg-mauveDark1 border-b border-mauve6 dark:border-mauveDark6 p-3 space-y-3 ${glassEffect}`}
+            className={`sticky top-0 space-y-3 border-b border-mauve6 bg-mauve1 p-3 dark:border-mauveDark6 dark:bg-mauveDark1 ${glassEffect}`}
           >
             <div className="flex items-center gap-3">
               <button
                 aria-label="Close menu"
-                className="p-2 rounded-md lg:hidden hover:bg-mauve4 dark:hover:bg-mauveDark4 text-slate12 dark:text-slateDark12"
+                className="rounded-md p-2 text-slate12 hover:bg-mauve4 dark:text-slateDark12 dark:hover:bg-mauveDark4 lg:hidden"
                 onClick={() => navigation.setOpen(false)}
               >
                 <CloseIcon aria-hidden />
@@ -207,11 +212,14 @@ export default function Sidebar() {
               <NowPlaying />
             </div>
           </div>
-          <ul className="space-y-1 p-3 flex-1">
+          <ul className="flex-1 space-y-1 p-3">
             {links.map((link, i) => {
               if (typeof link === 'string') {
                 return (
-                  <li key={i} className="px-2 pt-5 pb-2 text-xs font-semibold text-slate11 dark:text-slateDark11">
+                  <li
+                    key={i}
+                    className="px-2 pt-5 pb-2 text-xs font-semibold text-slate11 dark:text-slateDark11"
+                  >
                     {link}
                   </li>
                 )
@@ -222,21 +230,21 @@ export default function Sidebar() {
           </ul>
 
           <div
-            className={`sticky p-3 bottom-0 bg-mauve1 dark:bg-mauveDark1 border-t border-mauve6 dark:border-mauveDark6 flex justify-between items-center ${glassEffect}`}
+            className={`sticky bottom-0 flex items-center justify-between border-t border-mauve6 bg-mauve1 p-3 dark:border-mauveDark6 dark:bg-mauveDark1 ${glassEffect}`}
           >
             {session ? (
-              <div className="w-6 h-6 rounded-full overflow-hidden">
+              <div className="h-6 w-6 overflow-hidden rounded-full">
                 <Image
                   src={session.user.image}
                   alt={`Foto de perfil de ${session.user.name}`}
                   width={32}
                   height={32}
-                  className="w-full h-full object-cover"
+                  className="h-full w-full object-cover"
                 />
               </div>
             ) : (
               <button
-                className="relative bg-mauve2 dark:bg-mauveDark2 text-sm rounded-md px-5 py-1.5 transition duration-200"
+                className="relative rounded-md bg-mauve2 px-5 py-1.5 text-sm transition duration-200 dark:bg-mauveDark2"
                 onClick={() => signInDialog.setOpen(true)}
               >
                 Fazer login
@@ -249,7 +257,7 @@ export default function Sidebar() {
                   <DropdownMenu.Trigger asChild>
                     <button
                       aria-label="Configurações"
-                      className="bg-mauve4 dark:bg-mauveDark4 bg-opacity-0 hover:bg-opacity-100 transition duration-200 dark:bg-opacity-0 dark:hover:bg-opacity-100 text-sm rounded-lg p-2"
+                      className="rounded-lg bg-mauve4 bg-opacity-0 p-2 text-sm transition duration-200 hover:bg-opacity-100 dark:bg-mauveDark4 dark:bg-opacity-0 dark:hover:bg-opacity-100"
                     >
                       <ConfigIcon aria-hidden />
                     </button>
@@ -257,16 +265,16 @@ export default function Sidebar() {
                   <DropdownMenu.Content
                     side="right"
                     align="end"
-                    className="bg-mauve3 dark:bg-mauveDark3 rounded-md py-1.5 w-36 border border-mauve6 dark:border-mauveDark6 animate-dropdownMenuShow"
+                    className="w-36 animate-dropdownMenuShow rounded-md border border-mauve6 bg-mauve3 py-1.5 dark:border-mauveDark6 dark:bg-mauveDark3"
                   >
                     <DropdownMenu.Item
-                      className="text-sm cursor-pointer focus:bg-violet4 dark:focus:bg-violetDark4 pl-4 pr-7 py-1.5 outline-none rounded-sm flex items-center"
+                      className="flex cursor-pointer items-center rounded-sm py-1.5 pl-4 pr-7 text-sm outline-none focus:bg-violet4 dark:focus:bg-violetDark4"
                       onSelect={() => setDeleteDialogOpen(true)}
                     >
                       Deletar conta
                     </DropdownMenu.Item>
                     <DropdownMenu.Item
-                      className="text-sm cursor-pointer focus:bg-violet4 dark:focus:bg-violetDark4 pl-4 pr-7 py-1.5 outline-none rounded-sm flex items-center"
+                      className="flex cursor-pointer items-center rounded-sm py-1.5 pl-4 pr-7 text-sm outline-none focus:bg-violet4 dark:focus:bg-violetDark4"
                       onSelect={() => signOut()}
                     >
                       Sair da conta
@@ -284,15 +292,15 @@ export default function Sidebar() {
           open={deleteDialogOpen}
           onOpenChange={setDeleteDialogOpen}
         >
-          <div className="flex justify-end mt-5 gap-5">
+          <div className="mt-5 flex justify-end gap-5">
             <AlertDialogCancel
-              className="py-2 px-3 rounded-md bg-mauve3 hover:bg-mauve4 dark:bg-mauveDark3 dark:hover:bg-mauveDark4"
+              className="rounded-md bg-mauve3 py-2 px-3 hover:bg-mauve4 dark:bg-mauveDark3 dark:hover:bg-mauveDark4"
               disabled={deleteAccount.isLoading}
             >
               Cancelar
             </AlertDialogCancel>
             <AlertDialogAction
-              className="py-2 px-3 rounded-md bg-red-700 text-white hover:opacity-90 flex items-center gap-3"
+              className="flex items-center gap-3 rounded-md bg-red-700 py-2 px-3 text-white hover:opacity-90"
               onClick={onDeleteAccount}
             >
               {deleteAccount.isLoading && <SpinnerIcon />}
@@ -311,14 +319,15 @@ function KeyboardInput({ isMac }: { isMac: boolean }) {
   if (isMac) {
     return (
       <>
-        <kbd className="text-xs mr-1">⌘ +</kbd> <kbd className="text-xs text-current text-slate-200 bg-gray-0">k</kbd>
+        <kbd className="mr-1 text-xs">⌘ +</kbd>{' '}
+        <kbd className="bg-gray-0 text-xs text-current text-slate-200">k</kbd>
       </>
     )
   }
 
   return (
     <>
-      <kbd className="text-xs mr-1">ctrl +</kbd> <kbd className="text-xs">k</kbd>
+      <kbd className="mr-1 text-xs">ctrl +</kbd> <kbd className="text-xs">k</kbd>
     </>
   )
 }

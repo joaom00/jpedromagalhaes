@@ -1,6 +1,12 @@
-import { ListDetailView } from 'layouts'
-import { HomeTemplate } from 'templates'
+import { MainLayout } from '@/layouts'
+import { HomeTemplate } from '@/templates'
 
 export default function Home() {
-  return <ListDetailView list={null} hasDetail detail={<HomeTemplate />} />
+  return (
+    <MainLayout.Root>
+      <MainLayout.Detail>
+        <HomeTemplate />
+      </MainLayout.Detail>
+    </MainLayout.Root>
+  )
 }

@@ -2,10 +2,8 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
 import { Prisma } from '@prisma/client'
 
-import { prisma } from 'lib/prisma'
-
-import type { Bookmark } from 'shared/types'
-import { bookmarksQuery } from 'shared/queries'
+import { prisma } from '@/lib/prisma'
+import { type Bookmark, bookmarksQuery } from '@/components/Bookmarks'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
@@ -64,6 +62,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       return res.status(201).json(bookmark)
     } catch (error) {
+      console.log(error)
       if (error instanceof Prisma.PrismaClientKnownRequestError) {
         return res.status(500).json({ message: error.message })
       }

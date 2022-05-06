@@ -11,10 +11,13 @@ type NavigationContextData = {
 
 const NavigationContext = React.createContext<NavigationContextData | undefined>(undefined)
 
+// TODO: Refactor to use store maybe?
 export default function NavigationProvider({ children }: NavigationProviderProps) {
   const [open, setOpen] = React.useState(false)
 
-  return <NavigationContext.Provider value={{ open, setOpen }}>{children}</NavigationContext.Provider>
+  return (
+    <NavigationContext.Provider value={{ open, setOpen }}>{children}</NavigationContext.Provider>
+  )
 }
 
 export function useNavigation() {

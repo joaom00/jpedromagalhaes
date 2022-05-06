@@ -6,7 +6,7 @@ type SiteLayoutProps = {
 
 export function SiteLayout({ children }: SiteLayoutProps) {
   return (
-    <div className="relative flex w-full h-full min-h-screen">
+    <div className="relative flex h-full min-h-screen w-full">
       <Sidebar />
       <div className="flex flex-1">{children}</div>
     </div>

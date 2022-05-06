@@ -13,9 +13,9 @@ import toast from 'react-hot-toast'
 
 import useSound from 'use-sound'
 
-import { SiteLayout } from 'layouts'
-import { NavigationProvider, SignInDialogProvider } from 'contexts'
-import { Toast, CommandBar, NProgress } from 'components'
+import { SiteLayout } from '@/layouts'
+import { NavigationProvider, SignInDialogProvider } from '@/contexts'
+import { Toast, CommandBar, NProgress } from '@/components'
 
 import commandBarSound from '../public/sounds/command-bar.mp3'
 

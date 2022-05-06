@@ -8,7 +8,7 @@ import { useCreateBookmarkMutation } from './Bookmarks.queries'
 import { PlusIcon, SpinnerIcon } from '@/icons'
 import { Dialog, TextField, Textarea } from '@/components'
 
-export const AddBookmarkDialog = () => {
+export function AddBookmarkDialog() {
   const { data } = useSession()
   const [open, setOpen] = React.useState(false)
 
@@ -17,10 +17,10 @@ export const AddBookmarkDialog = () => {
   function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
+    if (createBookmark.isLoading) return
+
     const formData = new FormData(event.currentTarget)
     const values = Object.fromEntries(formData.entries()) as unknown as Prisma.BookmarkCreateInput
-
-    if (createBookmark.isLoading) return
 
     createBookmark.mutate(values, {
       onSuccess: () => {

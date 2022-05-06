@@ -2,7 +2,10 @@ import React from 'react'
 import toast from 'react-hot-toast'
 // TODO: create DropdownMenu component
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-import { Action as AlertDialogAction, Cancel as AlertDialogCancel } from '@radix-ui/react-alert-dialog'
+import {
+  Action as AlertDialogAction,
+  Cancel as AlertDialogCancel
+} from '@radix-ui/react-alert-dialog'
 
 import type { Scope } from 'shared/types'
 
@@ -135,7 +138,12 @@ export default function CommentMenu({ scope, identifier, comment }: CommentMenuP
           >
             Deletar
           </DropdownMenu.Item>
-          <DropdownMenu.Arrow className="fill-mauve3 dark:fill-mauveDark3" width={13} height={8} offset={7} />
+          <DropdownMenu.Arrow
+            className="fill-mauve3 dark:fill-mauveDark3"
+            width={13}
+            height={8}
+            offset={7}
+          />
         </DropdownMenu.Content>
       </DropdownMenu.Root>
     </>

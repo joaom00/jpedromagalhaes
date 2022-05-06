@@ -16,11 +16,11 @@
   }
 
   body {
-    @apply bg-mauve1 dark:bg-mauveDark1 text-slate12 dark:text-slateDark12;
+    @apply bg-white text-slate12 dark:bg-mauveDark1 dark:text-slateDark12;
   }
 
   ::selection {
-    @apply text-violet12 dark:text-violetDark12 bg-violetA5 dark:bg-violetDarkA5;
+    @apply bg-violetA5 text-violet12 dark:bg-violetDarkA5 dark:text-violetDark12;
   }
 
   body:after {
@@ -59,12 +59,12 @@
   }
 
   select {
-    @apply w-full px-4 py-2 border border-gray-200 rounded outline-none focus:outline-none focus:border-gray-100 text-white dark:border-gray-800 dark:focus:border-gray-600 bg-gray-100 dark:bg-white bg-opacity-5 hover:bg-opacity-10 focus:ring-0;
+    @apply w-full rounded border border-gray-200 bg-gray-100 bg-opacity-5 px-4 py-2 text-white outline-none hover:bg-opacity-10 focus:border-gray-100 focus:outline-none focus:ring-0 dark:border-gray-800 dark:bg-white dark:focus:border-gray-600;
   }
 
   button:focus,
   a:focus {
-    @apply outline-none ring-2 ring-offset-2 ring-offset-white dark:ring-offset-black ring-blue-500 dark:ring-blue-500;
+    @apply outline-none ring-2 ring-blue-500 ring-offset-2 ring-offset-white dark:ring-blue-500 dark:ring-offset-black;
   }
 
   button:active:not(:focus-visible),
@@ -81,7 +81,7 @@
 
   input:focus,
   textarea:focus {
-    @apply outline-none ring-offset-white dark:ring-offset-black ring-2 ring-offset-2 ring-blue-500;
+    @apply outline-none ring-2 ring-blue-500 ring-offset-2 ring-offset-white dark:ring-offset-black;
   }
 
   #nprogress {

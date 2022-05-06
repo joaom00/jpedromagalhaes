@@ -1,11 +1,19 @@
 import { InferGetStaticPropsType } from 'next'
 import { allRNProjects } from '.contentlayer/data'
 
-import { ListDetailView } from 'layouts'
-import { ProjectList } from 'components/Projects'
+import { MainLayout } from '@/layouts'
+import { ProjectList } from '@/components/Projects'
 
-export default function ReactNextProjects({ projects }: InferGetStaticPropsType<typeof getStaticProps>) {
-  return <ListDetailView list={<ProjectList title="Projetos React & Next" projects={projects} />} />
+export default function ReactNextProjects({
+  projects
+}: InferGetStaticPropsType<typeof getStaticProps>) {
+  return (
+    <MainLayout.Root>
+      <MainLayout.List>
+        <ProjectList title="Projetos React & Next" projects={projects} />
+      </MainLayout.List>
+    </MainLayout.Root>
+  )
 }
 
 export function getStaticProps() {

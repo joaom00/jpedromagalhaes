@@ -34,7 +34,9 @@ export default function useReactionMutation() {
         return {
           ...old,
           _count: {
-            reactions: old?.userHasReacted ? old?._count?.reactions - 1 : (old?._count?.reactions as number) + 1
+            reactions: old?.userHasReacted
+              ? old?._count?.reactions - 1
+              : (old?._count?.reactions as number) + 1
           },
           userHasReacted: !old?.userHasReacted
         }

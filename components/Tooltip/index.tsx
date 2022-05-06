@@ -7,7 +7,13 @@ type TooltipProps = {
   arrowClassName: string
 } & TooltipPrimitive.PopperContentProps
 
-export default function Tooltip({ children, content, contentClassName, arrowClassName, ...props }: TooltipProps) {
+export default function Tooltip({
+  children,
+  content,
+  contentClassName,
+  arrowClassName,
+  ...props
+}: TooltipProps) {
   return (
     <TooltipPrimitive.Provider delayDuration={0}>
       <TooltipPrimitive.Root>
@@ -15,7 +21,7 @@ export default function Tooltip({ children, content, contentClassName, arrowClas
         <TooltipPrimitive.Content
           align="center"
           sideOffset={6}
-          className={`px-3 py-1.5 rounded-md flex items-center justify-center animate-overlayShow ${contentClassName}`}
+          className={`flex animate-overlayShow items-center justify-center rounded-md px-3 py-1.5 ${contentClassName}`}
           {...props}
         >
           {content}

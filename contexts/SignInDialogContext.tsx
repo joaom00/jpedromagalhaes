@@ -2,7 +2,7 @@ import React from 'react'
 import { signIn } from 'next-auth/react'
 import { Root, Portal, Overlay, Content, Description, Close } from '@radix-ui/react-dialog'
 
-import { CloseIcon, GitbubIcon, GuestbookIcon, HeartFillIcon, TwitterIcon } from 'icons'
+import { CloseIcon, GitbubIcon, GuestbookIcon, HeartFillIcon, TwitterIcon } from '@/icons'
 
 type SignInDialogProviderProps = {
   children: React.ReactNode
@@ -28,11 +28,19 @@ export default function SignInDialogProvider({ children }: SignInDialogProviderP
             <Description>Ao criar uma conta, você poderá:</Description>
             <div className="mt-5 grid grid-cols-2 gap-5 text-center">
               <p className="grid place-items-center rounded-md bg-mauve3 p-6 font-semibold dark:bg-mauveDark3">
-                <HeartFillIcon size={24} aria-hidden className="mb-2 text-slate11 dark:text-slateDark11" />
+                <HeartFillIcon
+                  size={24}
+                  aria-hidden
+                  className="mb-2 text-slate11 dark:text-slateDark11"
+                />
                 Comentar e Curtir
               </p>
               <p className="grid place-items-center rounded-md bg-mauve3 p-6 font-semibold dark:bg-mauveDark3">
-                <GuestbookIcon size={24} aria-hidden className="mb-2 text-slate11 dark:text-slateDark11" />
+                <GuestbookIcon
+                  size={24}
+                  aria-hidden
+                  className="mb-2 text-slate11 dark:text-slateDark11"
+                />
                 Utilizar Guestbook
               </p>
             </div>

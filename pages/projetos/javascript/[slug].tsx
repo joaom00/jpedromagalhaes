@@ -3,11 +3,13 @@ import { useRouter } from 'next/router'
 import { allJSProjects } from '.contentlayer/data'
 import { useRegisterActions } from 'kbar'
 
-import { ListDetailView } from 'layouts'
+import { MainLayout } from '@/layouts'
+import { ProjectDetail, ProjectList } from '@/components/Projects'
 
-import { ProjectDetail, ProjectList } from 'components/Projects'
-
-export default function JSProjectDetail({ projects, project }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function JSProjectDetail({
+  projects,
+  project
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter()
 
   useRegisterActions(
@@ -21,11 +23,14 @@ export default function JSProjectDetail({ projects, project }: InferGetStaticPro
   )
 
   return (
-    <ListDetailView
-      list={<ProjectList title="Projetos JavaScript" projects={projects} />}
-      hasDetail
-      detail={<ProjectDetail project={project!} />}
-    />
+    <MainLayout.Root>
+      <MainLayout.List hasDetail>
+        <ProjectList title="Projetos JavaScript" projects={projects} />
+      </MainLayout.List>
+      <MainLayout.Detail>
+        <ProjectDetail project={project!} />
+      </MainLayout.Detail>
+    </MainLayout.Root>
   )
 }
 

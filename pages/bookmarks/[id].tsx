@@ -1,13 +1,23 @@
 import { GetServerSidePropsContext } from 'next'
 import { dehydrate, QueryClient } from 'react-query'
 
-import { fetchDetail, fetchComments } from 'shared/queries'
+import { fetchComments } from '@/shared/queries'
+import { fetchDetail } from '@/lib/useDetailQuery'
 
-import { ListDetailView } from 'layouts'
-import { BookmarkList, BookmarkDetail } from 'components/Bookmark'
+import { MainLayout } from '@/layouts'
+import { Bookmarks, BookmarksDetail } from '@/components/Bookmarks'
 
 export default function BookmarkDetailPage() {
-  return <ListDetailView list={<BookmarkList />} hasDetail detail={<BookmarkDetail />} />
+  return (
+    <MainLayout.Root>
+      <MainLayout.List hasDetail>
+        <Bookmarks />
+      </MainLayout.List>
+      <MainLayout.Detail>
+        <BookmarksDetail />
+      </MainLayout.Detail>
+    </MainLayout.Root>
+  )
 }
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext<{ id: string }>) {
@@ -15,8 +25,14 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext<{ id: st
 
   const queryClient = new QueryClient()
 
-  await queryClient.prefetchQuery([{ scope: 'bookmarks', type: 'detail', identifier: id }], fetchDetail)
-  await queryClient.prefetchQuery([{ scope: 'bookmarks', type: 'comments', identifier: id }], fetchComments)
+  await queryClient.prefetchQuery(
+    [{ scope: 'bookmarks', type: 'detail', identifier: id }],
+    fetchDetail
+  )
+  await queryClient.prefetchQuery(
+    [{ scope: 'bookmarks', type: 'comments', identifier: id }],
+    fetchComments
+  )
 
   return {
     props: {

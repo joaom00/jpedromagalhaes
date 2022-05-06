@@ -1,18 +1,24 @@
 import { dehydrate, QueryClient } from 'react-query'
 
-import { fetchList } from 'shared/queries'
+import { fetchList } from '@/lib/useListQuery'
 
-import { ListDetailView } from 'layouts'
-import { BookmarkList } from 'components/Bookmark'
+import { MainLayout } from '@/layouts'
+import { Bookmarks } from '@/components/Bookmarks'
 
 export default function BookmarksPage() {
-  return <ListDetailView list={<BookmarkList />} />
+  return (
+    <MainLayout.Root>
+      <MainLayout.List>
+        <Bookmarks />
+      </MainLayout.List>
+    </MainLayout.Root>
+  )
 }
 
 export async function getServerSideProps() {
   const queryClient = new QueryClient()
 
-  await queryClient.prefetchQuery([{ scope: 'bookmarks', type: 'list' }], fetchList)
+  await queryClient.prefetchQuery([{ entity: 'bookmarks', scope: 'list' }], fetchList)
 
   return {
     props: {

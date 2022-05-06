@@ -15,9 +15,7 @@ export const fetchList = async (ctx: ListContext) => {
   const [{ entity }] = ctx.queryKey
   const pageParam = ctx.pageParam
 
-  const apiUrl = pageParam
-    ? `http://localhost:3000/api/${entity}?cursor=${pageParam}`
-    : `http://localhost:3000/api/${entity}`
+  const apiUrl = pageParam ? `/api/${entity}?cursor=${pageParam}` : `/api/${entity}`
   const response = await fetch(apiUrl)
 
   if (!response.ok) {

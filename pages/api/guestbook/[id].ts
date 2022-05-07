@@ -1,8 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
 
-import { prisma } from 'lib/prisma'
-import { questionDetailQuery } from 'shared/queries'
+import { prisma } from '@/lib/prisma'
+
+import { guestbookDetailQuery } from '@/components/Guestbook'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
@@ -12,7 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       where: {
         id: id as string
       },
-      select: questionDetailQuery.select
+      select: guestbookDetailQuery.select
     })
 
     const session = await getSession({ req })

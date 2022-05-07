@@ -21,7 +21,7 @@ async function toggleUsedBy(slug: string) {
   }
 }
 
-export default function useUsedByMutation() {
+export function useUsedByMutation() {
   const queryClient = useQueryClient()
   const { data: session } = useSession()
 

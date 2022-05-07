@@ -37,6 +37,7 @@ export default function HomeTemplate() {
     return (
       <Container title="João Pedro Magalhães - Desenvolvedor Front-End, UI/UX entusiasta & Gopher">
         <TitleBar title="Início" />
+
         <div className="overflow-y-auto py-12 px-4 sm:px-0">
           <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-between">
             <h2 className="mb-5 text-lg font-bold sm:mb-0">Olá, eu sou João Pedro</h2>

@@ -1,5 +1,6 @@
-import { Stack } from '@/shared/types'
 import { Image } from '@/components'
+
+import { Stack } from './Stack.types'
 
 export function StackItem({ name, image }: Stack) {
   return (

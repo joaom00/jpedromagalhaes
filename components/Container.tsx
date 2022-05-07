@@ -10,9 +10,10 @@ type ContainerProps = {
   image?: string
   type?: string
 }
+
 export const Container = React.forwardRef<HTMLDivElement, ContainerProps>(
   ({ children, customClassname, ...customMeta }, ref) => {
-    // const router = useRouter()
+    const router = useRouter()
 
     const meta = {
       title: 'João Pedro Magalhães - Desenvolvedor frontend, UI/UX entusiasta & Gopher',
@@ -28,8 +29,8 @@ export const Container = React.forwardRef<HTMLDivElement, ContainerProps>(
           <title>{meta.title}</title>
           <meta name="robots" content="follow, index" />
           <meta content={meta.description} name="description" />
-          {/*<meta property="og:url" content={`https://jpedromagalhaes.vercel.app${router.asPath}`} />
-          <link rel="canonical" href={`https://jpedromagalhaes.vercel.app${router.asPath}`} />*/}
+          <meta property="og:url" content={`https://jpedromagalhaes.vercel.app${router.asPath}`} />
+          <link rel="canonical" href={`https://jpedromagalhaes.vercel.app${router.asPath}`} />
           <meta property="og:type" content={meta.type} />
           <meta property="og:site_name" content="João Pedro Magalhães" />
           <meta property="og:description" content={meta.description} />
@@ -53,5 +54,3 @@ export const Container = React.forwardRef<HTMLDivElement, ContainerProps>(
 )
 
 Container.displayName = 'ContainerComponent'
-
-export default Container

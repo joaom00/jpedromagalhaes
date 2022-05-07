@@ -1,7 +1,16 @@
 import { useMutation, useQueryClient } from 'react-query'
 import { Prisma, Question } from '@prisma/client'
 
-import { QuestionDetail } from '@/shared/types'
+import type { QuestionDetail } from './Guestbook.types'
+
+export const guestbookKeys = {
+  all: [{ entity: 'guestbook' }] as const,
+  list: () => [{ ...guestbookKeys.all[0], scope: 'list' }] as const,
+  detail: (identifier?: string) =>
+    [{ ...guestbookKeys.all[0], scope: 'detail', identifier }] as const,
+  comments: (identifier?: string) =>
+    [{ ...guestbookKeys.all[0], scope: 'comments', identifier }] as const
+}
 
 async function createQuestion(values: Prisma.QuestionCreateInput): Promise<Question> {
   const response = await fetch('/api/guestbook', {
@@ -22,7 +31,7 @@ export function useCreateQuestionMutation() {
   const queryClient = useQueryClient()
 
   return useMutation(createQuestion, {
-    onSuccess: () => queryClient.invalidateQueries([{ entity: 'guestbook', scope: 'list' }])
+    onSuccess: () => queryClient.invalidateQueries(guestbookKeys.list())
   })
 }
 
@@ -46,7 +55,7 @@ export function useUpdateQuestionMutation() {
 
   return useMutation(updateQuestion, {
     onSuccess: (_data, args) => {
-      queryClient.invalidateQueries([{ entity: 'guestbook', scope: 'detail', identifier: args.id }])
+      queryClient.invalidateQueries(guestbookKeys.detail(args.id))
     }
   })
 }
@@ -66,6 +75,6 @@ export function useDeleteQuestionMutation() {
   const queryClient = useQueryClient()
 
   return useMutation(deleteQuestion, {
-    onSuccess: () => queryClient.invalidateQueries([{ entity: 'guestbook', scope: 'list' }])
+    onSuccess: () => queryClient.invalidateQueries(guestbookKeys.list())
   })
 }

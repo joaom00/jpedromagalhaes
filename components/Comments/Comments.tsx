@@ -5,12 +5,13 @@ import { toast } from 'react-hot-toast'
 
 import type { Scope } from '@/shared/types'
 import { useCommentsQuery } from '@/shared/queries'
-import { useSignInDialog } from '@/contexts'
-import { useCreateCommentMutation } from './queries'
+
+import { useStore } from '@/hooks'
 
 import { SendIcon, SpinnerIcon } from '@/icons'
 import { Textarea, Image } from '@/components'
 
+import { useCreateCommentMutation } from './queries'
 const CommentMenu = dynamic(() => import('./CommentMenu'))
 
 type CommentsProps = {
@@ -20,20 +21,21 @@ type CommentsProps = {
 }
 
 export default function Comments({ scope, identifier, scrollContainerRef }: CommentsProps) {
+  const openSignInDialog = useStore((state) => state.openSignInDialog)
+
+  const { data: session } = useSession()
+  const commentsQuery = useCommentsQuery(scope, identifier)
+
+  const createComment = useCreateCommentMutation()
+
   const commentsContainerRef = React.useRef<HTMLDivElement>(null)
   const [value, setValue] = React.useState('')
   const [cachedValue, setCachedValue] = React.useState('')
 
-  const { data: session } = useSession()
-  const commentsQuery = useCommentsQuery(scope, identifier)
-  const signInDialog = useSignInDialog()
-
-  const createComment = useCreateCommentMutation()
-
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
 
-    if (!session) return signInDialog.setOpen(true)
+    if (!session) return openSignInDialog()
 
     if (createComment.isLoading) return
 

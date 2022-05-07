@@ -3,7 +3,7 @@ import { dehydrate, QueryClient } from 'react-query'
 import { fetchList } from '@/lib/useListQuery'
 
 import { MainLayout } from '@/layouts'
-import { Snippets } from '@/components/Snippets'
+import { snippetKeys, Snippets } from '@/components/Snippets'
 
 export default function SnippetsPage() {
   return (
@@ -18,7 +18,7 @@ export default function SnippetsPage() {
 export async function getServerSideProps() {
   const queryClient = new QueryClient()
 
-  await queryClient.prefetchQuery([{ entity: 'snippets', scope: 'list' }], fetchList)
+  await queryClient.prefetchQuery(snippetKeys.list(), fetchList)
 
   return {
     props: {

@@ -3,7 +3,7 @@ import { dehydrate, QueryClient } from 'react-query'
 import { fetchList } from '@/lib/useListQuery'
 
 import { MainLayout } from '@/layouts'
-import { Guestbook } from '@/components/Guestbook'
+import { Guestbook, guestbookKeys } from '@/components/Guestbook'
 
 export default function GuestbookPage() {
   return (
@@ -18,7 +18,7 @@ export default function GuestbookPage() {
 export async function getServerSideProps() {
   const queryClient = new QueryClient()
 
-  await queryClient.prefetchQuery([{ entity: 'guestbook', scope: 'list' }], fetchList)
+  await queryClient.prefetchQuery(guestbookKeys.list(), fetchList)
 
   return {
     props: {

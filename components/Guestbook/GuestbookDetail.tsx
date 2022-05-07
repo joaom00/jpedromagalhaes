@@ -3,12 +3,11 @@ import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
-import type { QuestionDetail } from '@/shared/types'
-
 import { SpinnerIcon } from '@/icons'
 import { Container, TitleBar, Error } from '@/components'
 import { useDetailQuery } from '@/lib/useDetailQuery'
 
+import type { QuestionDetail } from './Guestbook.types'
 const Comments = dynamic(() => import('@/components/Comments/Comments'))
 const QuestionActions = dynamic(() => import('./GuestbookActions'))
 

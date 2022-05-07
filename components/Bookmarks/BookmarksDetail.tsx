@@ -8,7 +8,7 @@ import { SpinnerIcon } from '@/icons'
 import { Container, TitleBar, Error } from '@/components'
 import { Comments } from '@/components/Comments'
 
-import type { BookmarkDetail } from './Bookmarks.queries'
+import type { BookmarkDetail } from './Bookmarks.types'
 import { BookmarksActions } from './BookmarksActions'
 
 export const BookmarksDetail = () => {

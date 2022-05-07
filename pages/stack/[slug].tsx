@@ -5,7 +5,7 @@ import { fetchUsers, fetchComments } from '@/shared/queries'
 import { fetchDetail } from '@/lib/useDetailQuery'
 
 import { MainLayout } from '@/layouts'
-import { Stack, StackDetail } from '@/components/Stack'
+import { Stack, StackDetail, stackKeys } from '@/components/Stack'
 
 export default function StackDetailPage() {
   return (
@@ -25,18 +25,9 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext<{ slug: 
 
   const queryClient = new QueryClient()
 
-  await queryClient.prefetchQuery(
-    [{ entity: 'stack', scope: 'detail', identifier: slug }],
-    fetchDetail
-  )
-  await queryClient.prefetchQuery(
-    [{ entity: 'stack', scope: 'users', identifier: slug }],
-    fetchUsers
-  )
-  await queryClient.prefetchQuery(
-    [{ entity: 'stack', scope: 'comments', identifier: slug }],
-    fetchComments
-  )
+  await queryClient.prefetchQuery(stackKeys.detail(slug), fetchDetail)
+  await queryClient.prefetchQuery(stackKeys.users(slug), fetchUsers)
+  await queryClient.prefetchQuery(stackKeys.comments(slug), fetchComments)
 
   return {
     props: {

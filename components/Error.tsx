@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 
 import { CompassIcon } from '@/icons'
 
-export default function Error() {
+export function Error() {
   const router = useRouter()
   return (
     <div className="grid w-full place-items-center text-center">

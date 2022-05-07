@@ -1,7 +1,17 @@
 import { useMutation, useQueryClient } from 'react-query'
-import { Prisma } from '@prisma/client'
 
-async function createStack(values: Prisma.StackCreateInput) {
+import type { StackDetail } from './Stack.types'
+
+export const stackKeys = {
+  all: [{ entity: 'stack' }] as const,
+  list: () => [{ ...stackKeys.all[0], scope: 'list' }] as const,
+  detail: (identifier?: string) => [{ ...stackKeys.all[0], scope: 'detail', identifier }] as const,
+  comments: (identifier?: string) =>
+    [{ ...stackKeys.all[0], scope: 'comments', identifier }] as const,
+  users: (identifier?: string) => [{ ...stackKeys.all[0], scope: 'users', identifier }] as const
+}
+
+async function createStack(values: StackDetail) {
   const response = await fetch('/api/stack', {
     method: 'POST',
     body: JSON.stringify(values)
@@ -17,11 +27,11 @@ export function useCreateStackMutation() {
   const queryClient = useQueryClient()
 
   return useMutation(createStack, {
-    onSuccess: () => queryClient.invalidateQueries([{ entity: 'stack', scope: 'list' }])
+    onSuccess: () => queryClient.invalidateQueries(stackKeys.list())
   })
 }
 
-async function updateStack(data: Partial<Prisma.StackCreateInput>) {
+async function updateStack(data: Partial<StackDetail>) {
   const response = await fetch(`/api/stack/${data.slug}`, {
     method: 'PATCH',
     body: JSON.stringify({
@@ -43,8 +53,7 @@ export function useUpdateStackMutation() {
   const queryClient = useQueryClient()
 
   return useMutation(updateStack, {
-    onSuccess: (_data, args) =>
-      queryClient.invalidateQueries([{ entity: 'stack', scope: 'detail', identifier: args.slug }])
+    onSuccess: (_data, args) => queryClient.invalidateQueries(stackKeys.detail(args.slug))
   })
 }
 
@@ -63,6 +72,6 @@ export function useDeleteStackMutation() {
   const queryClient = useQueryClient()
 
   return useMutation(deleteStack, {
-    onSuccess: () => queryClient.invalidateQueries([{ entity: 'stack', scope: 'list' }])
+    onSuccess: () => queryClient.invalidateQueries(stackKeys.list())
   })
 }

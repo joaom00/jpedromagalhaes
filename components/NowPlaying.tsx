@@ -10,7 +10,7 @@ type NowPlaying = {
   title: string
 }
 
-export default function NowPlaying() {
+export function NowPlaying() {
   const [nowPlaying, setNowPlaying] = React.useState<NowPlaying>()
 
   React.useEffect(() => {

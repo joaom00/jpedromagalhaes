@@ -9,7 +9,7 @@ type AlertDialogProps = {
   children: React.ReactNode
 }
 
-export default function AlertDialog({
+export function AlertDialog({
   title,
   description,
   open,

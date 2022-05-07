@@ -1,6 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react'
+import { Prisma } from '@prisma/client'
 import { toast } from 'react-hot-toast'
 import {
   Action as AlertDialogAction,
@@ -12,9 +13,8 @@ import { useReactionMutation } from '@/hooks'
 import { DeleteIcon, EditIcon, SpinnerIcon } from '@/icons'
 import { LikeButton, AlertDialog, Textarea, TextField, Dialog } from '@/components'
 
-import type { BookmarkDetail } from './Bookmarks.queries'
+import type { BookmarkDetail } from './Bookmarks.types'
 import { useUpdateBookmarkMutation, useDeleteBookmarkMutation } from './Bookmarks.queries'
-import { Prisma } from '@prisma/client'
 
 type BookmarksActionsProps = {
   bookmark: BookmarkDetail

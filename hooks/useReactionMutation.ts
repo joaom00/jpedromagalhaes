@@ -25,7 +25,7 @@ async function toggleReaction({ scope, identifier }: ToggleReactionData) {
   }
 }
 
-export default function useReactionMutation() {
+export function useReactionMutation() {
   const queryClient = useQueryClient()
 
   return useMutation(toggleReaction, {

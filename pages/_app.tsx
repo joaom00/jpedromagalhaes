@@ -14,8 +14,7 @@ import toast from 'react-hot-toast'
 import useSound from 'use-sound'
 
 import { SiteLayout } from '@/layouts'
-import { NavigationProvider, SignInDialogProvider } from '@/contexts'
-import { Toast, CommandBar, NProgress } from '@/components'
+import { Toast, Progress, CommandBar, SignInDialog } from '@/components'
 
 import commandBarSound from '../public/sounds/command-bar.mp3'
 
@@ -38,16 +37,16 @@ function MyApp({ Component, pageProps }: AppProps) {
       })
   )
 
-  queryClient.setQueryDefaults([{ type: 'list' }], {
+  queryClient.setQueryDefaults([{ scope: 'list' }], {
     staleTime: Infinity
   })
-  queryClient.setQueryDefaults([{ type: 'detail' }], {
+  queryClient.setQueryDefaults([{ scope: 'detail' }], {
     staleTime: Infinity
   })
-  queryClient.setQueryDefaults([{ type: 'comments' }], {
+  queryClient.setQueryDefaults([{ scope: 'comments' }], {
     staleTime: 1000 * 60 * 3
   })
-  queryClient.setQueryDefaults([{ type: 'users' }], {
+  queryClient.setQueryDefaults([{ scope: 'users' }], {
     staleTime: 1000 * 60 * 3
   })
 
@@ -72,21 +71,18 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <Toast />
       <SessionProvider session={pageProps.session}>
         <QueryClientProvider client={queryClient}>
           <Hydrate state={pageProps.dehydratedState}>
             <ThemeProvider attribute="class">
-              <NavigationProvider>
-                <SignInDialogProvider>
-                  <CommandBar>
-                    <SiteLayout>
-                      <Component {...pageProps} />
-                      <NProgress />
-                    </SiteLayout>
-                  </CommandBar>
-                </SignInDialogProvider>
-              </NavigationProvider>
+              <CommandBar>
+                <SiteLayout>
+                  <Component {...pageProps} />
+                  <SignInDialog />
+                  <Toast />
+                  <Progress />
+                </SiteLayout>
+              </CommandBar>
             </ThemeProvider>
           </Hydrate>
           <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />

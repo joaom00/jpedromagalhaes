@@ -1,13 +1,13 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 
-import type { Question } from '@/shared/types'
 import { useIntersectionObserver } from '@/hooks'
 import { useListQuery } from '@/lib/useListQuery'
 
 import { SpinnerIcon } from '@/icons'
 import { Container, List, TitleBar, Error } from '@/components'
 
+import type { Question } from './Guestbook.types'
 import { GuestbookItem } from './GuestbookItem'
 import { AddQuestionDialog } from './AddQuestionDialog'
 

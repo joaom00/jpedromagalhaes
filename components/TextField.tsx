@@ -2,7 +2,7 @@ import React from 'react'
 
 type TextFieldProps = React.ComponentPropsWithoutRef<'input'>
 
-export default function TextField({ className, ...props }: TextFieldProps) {
+export function TextField({ className, ...props }: TextFieldProps) {
   return (
     <input
       type="text"

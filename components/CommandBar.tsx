@@ -26,11 +26,11 @@ import {
   ReactIcon
 } from '@/icons'
 
-type CommandBarProps = {
-  children: React.ReactNode
+export interface CommandBarProps {
+  children?: React.ReactNode
 }
 
-export default function CommandBar({ children }: CommandBarProps) {
+export function CommandBar({ children }: CommandBarProps) {
   const router = useRouter()
   const { setTheme } = useTheme()
 

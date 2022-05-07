@@ -4,19 +4,20 @@ import { useSession } from 'next-auth/react'
 import toast from 'react-hot-toast'
 import { Prisma } from '@prisma/client'
 
-import { useSignInDialog } from '@/contexts'
+import { useStore } from '@/hooks'
 import { PlusIcon, SpinnerIcon } from '@/icons'
 import { Dialog, TextField, Textarea } from '@/components'
 
 import { useCreateQuestionMutation } from './Guestbook.queries'
 
 export function AddQuestionDialog() {
-  const [open, setOpen] = React.useState(false)
+  const openSignInDialog = useStore((state) => state.openSignInDialog)
 
   const router = useRouter()
   const { data: session } = useSession()
-  const signInDialog = useSignInDialog()
   const createQuestion = useCreateQuestionMutation()
+
+  const [open, setOpen] = React.useState(false)
 
   function onCreateQuestion(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -39,7 +40,7 @@ export function AddQuestionDialog() {
     if (session) {
       return setOpen(true)
     }
-    signInDialog.setOpen(true)
+    openSignInDialog()
   }
 
   return (

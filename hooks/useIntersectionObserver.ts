@@ -6,7 +6,7 @@ type Options = IntersectionObserverInit & {
   enabled?: boolean
 }
 
-export default function useIntersectionObserver({
+export function useIntersectionObserver({
   elementRef,
   onIntersect,
   enabled = true,

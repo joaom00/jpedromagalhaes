@@ -1,11 +1,11 @@
 import React from 'react'
 import { useSession } from 'next-auth/react'
 import toast from 'react-hot-toast'
-import { Prisma } from '@prisma/client'
 
 import { PlusIcon, SpinnerIcon } from '@/icons'
 import { Dialog, TextField, Textarea } from '@/components'
 
+import type { StackDetail } from './Stack.types'
 import { useCreateStackMutation } from './Stack.queries'
 
 export function AddStackDialog() {
@@ -20,7 +20,7 @@ export function AddStackDialog() {
     if (createStack.isLoading) return
 
     const formData = new FormData(event.currentTarget)
-    const values = Object.fromEntries(formData.entries()) as unknown as Prisma.StackCreateInput
+    const values = Object.fromEntries(formData.entries()) as unknown as StackDetail
 
     createStack.mutate(values, {
       onSuccess: () => {

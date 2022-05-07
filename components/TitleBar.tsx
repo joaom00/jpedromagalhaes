@@ -1,8 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
 
+import { useStore } from '@/hooks'
+
 import { ArrowLeftIcon, MenuIcon } from '@/icons'
-import { useNavigation } from '@/contexts'
 
 type TitleBarProps = {
   title: string
@@ -15,7 +16,7 @@ type TitleBarProps = {
   trailingAccessory?: React.ReactNode
 }
 
-export default function TitleBar({
+export function TitleBar({
   title,
   globalMenu = true,
   backButton = false,
@@ -25,7 +26,7 @@ export default function TitleBar({
   scrollContainerRef,
   trailingAccessory = null
 }: TitleBarProps) {
-  const { setOpen } = useNavigation()
+  const openSidebar = useStore((state) => state.openSidebar)
 
   const [offset, setOffset] = React.useState(200)
   const [opacity, _setOpacity] = React.useState(0)
@@ -104,7 +105,7 @@ export default function TitleBar({
         <span className="flex items-center space-x-3">
           {globalMenu && (
             <span
-              onClick={() => setOpen(true)}
+              onClick={openSidebar}
               className="flex cursor-pointer items-center justify-center rounded-md p-2 dark:hover:bg-gray-800 lg:hidden"
             >
               <MenuIcon />

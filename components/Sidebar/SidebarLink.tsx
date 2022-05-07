@@ -1,8 +1,9 @@
 import Link from 'next/link'
 import { IconType } from 'react-icons'
 
+import { useStore } from '@/hooks'
+
 import { ExternalLinkIcon } from '@/icons'
-import { useNavigation } from '@/contexts'
 
 type NavigationLinkProps = {
   icon: IconType
@@ -19,9 +20,10 @@ export function SidebarLink({
   isActive = false,
   isExternal = false
 }: NavigationLinkProps) {
-  const { setOpen } = useNavigation()
+  const closeSidebar = useStore((state) => state.closeSidebar)
+
   return (
-    <li onClick={() => setOpen(false)}>
+    <li onClick={closeSidebar}>
       <Link href={href}>
         <a
           target={isExternal ? '_blank' : undefined}

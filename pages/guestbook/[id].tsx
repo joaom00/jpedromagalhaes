@@ -5,7 +5,7 @@ import { fetchComments } from '@/shared/queries'
 import { fetchDetail } from '@/lib/useDetailQuery'
 
 import { MainLayout } from '@/layouts'
-import { Guestbook, GuestbookDetail } from '@/components/Guestbook'
+import { Guestbook, GuestbookDetail, guestbookKeys } from '@/components/Guestbook'
 
 export default function GuestbookDetailPage() {
   return (
@@ -25,10 +25,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext<{ id: st
 
   const queryClient = new QueryClient()
 
-  await queryClient.prefetchQuery(
-    [{ entity: 'guestbook', scope: 'detail', identifier: id }],
-    fetchDetail
-  )
+  await queryClient.prefetchQuery(guestbookKeys.detail(id), fetchDetail)
   await queryClient.prefetchQuery(
     [{ entity: 'guestbook', scope: 'comments', identifier: id }],
     fetchComments

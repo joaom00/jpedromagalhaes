@@ -1,38 +1,8 @@
 import { Prisma } from '@prisma/client'
 import { QueryFunctionContext, useQuery } from 'react-query'
-import type { Scope, Comment } from 'shared/types'
+import type { Comment } from 'shared/types'
 
 // Prisma
-
-export const stackQuery = Prisma.validator<Prisma.StackArgs>()({
-  select: {
-    name: true,
-    slug: true,
-    image: true
-  }
-})
-
-export const questionsQuery = Prisma.validator<Prisma.QuestionArgs>()({
-  select: {
-    id: true,
-    title: true,
-    author: {
-      select: {
-        name: true,
-        image: true
-      }
-    }
-  }
-})
-
-export const snippetsQuery = Prisma.validator<Prisma.SnippetArgs>()({
-  select: {
-    id: true,
-    title: true,
-    slug: true,
-    logo: true
-  }
-})
 
 export const commentsQuery = Prisma.validator<Prisma.CommentArgs>()({
   select: {
@@ -49,61 +19,7 @@ export const commentsQuery = Prisma.validator<Prisma.CommentArgs>()({
   }
 })
 
-export const stackDetailQuery = Prisma.validator<Prisma.StackArgs>()({
-  select: {
-    name: true,
-    description: true,
-    slug: true,
-    image: true,
-    url: true,
-    _count: {
-      select: {
-        reactions: true
-      }
-    }
-  }
-})
-
-export const questionDetailQuery = Prisma.validator<Prisma.QuestionArgs>()({
-  select: {
-    id: true,
-    title: true,
-    description: true,
-    author: {
-      select: {
-        email: true,
-        name: true,
-        image: true
-      }
-    },
-    _count: {
-      select: {
-        reactions: true
-      }
-    }
-  }
-})
-
-export const snippetDetailQuery = Prisma.validator<Prisma.SnippetArgs>()({
-  select: {
-    id: true,
-    title: true,
-    description: true,
-    slug: true,
-    logo: true,
-    _count: {
-      select: {
-        reactions: true
-      }
-    }
-  }
-})
-
 // React Query
-
-const usersKeys = (identifier: string) => [{ entity: 'stack', identifier, scope: 'users' }] as const
-const commentsKeys = (entity: Scope, identifier: string) =>
-  [{ entity, identifier, scope: 'comments' }] as const
 
 type PrismaUser = Prisma.UserGetPayload<{
   select: {
@@ -118,9 +34,16 @@ type Users = {
   userAlreadyUse: boolean
 }
 
-export async function fetchUsers({
-  queryKey: [{ identifier }]
-}: QueryFunctionContext<ReturnType<typeof usersKeys>>): Promise<Users> {
+interface FetchUsersContext {
+  entity: string
+  scope: string
+  identifier?: string
+}
+
+export async function fetchUsers(
+  ctx: QueryFunctionContext<Readonly<FetchUsersContext[]>>
+): Promise<Users> {
+  const [{ identifier }] = ctx.queryKey
   const response = await fetch(`/api/stack/users?slug=${identifier}`)
   const data = await response.json()
 
@@ -128,24 +51,31 @@ export async function fetchUsers({
 }
 
 export function useUsersQuery(identifier: string) {
-  return useQuery<Users, Error, Users, ReturnType<typeof usersKeys>>(
-    usersKeys(identifier),
+  return useQuery<Users, Error, Users, FetchUsersContext[]>(
+    [{ entity: 'stack', scope: 'users', identifier }],
     fetchUsers
   )
 }
 
-export async function fetchComments({
-  queryKey: [{ entity, identifier }]
-}: QueryFunctionContext<ReturnType<typeof commentsKeys>>): Promise<Comment[]> {
+interface FetchCommentsContext {
+  entity: string
+  scope: string
+  identifier?: string
+}
+
+export async function fetchComments(
+  ctx: QueryFunctionContext<Readonly<FetchCommentsContext[]>>
+): Promise<Comment[]> {
+  const [{ entity, identifier }] = ctx.queryKey
   const response = await fetch(`/api/${entity}/comments?identifier=${identifier}`)
   const data = await response.json()
 
   return data
 }
 
-export function useCommentsQuery(scope: Scope, identifier: string) {
-  return useQuery<Comment[], Error, Comment[], ReturnType<typeof commentsKeys>>(
-    commentsKeys(scope, identifier),
+export function useCommentsQuery(entity: string, identifier: string) {
+  return useQuery<Comment[], Error, Comment[], FetchCommentsContext[]>(
+    [{ entity, scope: 'comments', identifier }],
     fetchComments
   )
 }

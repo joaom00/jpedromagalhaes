@@ -6,14 +6,13 @@ import {
   Action as AlertDialogAction,
   Cancel as AlertDialogCancel
 } from '@radix-ui/react-alert-dialog'
-import { Prisma } from '@prisma/client'
 
-import type { SnippetDetail } from '@/shared/types'
 import { useReactionMutation } from '@/hooks'
 
 import { DeleteIcon, EditIcon, SpinnerIcon } from '@/icons'
 import { LikeButton, AlertDialog, Textarea, TextField, Dialog } from '@/components'
 
+import type { SnippetDetail } from './Snippets.types'
 import { useUpdateSnippetMutation, useDeleteSnippetMutation } from './Snippets.queries'
 
 type SnippetsActionsProps = {
@@ -41,7 +40,7 @@ export function SnippetsActions({ snippet }: SnippetsActionsProps) {
     if (updateSnippet.isLoading) return
 
     const formData = new FormData(event.currentTarget)
-    const values = Object.fromEntries(formData.entries()) as unknown as Prisma.SnippetUpdateInput
+    const values = Object.fromEntries(formData.entries()) as Partial<SnippetDetail>
 
     updateSnippet.mutate(values, {
       onSuccess: () => {

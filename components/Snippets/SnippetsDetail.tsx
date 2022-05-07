@@ -3,14 +3,14 @@ import { useRouter } from 'next/router'
 import { useMDXComponent } from 'next-contentlayer/hooks'
 import { MDX } from '.contentlayer/types'
 
-import type { SnippetDetail } from '@/shared/types'
+import { useDetailQuery } from '@/lib/useDetailQuery'
 
 import { SpinnerIcon } from '@/icons'
 import { TitleBar, MDXComponents, Image, Container, Error } from '@/components'
 import { Comments } from '@/components/Comments'
 
+import type { SnippetDetail } from './Snippets.types'
 import { SnippetsActions } from './SnippetsActions'
-import { useDetailQuery } from '@/lib/useDetailQuery'
 
 export function SnippetsDetail({ body }: { body: MDX | undefined }) {
   const titleRef = React.useRef(null)

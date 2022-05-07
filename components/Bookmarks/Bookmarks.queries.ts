@@ -1,37 +1,9 @@
 import { useMutation, useQueryClient } from 'react-query'
 import { Prisma } from '@prisma/client'
 
-export type Bookmark = Prisma.BookmarkGetPayload<typeof bookmarksQuery>
-export type BookmarkDetail = Prisma.BookmarkGetPayload<typeof bookmarkDetailQuery> & {
-  userHasReacted: boolean
-}
+import type { BookmarkDetail } from './Bookmarks.types'
 
-export const bookmarksQuery = Prisma.validator<Prisma.BookmarkArgs>()({
-  select: {
-    id: true,
-    title: true,
-    faviconUrl: true,
-    host: true
-  }
-})
-
-export const bookmarkDetailQuery = Prisma.validator<Prisma.BookmarkArgs>()({
-  select: {
-    id: true,
-    title: true,
-    description: true,
-    faviconUrl: true,
-    host: true,
-    url: true,
-    _count: {
-      select: {
-        reactions: true
-      }
-    }
-  }
-})
-
-const bookmarkKeys = {
+export const bookmarkKeys = {
   all: [{ entity: 'bookmarks' }] as const,
   list: () => [{ ...bookmarkKeys.all[0], scope: 'list' }] as const,
   detail: (identifier: string) =>
@@ -41,7 +13,7 @@ const bookmarkKeys = {
 }
 
 export const useCreateBookmarkMutation = <T>() => {
-  const createBookmark = async (values: Prisma.BookmarkCreateInput): Promise<T> => {
+  const createBookmark = async (values: Partial<BookmarkDetail>): Promise<T> => {
     const response = await fetch('/api/bookmarks', {
       method: 'POST',
       body: JSON.stringify({ data: values })

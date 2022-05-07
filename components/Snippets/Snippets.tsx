@@ -1,13 +1,13 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 
-import type { Snippet } from '@/shared/types'
 import { useListQuery } from '@/lib/useListQuery'
 import { useIntersectionObserver } from '@/hooks'
 
 import { SpinnerIcon } from '@/icons'
 import { Container, TitleBar, Error, List } from '@/components'
 
+import type { Snippet } from './Snippets.types'
 import { SnippetsItem } from './SnippetsItem'
 import { AddSnippetDialog } from './AddSnippetDialog'
 

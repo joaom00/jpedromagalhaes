@@ -3,7 +3,7 @@ import { dehydrate, QueryClient } from 'react-query'
 import { fetchList } from '@/lib/useListQuery'
 
 import { MainLayout } from '@/layouts'
-import { Stack } from '@/components/Stack'
+import { Stack, stackKeys } from '@/components/Stack'
 
 export default function StackPage() {
   return (
@@ -18,7 +18,7 @@ export default function StackPage() {
 export async function getServerSideProps() {
   const queryClient = new QueryClient()
 
-  await queryClient.prefetchInfiniteQuery([{ entity: 'stack', scope: 'list' }], fetchList)
+  await queryClient.prefetchInfiniteQuery(stackKeys.list(), fetchList)
 
   return {
     props: {

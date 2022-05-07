@@ -2,10 +2,10 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
 import { Prisma } from '@prisma/client'
 
-import { prisma } from 'lib/prisma'
+import { prisma } from '@/lib/prisma'
 
-import type { Stack } from 'shared/types'
-import { stackQuery } from 'shared/queries'
+import { stackQuery } from '@/components/Stack'
+import type { Stack } from '@/components/Stack/Stack.types'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {

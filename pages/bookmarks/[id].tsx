@@ -5,7 +5,7 @@ import { fetchComments } from '@/shared/queries'
 import { fetchDetail } from '@/lib/useDetailQuery'
 
 import { MainLayout } from '@/layouts'
-import { Bookmarks, BookmarksDetail } from '@/components/Bookmarks'
+import { bookmarkKeys, Bookmarks, BookmarksDetail } from '@/components/Bookmarks'
 
 export default function BookmarkDetailPage() {
   return (
@@ -25,14 +25,8 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext<{ id: st
 
   const queryClient = new QueryClient()
 
-  await queryClient.prefetchQuery(
-    [{ entity: 'bookmarks', scope: 'detail', identifier: id }],
-    fetchDetail
-  )
-  await queryClient.prefetchQuery(
-    [{ entity: 'bookmarks', scope: 'comments', identifier: id }],
-    fetchComments
-  )
+  await queryClient.prefetchQuery(bookmarkKeys.detail(id), fetchDetail)
+  await queryClient.prefetchQuery(bookmarkKeys.comments(id), fetchComments)
 
   return {
     props: {

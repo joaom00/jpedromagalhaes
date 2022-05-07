@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import type { Bookmark } from './Bookmarks.queries'
+import type { Bookmark } from './Bookmarks.types'
 
 export const BookmarksItem = ({ title, faviconUrl, host }: Bookmark) => {
   return (

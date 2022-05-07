@@ -8,7 +8,7 @@ type TextAreaProps = React.ComponentPropsWithoutRef<'textarea'> & {
   maxRows?: number
 }
 
-export default function Textarea({ className, maxRows = 8, rows = 1, ...props }: TextAreaProps) {
+export function Textarea({ className, maxRows = 8, rows = 1, ...props }: TextAreaProps) {
   return (
     <TextareaAutosize
       maxRows={maxRows}

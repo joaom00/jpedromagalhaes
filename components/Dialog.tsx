@@ -12,7 +12,7 @@ type DialogProps = {
   onOpenChange?: (open: boolean) => void
 }
 
-export default function Dialog({
+export function Dialog({
   title,
   description,
   trigger = null,

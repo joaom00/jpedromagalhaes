@@ -1,6 +1,6 @@
-import { Snippet } from '@/shared/types'
-
 import { Image } from '@/components'
+
+import type { Snippet } from './Snippets.types'
 
 export function SnippetsItem({ title, logo }: Snippet) {
   return (

@@ -1,7 +1,17 @@
 import { useMutation, useQueryClient } from 'react-query'
-import { Prisma } from '@prisma/client'
 
-async function updateSnippet(data: Prisma.SnippetUpdateInput) {
+import type { SnippetDetail } from './Snippets.types'
+
+export const snippetKeys = {
+  all: [{ entity: 'snippets' }] as const,
+  list: () => [{ ...snippetKeys.all[0], scope: 'list' }] as const,
+  detail: (identifier?: string) =>
+    [{ ...snippetKeys.all[0], scope: 'detail', identifier }] as const,
+  comments: (identifier?: string) =>
+    [{ ...snippetKeys.all[0], scope: 'comments', identifier }] as const
+}
+
+async function updateSnippet(data: Partial<SnippetDetail>) {
   const response = await fetch(`/api/snippets/${data.slug}`, {
     method: 'PATCH',
     body: JSON.stringify({
@@ -22,10 +32,7 @@ export function useUpdateSnippetMutation() {
   const queryClient = useQueryClient()
 
   return useMutation(updateSnippet, {
-    onSuccess: (_data, args) =>
-      queryClient.invalidateQueries([
-        { entity: 'snippets', scope: 'detail', identifier: args.slug }
-      ])
+    onSuccess: (_data, args) => queryClient.invalidateQueries(snippetKeys.detail(args.slug))
   })
 }
 
@@ -44,6 +51,6 @@ export function useDeleteSnippetMutation() {
   const queryClient = useQueryClient()
 
   return useMutation(deleteSnippet, {
-    onSuccess: () => queryClient.invalidateQueries([{ entity: 'snippets', scope: 'list' }])
+    onSuccess: () => queryClient.invalidateQueries(snippetKeys.list())
   })
 }

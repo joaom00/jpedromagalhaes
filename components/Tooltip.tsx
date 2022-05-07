@@ -7,7 +7,7 @@ type TooltipProps = {
   arrowClassName: string
 } & TooltipPrimitive.PopperContentProps
 
-export default function Tooltip({
+export function Tooltip({
   children,
   content,
   contentClassName,

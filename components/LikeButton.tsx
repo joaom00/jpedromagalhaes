@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSession } from 'next-auth/react'
 
-import { useSignInDialog } from '@/contexts'
+import { useStore } from '@/hooks'
 
 import { HeartFillIcon, HeartIcon } from '@/icons'
 
@@ -12,7 +12,11 @@ type LikeButtonProps = {
   loading: boolean
   onClick: () => void
 }
-export default function LikeButton({ id, hasReacted, count, loading, onClick }: LikeButtonProps) {
+export function LikeButton({ id, hasReacted, count, loading, onClick }: LikeButtonProps) {
+  const openSignInDialog = useStore((state) => state.openSignInDialog)
+
+  const { data: session } = useSession()
+
   const [ping, setPing] = React.useState(false)
   const [hasReactedState, setHasReactedState] = React.useState(hasReacted)
   const [currTranslate, setCurrTranslate] = React.useState(
@@ -21,9 +25,6 @@ export default function LikeButton({ id, hasReacted, count, loading, onClick }: 
   const [nextTranslate, setNextTranslate] = React.useState(
     hasReactedState ? 'translate-y-0' : '-translate-y-4'
   )
-
-  const { data: session } = useSession()
-  const signInDialog = useSignInDialog()
 
   let currCount = count
   let nextCount = hasReactedState ? currCount - 1 : currCount + 1
@@ -43,7 +44,7 @@ export default function LikeButton({ id, hasReacted, count, loading, onClick }: 
 
   function handleClick() {
     if (!session) {
-      return signInDialog.setOpen(true)
+      return openSignInDialog()
     }
     if (loading) return
     setCurrTranslate(nextTranslate)

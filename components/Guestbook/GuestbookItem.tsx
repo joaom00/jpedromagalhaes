@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import type { Question } from '@/shared/types'
+import type { Question } from './Guestbook.types'
 
 export function GuestbookItem({ title, author }: Question) {
   return (

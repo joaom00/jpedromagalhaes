@@ -3,23 +3,20 @@ import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react'
 
-import type { StackDetail } from '@/shared/types'
 import { useUsersQuery } from '@/shared/queries'
 import { useDetailQuery } from '@/lib/useDetailQuery'
 
-import { useSignInDialog } from '@/contexts'
-import { useUsedByMutation } from '@/hooks'
+import { useUsedByMutation, useStore } from '@/hooks'
 
 import { SpinnerIcon } from '@/icons'
 import { TitleBar, Image, Tooltip, Container, Error } from '@/components'
 
+import type { StackDetail } from './Stack.types'
 import { StackActions } from './StackActions'
 const Comments = dynamic(() => import('components/Comments/Comments'))
 
 export function StackDetail() {
-  const titleRef = React.useRef(null)
-  const scrollContainerRef = React.useRef<HTMLDivElement>(null)
-
+  const openSignInDialog = useStore((state) => state.openSignInDialog)
   const { data: session } = useSession()
   const router = useRouter()
   const slug = router.query.slug as string
@@ -27,13 +24,15 @@ export function StackDetail() {
   const toolQuery = useDetailQuery<StackDetail>('stack', slug)
   const usersQuery = useUsersQuery(slug)
   const usedByMutation = useUsedByMutation()
-  const signInDialog = useSignInDialog()
+
+  const titleRef = React.useRef(null)
+  const scrollContainerRef = React.useRef<HTMLDivElement>(null)
 
   function onUsedByChange() {
     if (session) {
       return usedByMutation.mutate(slug)
     }
-    signInDialog.setOpen(true)
+    openSignInDialog()
   }
 
   if (toolQuery.isSuccess) {

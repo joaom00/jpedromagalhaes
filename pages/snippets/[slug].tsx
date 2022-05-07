@@ -6,7 +6,7 @@ import { fetchComments } from '@/shared/queries'
 import { fetchDetail } from '@/lib/useDetailQuery'
 
 import { MainLayout } from '@/layouts'
-import { Snippets, SnippetsDetail } from '@/components/Snippets'
+import { snippetKeys, Snippets, SnippetsDetail } from '@/components/Snippets'
 
 export default function SnippetDetailPage({
   body
@@ -28,16 +28,9 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext<{ slug: 
   const snippet = allSnippets.find((snippet) => snippet.slug === slug)
 
   const queryClient = new QueryClient()
-  console.log(snippet)
 
-  await queryClient.prefetchQuery(
-    [{ entity: 'snippets', scope: 'detail', identifier: slug }],
-    fetchDetail
-  )
-  await queryClient.prefetchQuery(
-    [{ entity: 'snippets', scope: 'comments', identifier: slug }],
-    fetchComments
-  )
+  await queryClient.prefetchQuery(snippetKeys.detail(slug), fetchDetail)
+  await queryClient.prefetchQuery(snippetKeys.comments(slug), fetchComments)
 
   return {
     props: {

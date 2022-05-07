@@ -21,9 +21,7 @@ function RoundedImage(props: ImageProps) {
   return <Image alt={props.alt} className="rounded-lg" {...props} />
 }
 
-const MDXComponents = {
+export const MDXComponents = {
   Image: RoundedImage,
   a: CustomLink
 }
-
-export default MDXComponents

@@ -7,7 +7,7 @@ import { useIntersectionObserver } from '@/hooks'
 import { SpinnerIcon } from '@/icons'
 import { Container, TitleBar, List, Error } from '@/components'
 
-import { Bookmark } from './Bookmarks.queries'
+import type { Bookmark } from './Bookmarks.types'
 import { BookmarksItem } from './BookmarksItem'
 import { AddBookmarkDialog } from './AddBookmarkDialog'
 

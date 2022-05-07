@@ -1,13 +1,17 @@
 import { QueryFunctionContext, useQuery } from 'react-query'
 
-import type { Scope } from '@/shared/types'
+interface DetailQuery {
+  entity: string
+  scope: string
+  identifier?: string
+}
 
-const detailKeys = (entity: Scope, identifier: string) =>
-  [{ entity, identifier, scope: 'detail' }] as const
+const detailKeys = (entity: string, identifier: string): DetailQuery[] => [
+  { entity, identifier, scope: 'detail' }
+]
 
-export const fetchDetail = async ({
-  queryKey: [{ entity, identifier }]
-}: QueryFunctionContext<ReturnType<typeof detailKeys>>) => {
+export const fetchDetail = async (ctx: QueryFunctionContext<Readonly<DetailQuery[]>>) => {
+  const [{ entity, identifier }] = ctx.queryKey
   const response = await fetch(`/api/${entity}/${identifier}`)
 
   if (!response.ok) {
@@ -19,9 +23,6 @@ export const fetchDetail = async ({
   return data
 }
 
-export const useDetailQuery = <T = any>(scope: Scope, identifier: string) => {
-  return useQuery<T, Error, T, ReturnType<typeof detailKeys>>(
-    detailKeys(scope, identifier),
-    fetchDetail
-  )
+export const useDetailQuery = <T = any>(scope: string, identifier: string) => {
+  return useQuery<T, Error, T, DetailQuery[]>(detailKeys(scope, identifier), fetchDetail)
 }

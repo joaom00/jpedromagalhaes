@@ -6,12 +6,13 @@ import {
   Cancel as AlertDialogCancel
 } from '@radix-ui/react-alert-dialog'
 
-import type { QuestionDetail } from '@/shared/types'
 import { useReactionMutation } from '@/hooks'
-import { useDeleteQuestionMutation, useUpdateQuestionMutation } from './Guestbook.queries'
 
 import { DeleteIcon, EditIcon, SpinnerIcon } from '@/icons'
 import { LikeButton, AlertDialog, TextField, Textarea, Dialog } from '@/components'
+
+import type { QuestionDetail } from './Guestbook.types'
+import { useDeleteQuestionMutation, useUpdateQuestionMutation } from './Guestbook.queries'
 
 type QuestionActionsProps = {
   question: QuestionDetail

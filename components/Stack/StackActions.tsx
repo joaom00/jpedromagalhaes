@@ -7,12 +7,12 @@ import {
   Cancel as AlertDialogCancel
 } from '@radix-ui/react-alert-dialog'
 
-import type { StackDetail } from '@/shared/types'
 import { useReactionMutation } from '@/hooks'
 
 import { DeleteIcon, EditIcon, SpinnerIcon } from '@/icons'
 import { LikeButton, AlertDialog, TextField, Textarea, Dialog } from '@/components'
 
+import type { StackDetail } from './Stack.types'
 import { useUpdateStackMutation, useDeleteStackMutation } from './Stack.queries'
 
 type StackActionsProps = {

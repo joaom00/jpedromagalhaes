@@ -1,10 +1,8 @@
 import { QueryFunctionContext, useInfiniteQuery } from 'react-query'
 
-type Entity = 'bookmarks' | 'guestbook' | 'snippets' | 'stack'
-
 type Key = Readonly<
   {
-    entity: Entity
+    entity: string
     scope: 'list'
   }[]
 >
@@ -25,7 +23,7 @@ export const fetchList = async (ctx: ListContext) => {
   return await response.json()
 }
 
-export const useListQuery = <T extends { nextCursor: string }>(entity: Entity) => {
+export const useListQuery = <T extends { nextCursor: string }>(entity: string) => {
   return useInfiniteQuery<T, Error, T, Key>([{ entity, scope: 'list' }], fetchList, {
     getNextPageParam: (lastPage) => lastPage.nextCursor
   })

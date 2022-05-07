@@ -1,5 +1,4 @@
 import React from 'react'
-import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { signOut, useSession } from 'next-auth/react'
@@ -13,7 +12,7 @@ import {
   Cancel as AlertDialogCancel
 } from '@radix-ui/react-alert-dialog'
 
-import { useNavigation, useSignInDialog } from '@/contexts'
+import { useStore } from '@/hooks'
 
 import {
   HomeIcon,
@@ -32,30 +31,28 @@ import {
   SpinnerIcon
 } from '@/icons'
 import { RiCommandFill } from 'react-icons/ri'
-import { NowPlaying, ToggleThemeButton } from '@/components'
+import { NowPlaying, ToggleThemeButton, Tooltip, AlertDialog } from '@/components'
 
 import { SidebarLink } from './SidebarLink'
 import { SidebarOverlay } from './SidebarOverlay'
 
 import commandBarSound from '../../public/sounds/command-bar.mp3'
 
-const Tooltip = dynamic(() => import('components/Tooltip'))
-const AlertDialog = dynamic(() => import('components/AlertDialog'))
-
 const glassEffect =
   'backdrop-filter dark:backdrop-filter backdrop-blur-lg dark:backdrop-blur-lg bg-opacity-20 dark:bg-opacity-50'
 
 export default function Sidebar() {
-  const [mounted, setMounted] = React.useState(false)
-  const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false)
+  const isOpenSidebar = useStore((state) => state.isOpenSidebar)
+  const closeSidebar = useStore((state) => state.closeSidebar)
+  const openSignInDialog = useStore((state) => state.openSignInDialog)
 
   const { data: session } = useSession()
   const router = useRouter()
   const { query } = useKBar()
   const [commandBarSoundPlay] = useSound(commandBarSound)
 
-  const navigation = useNavigation()
-  const signInDialog = useSignInDialog()
+  const [mounted, setMounted] = React.useState(false)
+  const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false)
 
   const deleteAccount = useMutation(
     async () => {
@@ -174,7 +171,7 @@ export default function Sidebar() {
       <>
         <nav
           className={`${
-            navigation.open
+            isOpenSidebar
               ? 'absolute inset-y-0 left-0 translate-x-0 shadow-lg'
               : 'absolute -translate-x-full'
           } 3xl:w-80 z-30 flex h-full max-h-screen min-h-screen w-3/4 flex-none transform flex-col overflow-y-auto border-r border-mauve6 bg-white pb-10 transition duration-200 ease-in-out dark:border-mauveDark6 dark:bg-mauveDark1 sm:w-1/2 sm:pb-0 md:w-1/3 lg:relative lg:z-auto lg:w-56 lg:translate-x-0 2xl:w-72`}
@@ -186,7 +183,7 @@ export default function Sidebar() {
               <button
                 aria-label="Close menu"
                 className="rounded-md p-2 text-slate12 hover:bg-mauve4 dark:text-slateDark12 dark:hover:bg-mauveDark4 lg:hidden"
-                onClick={() => navigation.setOpen(false)}
+                onClick={closeSidebar}
               >
                 <CloseIcon aria-hidden />
               </button>
@@ -245,7 +242,7 @@ export default function Sidebar() {
             ) : (
               <button
                 className="relative rounded-md bg-mauve2 px-5 py-1.5 text-sm transition duration-200 dark:bg-mauveDark2"
-                onClick={() => signInDialog.setOpen(true)}
+                onClick={openSignInDialog}
               >
                 Fazer login
               </button>

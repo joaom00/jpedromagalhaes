@@ -94,7 +94,7 @@
     "printWidth": 100
   },
   "lint-staged": {
-    "*": [
+    "*.+(js|jsx|css|less|scss|ts|tsx|gql|graphql|md|mdx)": [
       "yarn format",
       "yarn lint"
     ]

@@ -3,7 +3,8 @@
 ```ts
 type NonEmptyArray<T> = readonly [T, ...ReadonlyArray<T>]
 
-const isNonEmpty = <T>(array: ReadonlyArray<T> | undefined): array is NonEmptyArray<T> => !!array && array.length > 0
+const isNonEmpty = <T>(array: ReadonlyArray<T> | undefined): array is NonEmptyArray<T> =>
+  !!array && array.length > 0
 
 // usage
 

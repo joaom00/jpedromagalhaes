@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from 'react-query'
-import type { Scope } from 'shared/types'
+import type { Scope } from '@/shared/types'
 
 type ToggleReactionData = {
-  scope: Scope
+  entity: Scope
   identifier: string
 }
 
@@ -13,8 +13,8 @@ type Data = {
   }
 }
 
-async function toggleReaction({ scope, identifier }: ToggleReactionData) {
-  const response = await fetch(`/api/${scope}/like`, {
+async function toggleReaction({ entity, identifier }: ToggleReactionData) {
+  const response = await fetch(`/api/${entity}/like`, {
     method: 'POST',
     body: JSON.stringify({ identifier })
   })
@@ -29,8 +29,8 @@ export function useReactionMutation() {
   const queryClient = useQueryClient()
 
   return useMutation(toggleReaction, {
-    onMutate: ({ scope, identifier }) => {
-      queryClient.setQueryData<Data>([{ scope, type: 'detail', identifier }], (old) => {
+    onMutate: ({ entity, identifier }) => {
+      queryClient.setQueryData<Data>([{ entity, scope: 'detail', identifier }], (old) => {
         return {
           ...old,
           _count: {

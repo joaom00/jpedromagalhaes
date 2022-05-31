@@ -31,7 +31,7 @@ export function SnippetsActions({ snippet }: SnippetsActionsProps) {
 
   function onReactionChange() {
     if (reactionMutation.isLoading) return
-    reactionMutation.mutate({ scope: 'snippets', identifier: snippet.slug })
+    reactionMutation.mutate({ entity: 'snippets', identifier: snippet.slug })
   }
 
   function onUpdateSnippet(event: React.FormEvent<HTMLFormElement>) {
@@ -152,7 +152,7 @@ export function SnippetsActions({ snippet }: SnippetsActionsProps) {
           </>
         )}
         <LikeButton
-          id={snippet.slug}
+          key={snippet.slug}
           loading={reactionMutation.isLoading}
           count={snippet._count.reactions}
           hasReacted={snippet.userHasReacted}

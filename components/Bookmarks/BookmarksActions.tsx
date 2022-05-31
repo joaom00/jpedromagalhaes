@@ -33,7 +33,7 @@ export const BookmarksActions = ({ bookmark }: BookmarksActionsProps) => {
 
   function onReactionChange() {
     if (reactionMutation.isLoading) return
-    reactionMutation.mutate({ scope: 'bookmarks', identifier: bookmark.id })
+    reactionMutation.mutate({ entity: 'bookmarks', identifier: bookmark.id })
   }
 
   function onUpdateBookmark(event: React.FormEvent<HTMLFormElement>) {
@@ -132,10 +132,11 @@ export const BookmarksActions = ({ bookmark }: BookmarksActionsProps) => {
         {session?.user.role === 'ADMIN' && (
           <>
             <button
+              aria-label="Deletar bookmark"
               onClick={() => setDeleteDialogOpen(true)}
               className="rounded-md px-3 text-sm text-slate11 transition duration-100 hover:bg-red-700 hover:text-white dark:text-slateDark11 dark:hover:text-white"
             >
-              <DeleteIcon size={16} />
+              <DeleteIcon aria-hidden size={16} />
             </button>
             <button
               onClick={() => setEditDialogOpen(true)}
@@ -147,7 +148,7 @@ export const BookmarksActions = ({ bookmark }: BookmarksActionsProps) => {
         )}
 
         <LikeButton
-          id={bookmark.id}
+          key={bookmark.id}
           loading={reactionMutation.isLoading}
           count={bookmark._count.reactions}
           hasReacted={bookmark.userHasReacted}

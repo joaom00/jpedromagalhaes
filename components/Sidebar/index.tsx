@@ -42,7 +42,7 @@ const glassEffect =
   'backdrop-filter dark:backdrop-filter backdrop-blur-lg dark:backdrop-blur-lg bg-opacity-20 dark:bg-opacity-50'
 
 export default function Sidebar() {
-  const isOpenSidebar = useStore((state) => state.isOpenSidebar)
+  const isOpenSidebar = useStore((state) => state.isSidebarOpen)
   const closeSidebar = useStore((state) => state.closeSidebar)
   const openSignInDialog = useStore((state) => state.openSignInDialog)
 

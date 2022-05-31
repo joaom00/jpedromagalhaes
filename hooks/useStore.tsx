@@ -1,7 +1,7 @@
 import create from 'zustand'
 
 interface Store {
-  isOpenSidebar: boolean
+  isSidebarOpen: boolean
   openSidebar: () => void
   closeSidebar: () => void
   isSignInDialogOpen: boolean
@@ -11,9 +11,9 @@ interface Store {
 }
 
 export const useStore = create<Store>((set) => ({
-  isOpenSidebar: false,
-  openSidebar: () => set((state) => ({ ...state, isOpenSidebar: true })),
-  closeSidebar: () => set((state) => ({ ...state, isOpenSidebar: false })),
+  isSidebarOpen: false,
+  openSidebar: () => set((state) => ({ ...state, isSidebarOpen: true })),
+  closeSidebar: () => set((state) => ({ ...state, isSidebarOpen: false })),
   isSignInDialogOpen: false,
   setIsSignInDialogOpen: (open) => set((state) => ({ ...state, isSignInDialogOpen: open })),
   openSignInDialog: () => set((state) => ({ ...state, isSignInDialogOpen: true })),

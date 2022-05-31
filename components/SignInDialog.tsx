@@ -36,7 +36,7 @@ export function SignInDialog() {
           <div className="mt-7 space-y-5">
             <button
               className="flex w-full items-center justify-center gap-3 rounded-md bg-mauve3 py-3 font-semibold dark:bg-mauveDark3"
-              onClick={() => signIn('github')}
+              onClick={() => signIn('github', undefined, { eventId: '1' })}
             >
               <GitbubIcon aria-hidden />
               Entrar com GitHub

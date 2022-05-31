@@ -29,7 +29,7 @@ export default function GuestbookActions({ question }: QuestionActionsProps) {
 
   function onReactionChange() {
     if (reactionMutation.isLoading) return
-    reactionMutation.mutate({ scope: 'guestbook', identifier: question.id })
+    reactionMutation.mutate({ entity: 'guestbook', identifier: question.id })
   }
 
   function onUpdateQuestion(event: React.FormEvent<HTMLFormElement>) {
@@ -142,7 +142,7 @@ export default function GuestbookActions({ question }: QuestionActionsProps) {
           </>
         )}
         <LikeButton
-          id={question.id}
+          key={question.id}
           loading={reactionMutation.isLoading}
           count={question._count.reactions}
           hasReacted={question.hasReacted}

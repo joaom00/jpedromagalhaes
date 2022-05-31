@@ -33,7 +33,7 @@ export const BookmarksDetail = () => {
           titleRef={titleRef}
           scrollContainerRef={scrollContainerRef}
         />
-        <div className="p-8">
+        <div className="p-8" data-cy="bookmark-detail">
           <div className="flex items-center">
             <h1 ref={titleRef} className="flex-1 text-2xl font-semibold lg:text-3xl">
               {bookmarkQuery.data.title}

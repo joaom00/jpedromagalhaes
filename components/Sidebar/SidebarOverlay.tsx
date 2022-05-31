@@ -1,7 +1,7 @@
 import { useStore } from '@/hooks'
 
 export function SidebarOverlay() {
-  const isOpenSidebar = useStore((state) => state.isOpenSidebar)
+  const isOpenSidebar = useStore((state) => state.isSidebarOpen)
   const closeSidebar = useStore((state) => state.closeSidebar)
 
   return (

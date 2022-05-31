@@ -5,14 +5,18 @@ import { useStore } from '@/hooks'
 
 import { HeartFillIcon, HeartIcon } from '@/icons'
 
-type LikeButtonProps = {
-  id: string
+interface LikeButtonProps {
+  // id: string
   hasReacted: boolean
   count: number
   loading: boolean
   onClick: () => void
 }
-export function LikeButton({ id, hasReacted, count, loading, onClick }: LikeButtonProps) {
+
+const CURR_OPACITY = 'opacity-100'
+const NEXT_OPACITY = 'opacity-0'
+
+export function LikeButton({ hasReacted, count, loading, onClick }: LikeButtonProps) {
   const openSignInDialog = useStore((state) => state.openSignInDialog)
 
   const { data: session } = useSession()
@@ -26,21 +30,8 @@ export function LikeButton({ id, hasReacted, count, loading, onClick }: LikeButt
     hasReactedState ? 'translate-y-0' : '-translate-y-4'
   )
 
-  let currCount = count
-  let nextCount = hasReactedState ? currCount - 1 : currCount + 1
-
-  let currOpacity = 'opacity-100'
-  let nextOpacity = 'opacity-0'
-
-  React.useEffect(() => {
-    setHasReactedState(hasReacted)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    currCount = count
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    nextCount = hasReacted ? count - 1 : count + 1
-    setCurrTranslate(hasReacted ? '-translate-y-4' : 'translate-y-0')
-    setNextTranslate(hasReacted ? 'translate-y-0' : '-translate-y-4')
-  }, [id, hasReacted])
+  const currCount = count
+  const nextCount = hasReactedState ? count - 1 : count + 1
 
   function handleClick() {
     if (!session) {
@@ -49,7 +40,7 @@ export function LikeButton({ id, hasReacted, count, loading, onClick }: LikeButt
     if (loading) return
     setCurrTranslate(nextTranslate)
     setNextTranslate(currTranslate)
-    setHasReactedState(!hasReactedState)
+    setHasReactedState((hasReactedState) => !hasReactedState)
     if (!hasReactedState) {
       setPing(true)
       setTimeout(() => setPing(false), 700)
@@ -83,13 +74,13 @@ export function LikeButton({ id, hasReacted, count, loading, onClick }: LikeButt
         >
           {hasReactedState ? (
             <>
-              <span className={`h-2 transition-all duration-300 ${nextOpacity}`}>{nextCount}</span>
-              <span className={`h-2 transition-all duration-300 ${currOpacity}`}>{currCount}</span>
+              <span className={`h-2 transition-all duration-300 ${NEXT_OPACITY}`}>{nextCount}</span>
+              <span className={`h-2 transition-all duration-300 ${CURR_OPACITY}`}>{currCount}</span>
             </>
           ) : (
             <>
-              <span className={`h-2 transition-all duration-300 ${currOpacity}`}>{currCount}</span>
-              <span className={`h-2 transition-all duration-300 ${nextOpacity}`}>{nextCount}</span>
+              <span className={`h-2 transition-all duration-300 ${CURR_OPACITY}`}>{currCount}</span>
+              <span className={`h-2 transition-all duration-300 ${NEXT_OPACITY}`}>{nextCount}</span>
             </>
           )}
         </div>

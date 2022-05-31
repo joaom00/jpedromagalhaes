@@ -32,7 +32,7 @@ export function StackActions({ stack }: StackActionsProps) {
   function onReactionChange() {
     if (reactionMutation.isLoading) return
 
-    reactionMutation.mutate({ scope: 'stack', identifier: stack.slug })
+    reactionMutation.mutate({ entity: 'stack', identifier: stack.slug })
   }
 
   function onUpdateStack(event: React.FormEvent<HTMLFormElement>) {
@@ -140,7 +140,7 @@ export function StackActions({ stack }: StackActionsProps) {
           </>
         )}
         <LikeButton
-          id={stack.slug}
+          key={stack.slug}
           loading={reactionMutation.isLoading}
           count={stack._count.reactions}
           hasReacted={stack.userHasReacted}

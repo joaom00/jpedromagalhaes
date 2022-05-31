@@ -49,7 +49,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(401).send('Unauthorized')
     }
 
-    if (session.user.role === 'USER') {
+    if (session?.user.role === 'USER') {
       return res.status(401).send('Unauthorized')
     }
 
@@ -62,7 +62,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       return res.status(201).json(bookmark)
     } catch (error) {
-      console.log(error)
+      console.error(error)
       if (error instanceof Prisma.PrismaClientKnownRequestError) {
         return res.status(500).json({ message: error.message })
       }

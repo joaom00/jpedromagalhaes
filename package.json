@@ -94,9 +94,7 @@
     "printWidth": 100
   },
   "lint-staged": {
-    "*.+(js|jsx|css|less|scss|ts|tsx|gql|graphql|md|mdx)": [
-      "yarn format",
-      "yarn lint"
-    ]
+    "*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|gql|graphql|mdx|vue)": "yarn format",
+    "*.+(js|jsx|ts|tsx)": "yarn lint"
   }
 }

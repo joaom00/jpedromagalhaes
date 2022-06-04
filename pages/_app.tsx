@@ -18,6 +18,10 @@ import { Toast, Progress, CommandBar, SignInDialog } from '@/components'
 
 import commandBarSound from '../public/sounds/command-bar.mp3'
 
+if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
+  require('../mocks')
+}
+
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = React.useState(
     () =>

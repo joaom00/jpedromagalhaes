@@ -1,6 +1,6 @@
 import { dehydrate, QueryClient } from 'react-query'
 
-import { fetchList } from '@/lib/useListQuery'
+import { fetchList } from '@/hooks/useListQuery'
 
 import { MainLayout } from '@/layouts'
 import { snippetKeys, Snippets } from '@/components/Snippets'

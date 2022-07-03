@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 
 import type { Stack } from './Stack.types'
 import { useIntersectionObserver } from '@/hooks'
-import { useListQuery } from '@/lib/useListQuery'
+import { useListQuery } from '@/hooks/useListQuery'
 
 import { SpinnerIcon } from '@/icons'
 import { Container, TitleBar, Error, List } from '@/components'

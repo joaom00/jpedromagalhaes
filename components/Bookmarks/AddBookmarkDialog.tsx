@@ -3,7 +3,7 @@ import { useSession } from 'next-auth/react'
 import toast from 'react-hot-toast'
 import { Prisma } from '@prisma/client'
 
-import { useCreateBookmarkMutation } from './Bookmarks.queries'
+import { useCreateBookmark } from './Bookmarks.queries'
 
 import { PlusIcon, SpinnerIcon } from '@/icons'
 import { Dialog, TextField, Textarea } from '@/components'
@@ -12,7 +12,7 @@ export function AddBookmarkDialog() {
   const { data } = useSession()
   const [open, setOpen] = React.useState(false)
 
-  const createBookmark = useCreateBookmarkMutation()
+  const createBookmark = useCreateBookmark()
 
   function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()

@@ -5,7 +5,7 @@ import { useIntersectionObserver } from '@/hooks'
 import { useListQuery } from '@/hooks/useListQuery'
 
 import { SpinnerIcon } from '@/icons'
-import { Container, List, TitleBar, Error } from '@/components'
+import { Container, List, ListItem, TitleBar, Error } from '@/components'
 
 import type { Question } from './Guestbook.types'
 import { GuestbookItem } from './GuestbookItem'
@@ -35,21 +35,21 @@ export function Guestbook() {
     >
       <TitleBar title="Guestbook" trailingAccessory={<AddQuestionDialog />} />
 
-      <List.Root>
+      <List>
         {questionsQuery.data?.pages?.map((page, index) => (
           <React.Fragment key={index}>
             {page.questions.map((question) => (
-              <List.Item
+              <ListItem
                 key={question.id}
                 href={`/guestbook/${question.id}`}
                 isActive={router.asPath.indexOf(question.id) >= 0}
               >
                 <GuestbookItem {...question} />
-              </List.Item>
+              </ListItem>
             ))}
           </React.Fragment>
         ))}
-      </List.Root>
+      </List>
 
       {questionsQuery.isLoading && (
         <div className="grid place-items-center pb-4">

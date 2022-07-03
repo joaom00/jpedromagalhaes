@@ -5,7 +5,7 @@ import { useListQuery } from '@/hooks/useListQuery'
 import { useIntersectionObserver } from '@/hooks'
 
 import { SpinnerIcon } from '@/icons'
-import { Container, TitleBar, List, Error } from '@/components'
+import { Container, TitleBar, List, ListItem, Error } from '@/components'
 
 import type { Bookmark } from './Bookmarks.types'
 import { BookmarksItem } from './BookmarksItem'
@@ -35,21 +35,21 @@ export const Bookmarks = () => {
     >
       <TitleBar title="Bookmarks" trailingAccessory={<AddBookmarkDialog />} />
 
-      <List.Root data-cy="bookmarks-list">
+      <List data-cy="bookmarks-list">
         {bookmarksQuery.data?.pages?.map((page, index) => (
           <React.Fragment key={index}>
             {page.bookmarks.map((bookmark) => (
-              <List.Item
+              <ListItem
                 key={bookmark.id}
                 href={`/bookmarks/${bookmark.id}`}
                 isActive={router.asPath.indexOf(bookmark.id) >= 0}
               >
                 <BookmarksItem {...bookmark} />
-              </List.Item>
+              </ListItem>
             ))}
           </React.Fragment>
         ))}
-      </List.Root>
+      </List>
 
       {bookmarksQuery.isLoading && (
         <div className="grid place-items-center pb-4">

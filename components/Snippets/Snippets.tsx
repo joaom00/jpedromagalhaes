@@ -5,7 +5,7 @@ import { useListQuery } from '@/hooks/useListQuery'
 import { useIntersectionObserver } from '@/hooks'
 
 import { SpinnerIcon } from '@/icons'
-import { Container, TitleBar, Error, List } from '@/components'
+import { Container, TitleBar, Error, List, ListItem } from '@/components'
 
 import type { Snippet } from './Snippets.types'
 import { SnippetsItem } from './SnippetsItem'
@@ -35,22 +35,22 @@ export function Snippets() {
     >
       <TitleBar title="Snippets" trailingAccessory={<AddSnippetDialog />} />
 
-      <List.Root className="space-y-1 p-3">
+      <List className="space-y-1 p-3">
         {snippetsQuery.data?.pages?.map((page, index) => (
           <React.Fragment key={index}>
             {page.snippets.map((snippet) => (
-              <List.Item
+              <ListItem
                 key={snippet.id}
                 href={`/snippets/${snippet.slug}`}
                 isActive={router.asPath.indexOf(snippet.slug) >= 0}
                 className="!flex-row items-center gap-4"
               >
                 <SnippetsItem {...snippet} />
-              </List.Item>
+              </ListItem>
             ))}
           </React.Fragment>
         ))}
-      </List.Root>
+      </List>
 
       {snippetsQuery.isLoading && (
         <div className="grid place-items-center pb-4">

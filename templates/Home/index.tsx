@@ -38,8 +38,10 @@ export default function HomeTemplate() {
       <Container title="João Pedro Magalhães - Desenvolvedor Front-End, UI/UX entusiasta & Gopher">
         <TitleBar title="Início" />
 
-        <div className="overflow-y-auto py-12 px-4 sm:px-0">
-          <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-between">
+        <div className="overflow-y-auto py-12 px-4 sm:px-0 bg-dots relative">
+          <div className="absolute top-0 w-full h-full bg-gradient-to-b from-white dark:from-mauveDark2" />
+
+          <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-between relative z-20">
             <h2 className="mb-5 text-lg font-bold sm:mb-0">Olá, eu sou João Pedro</h2>
             <span className="cursor-pointer text-sm font-semibold" onClick={() => query.toggle()}>
               {isMobile ? (
@@ -56,7 +58,7 @@ export default function HomeTemplate() {
               )}
             </span>
           </div>
-          <div className="prose mx-auto mt-10 w-full max-w-3xl dark:prose-dark">
+          <div className="prose mx-auto mt-10 w-full max-w-3xl dark:prose-dark relative z-20">
             <p>
               Desenvolvedor Front End que gosta de UI/UX design e às vezes brincar um pouco no
               backend, principalmente com Go. Além de, desenvolver e contribuir em projetos, vou
@@ -66,7 +68,7 @@ export default function HomeTemplate() {
             <hr />
             <h3>Principais Projetos</h3>
           </div>
-          <ul className="mx-auto mt-6 flex max-w-3xl flex-col gap-3">
+          <ul className="mx-auto mt-6 flex max-w-3xl flex-col gap-3 relative z-20">
             {featuredProjects.map((project) => (
               <li key={project.id} className="flex">
                 <a

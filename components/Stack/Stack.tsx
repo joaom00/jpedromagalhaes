@@ -6,7 +6,7 @@ import { useIntersectionObserver } from '@/hooks'
 import { useListQuery } from '@/hooks/useListQuery'
 
 import { SpinnerIcon } from '@/icons'
-import { Container, TitleBar, Error, List } from '@/components'
+import { Container, TitleBar, Error, List, ListItem } from '@/components'
 
 import { StackItem } from './StackItem'
 import { AddStackDialog } from './AddStackDialog'
@@ -35,22 +35,22 @@ export function Stack() {
     >
       <TitleBar title="Stack" trailingAccessory={<AddStackDialog />} />
 
-      <List.Root>
+      <List>
         {stackQuery.data?.pages?.map((page, index) => (
           <React.Fragment key={index}>
             {page.stack.map((stack) => (
-              <List.Item
+              <ListItem
                 key={stack.slug}
                 href={`/stack/${stack.slug}`}
                 isActive={router.asPath.indexOf(stack.slug) >= 0}
                 className="!flex-row items-center gap-4"
               >
                 <StackItem {...stack} />
-              </List.Item>
+              </ListItem>
             ))}
           </React.Fragment>
         ))}
-      </List.Root>
+      </List>
 
       {stackQuery.isLoading && (
         <div className="grid place-items-center pb-4">

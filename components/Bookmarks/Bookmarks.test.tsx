@@ -15,7 +15,7 @@ window.IntersectionObserver = jest.fn().mockImplementation(intersectionObserverM
 jest.mock('next/router', () => require('next-router-mock'))
 
 describe('Bookmarks', () => {
-  it("should render an error message in bookmark's list", async () => {
+  it('should render an error message in bookmark list', async () => {
     server.use(rest.get('/api/bookmarks', (_req, res, ctx) => res(ctx.status(500))))
 
     const screen = renderWithClient(
@@ -34,7 +34,7 @@ describe('Bookmarks', () => {
     ).toBeInTheDocument()
   })
 
-  it("should render bookmark's detail", async () => {
+  it('should render bookmark detail', async () => {
     const screen = renderWithClient(
       <SessionProvider
         session={{

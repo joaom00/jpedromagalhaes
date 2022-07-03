@@ -12,7 +12,7 @@ export const bookmarkKeys = {
     [{ ...bookmarkKeys.all[0], scope: 'comments', identifier }] as const
 }
 
-export const useCreateBookmarkMutation = <T>() => {
+export const useCreateBookmark = <T>() => {
   const createBookmark = async (values: Partial<BookmarkDetail>): Promise<T> => {
     const response = await fetch('/api/bookmarks', {
       method: 'POST',

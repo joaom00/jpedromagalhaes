@@ -1,7 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 
-import { useListQuery } from '@/lib/useListQuery'
+import { useListQuery } from '@/hooks/useListQuery'
 import { useIntersectionObserver } from '@/hooks'
 
 import { SpinnerIcon } from '@/icons'

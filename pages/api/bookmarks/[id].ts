@@ -40,7 +40,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   if (req.method === 'DELETE') {
     const session = await getSession({ req })
-    console.log('-----------------------------session------------------', session)
 
     if (!session) {
       return res.status(401).send('Unauthorized')

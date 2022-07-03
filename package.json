@@ -59,6 +59,7 @@
     "@panva/hkdf": "^1.0.2",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "12.1.5",
+    "@testing-library/react-hooks": "^8.0.0",
     "@testing-library/user-event": "^14.2.0",
     "@types/jest": "^28.1.0",
     "@types/node": "16.11.10",
@@ -77,6 +78,7 @@
     "jest-environment-jsdom": "^28.1.0",
     "jose": "^4.8.1",
     "lint-staged": ">=10",
+    "next-router-mock": "^0.6.10",
     "postcss": "^8.4.5",
     "prettier": "^2.5.0",
     "prettier-plugin-tailwindcss": "^0.1.8",
@@ -89,6 +91,7 @@
     "rehype-slug": "^5.0.0",
     "remark-gfm": "^3.0.1",
     "ts-node": "^10.7.0",
+    "ts-toolbelt": "^9.6.0",
     "typescript": "4.5.2",
     "url-loader": "^4.1.1"
   },

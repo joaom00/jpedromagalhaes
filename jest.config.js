@@ -1,5 +1,5 @@
 module.exports = {
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  setupFilesAfterEnv: ['<rootDir>/.jest/setup.ts'],
   collectCoverageFrom: ['**/*.{js,jsx,ts,tsx}', '!**/*.d.ts', '!**/node_modules/**'],
   moduleNameMapper: {
     // Handle CSS imports (with CSS modules)
@@ -7,11 +7,11 @@ module.exports = {
     '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
 
     // Handle CSS imports (without CSS modules)
-    '^.+\\.(css|sass|scss)$': '<rootDir>/__mocks__/styleMock.js',
+    '^.+\\.(css|sass|scss|mp3)$': '<rootDir>/.jest/styleMock.js',
 
     // Handle image imports
     // https://jestjs.io/docs/webpack#handling-static-assets
-    '^.+\\.(png|jpg|jpeg|gif|mp3|webp|avif|ico|bmp|svg)$/i': `<rootDir>/__mocks__/fileMock.js`,
+    '^.+\\.(png|jpg|jpeg|gif|webp|avif|ico|bmp|svg)$/i': `<rootDir>/.jest/fileMock.js`,
 
     // Handle module aliases
     '^@/(.*)$': '<rootDir>/$1'

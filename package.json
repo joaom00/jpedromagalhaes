@@ -49,7 +49,6 @@
     "react-icons": "^4.3.1",
     "react-query": "^3.34.0",
     "tailwind-merge": "^1.9.0",
-    "tailwindcss": "^3.0.1",
     "use-sound": "^4.0.1",
     "whatwg-fetch": "^3.6.2",
     "zustand": "^4.0.0-rc.1"
@@ -87,6 +86,7 @@
     "rehype-slug": "^5.0.0",
     "remark-gfm": "^3.0.1",
     "start-server-and-test": "^1.14.0",
+    "tailwindcss": "^3.2.4",
     "typescript": "4.5.2",
     "url-loader": "^4.1.1",
     "windy-radix-palette": "^0.5.0"

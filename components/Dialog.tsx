@@ -36,8 +36,8 @@ const DialogContent = ({
         {...props}
         className={cn(
           'fixed z-50 max-h-[85vh] w-full max-w-2xl rounded-md bg-gray-1 py-10 px-3 shadow-2xl lg:p-6',
-          'data-[state=open]:animate-dialog-content-mobile-show data-[state=closed]:animate-dialog-content-mobile-hide bottom-0 left-0',
-          'md:data-[state=open]:animate-dialog-content-show md:data-[state=closed]:animate-dialog-content-hide md:bottom-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2',
+          'bottom-0 left-0 data-[state=open]:animate-dialog-content-mobile-show data-[state=closed]:animate-dialog-content-mobile-hide',
+          'md:bottom-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:data-[state=open]:animate-dialog-content-show md:data-[state=closed]:animate-dialog-content-hide',
           className
         )}
       >

@@ -17,6 +17,7 @@ import { SiteLayout } from '@/layouts'
 import { Toast, Progress, CommandBar, SignInDialog } from '@/components'
 
 import commandBarSound from '../public/sounds/command-bar.mp3'
+import * as Tooltip from '@radix-ui/react-tooltip'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = React.useState(
@@ -75,14 +76,16 @@ function MyApp({ Component, pageProps }: AppProps) {
         <QueryClientProvider client={queryClient}>
           <Hydrate state={pageProps.dehydratedState}>
             <ThemeProvider attribute="class">
-              <CommandBar>
-                <SiteLayout>
-                  <Component {...pageProps} />
-                  <SignInDialog />
-                  <Toast />
-                  <Progress />
-                </SiteLayout>
-              </CommandBar>
+              <Tooltip.Provider>
+                <CommandBar>
+                  <SiteLayout>
+                    <Component {...pageProps} />
+                    <SignInDialog />
+                    <Toast />
+                    <Progress />
+                  </SiteLayout>
+                </CommandBar>
+              </Tooltip.Provider>
             </ThemeProvider>
           </Hydrate>
           <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />

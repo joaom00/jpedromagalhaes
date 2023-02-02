@@ -1,10 +1,11 @@
 import React from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { cn } from '@/lib/utils'
 
 type ContainerProps = {
   children: React.ReactNode
-  customClassname?: string
+  className?: string
   title?: string
   description?: string
   image?: string
@@ -12,7 +13,7 @@ type ContainerProps = {
 }
 
 export const Container = React.forwardRef<HTMLDivElement, ContainerProps>(
-  ({ children, customClassname, ...customMeta }, ref) => {
+  ({ children, className, ...customMeta }, ref) => {
     const router = useRouter()
 
     const meta = {
@@ -44,7 +45,7 @@ export const Container = React.forwardRef<HTMLDivElement, ContainerProps>(
         </Head>
         <div
           ref={ref}
-          className={`relative flex max-h-screen w-full flex-col overflow-y-auto ${customClassname}`}
+          className={cn('relative flex max-h-screen w-full flex-col overflow-y-auto', className)}
         >
           {children}
         </div>

@@ -16,7 +16,7 @@
   }
 
   body {
-    @apply bg-white text-slate12 dark:bg-mauveDark1 dark:text-slateDark12;
+    @apply bg-gray-1 text-gray-12;
   }
 
   ::selection {

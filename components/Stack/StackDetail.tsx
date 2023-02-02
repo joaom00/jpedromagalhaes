@@ -11,9 +11,10 @@ import { useUsedByMutation, useStore } from '@/hooks'
 import { SpinnerIcon } from '@/icons'
 import { TitleBar, Image, Tooltip, Container, Error } from '@/components'
 
-import type { StackDetail } from './Stack.types'
 import { StackActions } from './StackActions'
 const Comments = dynamic(() => import('components/Comments/Comments'))
+
+import type { StackDetail } from './Stack.types'
 
 export function StackDetail() {
   const openSignInDialog = useStore((state) => state.openSignInDialog)
@@ -88,8 +89,8 @@ export function StackDetail() {
                         key={index}
                         content={<span className="text-sm">{user.name}</span>}
                         side="top"
-                        contentClassName="bg-mauve3 dark:bg-mauveDark3"
-                        arrowClassName="fill-mauve3 dark:fill-mauveDark3"
+                        delayDuration={300}
+                        className="border border-gray-6 bg-gray-3 text-gray-12"
                       >
                         <div className="h-8 w-8 overflow-hidden rounded-full">
                           <Image

@@ -7,10 +7,6 @@ import { useKBar } from 'kbar'
 import useSound from 'use-sound'
 // TODO: create DropdownMenu component
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-import {
-  Action as AlertDialogAction,
-  Cancel as AlertDialogCancel
-} from '@radix-ui/react-alert-dialog'
 
 import { useStore } from '@/hooks'
 
@@ -188,12 +184,7 @@ export default function Sidebar() {
                 <CloseIcon aria-hidden />
               </button>
               <p className="text-sm font-medium">João Pedro Magalhães</p>
-              <Tooltip
-                content={<KeyboardInput isMac={isMac} />}
-                side="right"
-                contentClassName="bg-mauve3 dark:bg-mauveDark3"
-                arrowClassName="fill-mauve3 dark:fill-mauveDark3"
-              >
+              <Tooltip content={<KeyboardInput isMac={isMac} />} side="right" className="bg-gray-3">
                 <button
                   className="ml-auto rounded-md p-1"
                   onClick={() => {
@@ -262,14 +253,39 @@ export default function Sidebar() {
                   <DropdownMenu.Content
                     side="right"
                     align="end"
-                    className="w-36 animate-dropdownMenuShow rounded-md border border-mauve6 bg-mauve3 py-1.5 dark:border-mauveDark6 dark:bg-mauveDark3"
+                    hidden={deleteDialogOpen}
+                    className="w-36 animate-dropdownMenuShow rounded-md border border-gray-6 bg-gray-3 py-1.5"
                   >
-                    <DropdownMenu.Item
-                      className="flex cursor-pointer items-center rounded-sm py-1.5 pl-4 pr-7 text-sm outline-none focus:bg-violet4 dark:focus:bg-violetDark4"
-                      onSelect={() => setDeleteDialogOpen(true)}
-                    >
-                      Deletar conta
-                    </DropdownMenu.Item>
+                    <AlertDialog.Root open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+                      <AlertDialog.Trigger asChild>
+                        <DropdownMenu.Item
+                          className="flex select-none items-center rounded-sm py-1.5 pl-4 pr-7 text-sm outline-none focus:bg-violet-9"
+                          onSelect={(event) => event.preventDefault()}
+                        >
+                          Deletar conta
+                        </DropdownMenu.Item>
+                      </AlertDialog.Trigger>
+                      <AlertDialog.Content
+                        title="Você tem certeza disso?"
+                        description="Essa ação não poderá ser desfeita. A sua conta será deletada permanentemente e os dados não poderão ser restaurados."
+                      >
+                        <div className="mt-5 flex justify-end gap-5">
+                          <AlertDialog.Cancel
+                            className="rounded-md bg-gray-3 py-2 px-3 hover:bg-gray-4"
+                            disabled={deleteAccount.isLoading}
+                          >
+                            Cancelar
+                          </AlertDialog.Cancel>
+                          <AlertDialog.Action
+                            className="flex items-center gap-3 rounded-md bg-red-700 py-2 px-3 text-white hover:opacity-90"
+                            onClick={onDeleteAccount}
+                          >
+                            {deleteAccount.isLoading && <SpinnerIcon />}
+                            Deletar conta
+                          </AlertDialog.Action>
+                        </div>
+                      </AlertDialog.Content>
+                    </AlertDialog.Root>
                     <DropdownMenu.Item
                       className="flex cursor-pointer items-center rounded-sm py-1.5 pl-4 pr-7 text-sm outline-none focus:bg-violet4 dark:focus:bg-violetDark4"
                       onSelect={() => signOut()}
@@ -283,28 +299,6 @@ export default function Sidebar() {
           </div>
         </nav>
         <SidebarOverlay />
-        <AlertDialog
-          title="Você tem certeza disso?"
-          description="Essa ação não poderá ser desfeita. A sua conta será deletada permanentemente e os dados não poderão ser restaurados."
-          open={deleteDialogOpen}
-          onOpenChange={setDeleteDialogOpen}
-        >
-          <div className="mt-5 flex justify-end gap-5">
-            <AlertDialogCancel
-              className="rounded-md bg-mauve3 py-2 px-3 hover:bg-mauve4 dark:bg-mauveDark3 dark:hover:bg-mauveDark4"
-              disabled={deleteAccount.isLoading}
-            >
-              Cancelar
-            </AlertDialogCancel>
-            <AlertDialogAction
-              className="flex items-center gap-3 rounded-md bg-red-700 py-2 px-3 text-white hover:opacity-90"
-              onClick={onDeleteAccount}
-            >
-              {deleteAccount.isLoading && <SpinnerIcon />}
-              Deletar conta
-            </AlertDialogAction>
-          </div>
-        </AlertDialog>
       </>
     )
   }

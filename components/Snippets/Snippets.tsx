@@ -31,7 +31,7 @@ export function Snippets() {
   return (
     <Container
       title="Snippets - João Pedro Magalhães"
-      customClassname="h-full border-r border-mauve6 dark:border-mauveDark6 md:w-80 xl:w-96 bg-mauve1 dark:bg-mauveDark1"
+      className="h-full border-r border-mauve6 bg-mauve1 dark:border-mauveDark6 dark:bg-mauveDark1 md:w-80 xl:w-96"
     >
       <TitleBar title="Snippets" trailingAccessory={<AddSnippetDialog />} />
 

@@ -24,7 +24,6 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext<{ slug: 
   const { slug } = ctx.params!
 
   const queryClient = new QueryClient()
-
   await queryClient.prefetchQuery(stackKeys.detail(slug), fetchDetail)
   await queryClient.prefetchQuery(stackKeys.users(slug), fetchUsers)
   await queryClient.prefetchQuery(stackKeys.comments(slug), fetchComments)

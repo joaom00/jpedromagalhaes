@@ -1,4 +1,5 @@
 const { spacing, fontFamily } = require('tailwindcss/defaultTheme')
+const radixColors = require('@radix-ui/colors')
 
 module.exports = {
   content: [
@@ -139,6 +140,30 @@ module.exports = {
         violetDarkA5: 'hsla(252, 99.7%, 66.4%, 0.286)'
       },
       keyframes: {
+        'dialog-overlay-show': {
+          fro: { opacity: '0' },
+          to: { opacity: '1' }
+        },
+        'dialog-overlay-hide': {
+          fro: { opacity: '1' },
+          to: { opacity: '0' }
+        },
+        'dialog-content-show': {
+          from: { opacity: '0', transform: 'translate(-50%, -48%) scale(.96)' },
+          to: { opacity: '1', transform: 'translate(-50%, -50%) scale(1)' }
+        },
+        'dialog-content-hide': {
+          from: { opacity: '1', transform: 'translate(-50%, -50%) scale(1)' },
+          to: { opacity: '0', transform: 'translate(-50%, -48%) scale(.96)' }
+        },
+        'dialog-content-mobile-show': {
+          from: { transform: 'translate(0, 100%)' },
+          to: { transform: 'translate(0, 0)' }
+        },
+        'dialog-content-mobile-hide': {
+          from: { transform: 'translate(0, 0)' },
+          to: { transform: 'translate(0%, 100%)' }
+        },
         overlayShow: {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' }
@@ -153,6 +178,14 @@ module.exports = {
         }
       },
       animation: {
+        'dialog-overlay-show': 'dialog-overlay-show 150ms cubic-bezier(0.16, 1, 0.3, 1)',
+        'dialog-overlay-hide': 'dialog-overlay-hide 150ms cubic-bezier(0.16, 1, 0.3, 1)',
+        'dialog-content-show': 'dialog-content-show 150ms cubic-bezier(0.16, 1, 0.3, 1)',
+        'dialog-content-hide': 'dialog-content-hide 150ms cubic-bezier(0.16, 1, 0.3, 1)',
+        'dialog-content-mobile-show':
+          'dialog-content-mobile-show 300ms cubic-bezier(0.16, 1, 0.3, 1)',
+        'dialog-content-mobile-hide':
+          'dialog-content-mobile-hide 300ms cubic-bezier(0.16, 1, 0.3, 1)',
         overlayShow: 'overlayShow 200ms cubic-bezier(0.16, 1, 0.3, 1)',
         contentShow: 'contentShow 200ms cubic-bezier(0.16, 1, 0.3, 1)',
         dropdownMenuShow: 'dropdownMenuShow 200ms cubic-bezier(0.2, 0, 0.13, 1.5);'
@@ -160,7 +193,7 @@ module.exports = {
       typography: (theme) => ({
         DEFAULT: {
           css: {
-            color: theme('colors.slate12'),
+            color: theme('colors.gray.12'),
             a: {
               color: theme('colors.blue.500'),
               '&:hover': {
@@ -181,7 +214,7 @@ module.exports = {
         },
         dark: {
           css: {
-            color: theme('colors.slateDark12'),
+            color: theme('colors.gray.12'),
             a: {
               color: theme('colors.blue.400'),
               '&:hover': {
@@ -190,14 +223,14 @@ module.exports = {
               code: { color: theme('colors.blue.400') }
             },
             blockquote: {
-              borderLeftColor: theme('colors.gray.700'),
+              borderLeftColor: theme('colors.gray.7'),
               color: theme('colors.gray.300')
             },
             'h2,h3,h4': {
-              color: theme('colors.slateDark12'),
+              color: theme('colors.gray.12'),
               'scroll-margin-top': spacing[32]
             },
-            hr: { borderColor: theme('colors.slateDark6') },
+            hr: { borderColor: theme('colors.gray.6') },
             ol: {
               li: {
                 '&:before': { color: theme('colors.gray.500') }
@@ -211,11 +244,11 @@ module.exports = {
             strong: { color: theme('colors.gray.100') },
             thead: {
               color: theme('colors.gray.100'),
-              borderBottomColor: theme('colors.gray.600')
+              borderBottomColor: theme('colors.gray.6')
             },
             tbody: {
               tr: {
-                borderBottomColor: theme('colors.gray.700')
+                borderBottomColor: theme('colors.gray.6')
               }
             }
           }
@@ -226,7 +259,17 @@ module.exports = {
   plugins: [
     require('@tailwindcss/forms'),
     require('@tailwindcss/typography'),
-    require('@tailwindcss/line-clamp')
+    require('@tailwindcss/line-clamp'),
+    require('windy-radix-palette')({
+      colors: {
+        gray: radixColors.gray,
+        grayDark: radixColors.grayDark,
+        blue: radixColors.blue,
+        blueDark: radixColors.blueDark,
+        violet: radixColors.violet,
+        violetDark: radixColors.violetDark
+      }
+    })
   ],
   variants: {
     typography: ['dark'],

@@ -31,7 +31,7 @@ export const Bookmarks = () => {
   return (
     <Container
       title="Bookmarks - João Pedro Magalhães"
-      customClassname="h-full border-r border-mauve6 dark:border-mauveDark6 md:w-80 xl:w-96 dark:bg-mauveDark1"
+      className="h-full border-r border-gray-6 bg-gray-1 md:w-80 xl:w-96"
     >
       <TitleBar title="Bookmarks" trailingAccessory={<AddBookmarkDialog />} />
 

@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -11,13 +12,16 @@ export default function ProjectListItem({ title, shortDescription, tech, slug }:
     <li>
       <Link href={`/projetos/${tech}/${slug}`}>
         <a
-          className={`flex items-center space-x-4 rounded-md px-3 py-4 hover:bg-mauve4 dark:hover:bg-mauveDark4 ${
-            isActive ? 'bg-mauve5 dark:bg-mauveDark5' : 'hover:bg-mauve4 dark:hover:bg-mauveDark4'
-          }`}
+          className={clsx(
+            'flex items-center space-x-4 rounded-md px-3 py-4 hover:bg-gray-4',
+            isActive && 'bg-gray-5'
+          )}
         >
           <div>
-            <p className="font-medium">{title}</p>
-            <p className="text-sm text-slate11 dark:text-slateDark11">{shortDescription}</p>
+            <p className="font-medium text-gray-12">{title}</p>
+            <p title={shortDescription} className="text-sm text-gray-11 line-clamp-2">
+              {shortDescription}
+            </p>
           </div>
         </a>
       </Link>

@@ -1,4 +1,4 @@
-import { QueryFunctionContext, useQuery } from 'react-query'
+import { useQuery, type QueryFunctionContext } from 'react-query'
 
 interface DetailQuery {
   entity: string
@@ -19,10 +19,9 @@ export const fetchDetail = async (ctx: QueryFunctionContext<Readonly<DetailQuery
   }
 
   const data = await response.json()
-
   return data
 }
 
-export const useDetailQuery = <T = any>(scope: string, identifier: string) => {
-  return useQuery<T, Error, T, DetailQuery[]>(detailKeys(scope, identifier), fetchDetail)
+export const useDetailQuery = <T = any>(entity: string, identifier: string) => {
+  return useQuery<T, Error, T, DetailQuery[]>(detailKeys(entity, identifier), fetchDetail)
 }

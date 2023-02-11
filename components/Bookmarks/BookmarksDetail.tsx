@@ -35,7 +35,7 @@ export const BookmarksDetail = () => {
         />
         <div className="p-8">
           <div className="flex items-center">
-            <h1 ref={titleRef} className="flex-1 text-2xl font-semibold lg:text-3xl">
+            <h1 ref={titleRef} className="flex-1 text-2xl font-semibold text-gray-12 lg:text-3xl">
               {bookmarkQuery.data.title}
             </h1>
           </div>
@@ -49,11 +49,9 @@ export const BookmarksDetail = () => {
                 className="h-full w-full object-cover"
               />
             </div>
-            <span className="text-slate11 dark:text-slateDark11">{bookmarkQuery.data.host}</span>
+            <span className="text-gray-11">{bookmarkQuery.data.host}</span>
           </div>
-          <p className="mt-6 text-slate11 dark:text-slateDark11">
-            {bookmarkQuery.data.description}
-          </p>
+          <p className="mt-6 text-gray-11">{bookmarkQuery.data.description}</p>
           <a
             href={bookmarkQuery.data.url}
             target="_blank"

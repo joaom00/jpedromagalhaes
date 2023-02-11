@@ -7,8 +7,9 @@ import { useReactionMutation } from '@/hooks'
 import { DeleteIcon, EditIcon, SpinnerIcon } from '@/icons'
 import { LikeButton, AlertDialog, TextField, Textarea, Dialog } from '@/components'
 
-import type { QuestionDetail } from './Guestbook.types'
 import { useDeleteQuestionMutation, useUpdateQuestionMutation } from './Guestbook.queries'
+
+import type { QuestionDetail } from './Guestbook.types'
 
 type QuestionActionsProps = {
   question: QuestionDetail

@@ -7,9 +7,10 @@ import { useIntersectionObserver } from '@/hooks'
 import { SpinnerIcon } from '@/icons'
 import { Container, TitleBar, List, Error } from '@/components'
 
-import type { Bookmark } from './Bookmarks.types'
 import { BookmarksItem } from './BookmarksItem'
 import { AddBookmarkDialog } from './AddBookmarkDialog'
+
+import type { Bookmark } from './Bookmarks.types'
 
 type BookmarkListData = {
   bookmarks: Bookmark[]

@@ -52,6 +52,7 @@ export const Bookmarks = () => {
       )}
 
       {bookmarksQuery.isError && <Error />}
+
       <div ref={endListRef} />
     </Container>
   )

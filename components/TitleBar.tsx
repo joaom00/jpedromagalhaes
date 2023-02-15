@@ -97,16 +97,14 @@ export function TitleBar({
         boxShadow: `0 1px 3px rgba(0,0,0,${currentScrollOffset})`,
         minHeight: '48px'
       }}
-      className={`sticky top-0 z-10 flex h-[60px] items-center justify-between px-3 backdrop-blur-xl backdrop-filter ${
-        globalMenu ? 'bg-mauve3 dark:bg-mauveDark2' : 'bg-mauve3 dark:bg-mauveDark2'
-      }`}
+      className="sticky top-0 z-10 flex h-[60px] items-center justify-between bg-gray-2 px-3 backdrop-blur-xl backdrop-filter"
     >
       <div className="flex flex-1 items-center justify-between">
         <span className="flex items-center space-x-3">
           {globalMenu && (
             <span
               onClick={openSidebar}
-              className="flex cursor-pointer items-center justify-center rounded-md p-2 dark:hover:bg-gray-800 lg:hidden"
+              className="flex cursor-pointer items-center justify-center rounded-md p-2 hover:bg-gray-3 lg:hidden"
             >
               <MenuIcon />
             </span>
@@ -114,7 +112,7 @@ export function TitleBar({
 
           {backButton && (
             <Link href={backButtonHref}>
-              <a className="flex items-center justify-center rounded-md p-2 dark:hover:bg-gray-800 lg:hidden">
+              <a className="flex items-center justify-center rounded-md p-2 hover:bg-gray-3 lg:hidden">
                 <ArrowLeftIcon />
               </a>
             </Link>
@@ -129,7 +127,7 @@ export function TitleBar({
                   }
                 : {}
             }
-            className="text-sm font-semibold text-gray-700 dark:text-white"
+            className="text-sm font-semibold text-gray-12"
           >
             {title}
           </p>

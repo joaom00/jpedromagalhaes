@@ -16,23 +16,18 @@ type ListItemProps = React.ComponentPropsWithoutRef<'a'> & {
   href: string
 }
 
-const ListItem = ({ isActive = false, href, className = '', ...props }: ListItemProps) => {
+const ListItem = ({ isActive = false, href, className, ...props }: ListItemProps) => {
   return (
     <li>
       <Link href={href}>
         <a
-          className={cn(
-            'flex flex-col gap-2 rounded-md px-3 py-2 hover:bg-mauve4 dark:hover:bg-mauveDark4',
-            className,
-            {
-              'bg-mauve5 dark:bg-mauveDark5': isActive,
-              'hover:bg-mauve4 dark:hover:bg-mauveDark4': !isActive
-            }
-          )}
           {...props}
-        >
-          {props.children}
-        </a>
+          className={cn(
+            'flex flex-col gap-2 rounded-md px-3 py-2 hover:bg-gray-4',
+            isActive && 'bg-gray-5',
+            className
+          )}
+        />
       </Link>
     </li>
   )

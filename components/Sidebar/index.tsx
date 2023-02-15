@@ -5,7 +5,6 @@ import { signOut, useSession } from 'next-auth/react'
 import { useMutation } from 'react-query'
 import { useKBar } from 'kbar'
 import useSound from 'use-sound'
-// TODO: create DropdownMenu component
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 
 import { useStore } from '@/hooks'
@@ -287,7 +286,7 @@ export default function Sidebar() {
                       </AlertDialog.Content>
                     </AlertDialog.Root>
                     <DropdownMenu.Item
-                      className="flex cursor-pointer items-center rounded-sm py-1.5 pl-4 pr-7 text-sm outline-none focus:bg-violet4 dark:focus:bg-violetDark4"
+                      className="flex select-none items-center rounded-sm py-1.5 pl-4 pr-7 text-sm outline-none focus:bg-violet-9"
                       onSelect={() => signOut()}
                     >
                       Sair da conta

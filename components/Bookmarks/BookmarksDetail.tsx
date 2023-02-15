@@ -2,14 +2,12 @@ import React from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
-import { useDetailQuery } from '@/lib/useDetailQuery'
-
 import { SpinnerIcon } from '@/icons'
 import { Container, TitleBar, Error } from '@/components'
 import { Comments } from '@/components/Comments'
 
-import type { BookmarkDetail } from './Bookmarks.types'
 import { BookmarksActions } from './BookmarksActions'
+import { useBookmarkQuery } from './Bookmarks.queries'
 
 export const BookmarksDetail = () => {
   const titleRef = React.useRef<HTMLHeadingElement>(null)
@@ -18,7 +16,7 @@ export const BookmarksDetail = () => {
   const router = useRouter()
   const id = router.query.id as string
 
-  const bookmarkQuery = useDetailQuery<BookmarkDetail>('bookmarks', id)
+  const bookmarkQuery = useBookmarkQuery(id)
 
   if (bookmarkQuery.isSuccess) {
     return (

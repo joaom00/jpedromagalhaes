@@ -1,7 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 
-import { useListQuery } from '@/lib/useListQuery'
 import { useIntersectionObserver } from '@/hooks'
 
 import { SpinnerIcon } from '@/icons'
@@ -9,19 +8,13 @@ import { Container, TitleBar, List, Error } from '@/components'
 
 import { BookmarksItem } from './BookmarksItem'
 import { AddBookmarkDialog } from './AddBookmarkDialog'
-
-import type { Bookmark } from './Bookmarks.types'
-
-type BookmarkListData = {
-  bookmarks: Bookmark[]
-  nextCursor: string
-}
+import { useBookmarksQuery } from './Bookmarks.queries'
 
 export const Bookmarks = () => {
   const router = useRouter()
   const endListRef = React.useRef<HTMLDivElement>(null)
 
-  const bookmarksQuery = useListQuery<BookmarkListData>('bookmarks')
+  const bookmarksQuery = useBookmarksQuery()
 
   useIntersectionObserver({
     elementRef: endListRef,

@@ -1,9 +1,7 @@
 import { dehydrate, QueryClient } from 'react-query'
 
-import { fetchList } from '@/lib/useListQuery'
-
 import { MainLayout } from '@/layouts'
-import { bookmarkKeys, Bookmarks } from '@/components/Bookmarks'
+import { bookmarkKeys, Bookmarks, fetchBookmarks } from '@/components/Bookmarks'
 
 export default function BookmarksPage() {
   return (
@@ -18,7 +16,7 @@ export default function BookmarksPage() {
 export async function getServerSideProps() {
   const queryClient = new QueryClient()
 
-  await queryClient.prefetchQuery(bookmarkKeys.list(), fetchList)
+  await queryClient.prefetchQuery(bookmarkKeys.list(), fetchBookmarks)
 
   return {
     props: {

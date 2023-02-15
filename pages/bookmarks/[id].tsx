@@ -2,10 +2,9 @@ import { GetServerSidePropsContext } from 'next'
 import { dehydrate, QueryClient } from 'react-query'
 
 import { fetchComments } from '@/shared/queries'
-import { fetchDetail } from '@/lib/useDetailQuery'
 
 import { MainLayout } from '@/layouts'
-import { bookmarkKeys, Bookmarks, BookmarksDetail } from '@/components/Bookmarks'
+import { bookmarkKeys, Bookmarks, BookmarksDetail, fetchBookmark } from '@/components/Bookmarks'
 
 export default function BookmarkDetailPage() {
   return (
@@ -25,7 +24,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext<{ id: st
 
   const queryClient = new QueryClient()
 
-  await queryClient.prefetchQuery(bookmarkKeys.detail(id), fetchDetail)
+  await queryClient.prefetchQuery(bookmarkKeys.detail(id), fetchBookmark)
   await queryClient.prefetchQuery(bookmarkKeys.comments(id), fetchComments)
 
   return {

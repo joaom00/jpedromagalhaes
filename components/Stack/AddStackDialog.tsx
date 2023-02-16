@@ -2,11 +2,11 @@ import React from 'react'
 import { useSession } from 'next-auth/react'
 import toast from 'react-hot-toast'
 
-import { PlusIcon, SpinnerIcon } from '@/icons'
+import { CloseIcon, PlusIcon, SpinnerIcon } from '@/icons'
 import { Dialog, TextField, Textarea } from '@/components'
 
-import type { StackDetail } from './Stack.types'
 import { useCreateStackMutation } from './Stack.queries'
+import type { StackDetail } from './Stack.types'
 
 export function AddStackDialog() {
   const { data } = useSession()
@@ -28,20 +28,22 @@ export function AddStackDialog() {
       }
     })
   }
+  if (data?.user.role !== 'ADMIN') return null
 
-  if (data?.user.role === 'ADMIN') {
-    return (
-      <Dialog.Root open={open} onOpenChange={setOpen}>
-        <Dialog.Trigger
-          aria-label="Adicionar stack"
-          className="rounded-md p-2 text-gray-12 transition duration-200 hover:bg-gray-4"
-        >
-          <PlusIcon />
-        </Dialog.Trigger>
-        <Dialog.Content
-          title="Adicionar ferramenta"
-          description="Preencha os campos para adicionar uma ferramenta. Clique em salvar quando terminar"
-        >
+  return (
+    <Dialog.Root open={open} onOpenChange={setOpen}>
+      <Dialog.Trigger
+        aria-label="Adicionar stack"
+        className="rounded-md p-2 text-gray-11 transition duration-200 hover:bg-gray-4 hover:text-gray-12"
+      >
+        <PlusIcon />
+      </Dialog.Trigger>
+      <Dialog.Portal>
+        <Dialog.Content>
+          <Dialog.Title>Adicionar ferramenta</Dialog.Title>
+          <Dialog.Description>
+            Preencha os campos para adicionar uma ferramenta. Clique em salvar quando terminar
+          </Dialog.Description>
           <form className="grid grid-cols-2 gap-4" onSubmit={handleSubmit}>
             <TextField name="name" placeholder="Nome" required />
             <TextField name="slug" placeholder="Slug" required />
@@ -55,10 +57,11 @@ export function AddStackDialog() {
               </button>
             </div>
           </form>
+          <Dialog.Close>
+            <CloseIcon />
+          </Dialog.Close>
         </Dialog.Content>
-      </Dialog.Root>
-    )
-  }
-
-  return null
+      </Dialog.Portal>
+    </Dialog.Root>
+  )
 }

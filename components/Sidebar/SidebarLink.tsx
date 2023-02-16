@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { IconType } from 'react-icons'
+import clsx from 'clsx'
 
 import { useStore } from '@/hooks'
 
@@ -28,15 +29,14 @@ export function SidebarLink({
         <a
           target={isExternal ? '_blank' : undefined}
           rel={isExternal ? 'noopener noreferrer' : undefined}
-          className={`flex items-center space-x-3 rounded-md px-2 py-1.5  ${
-            isActive
-              ? 'bg-mauve5 dark:bg-mauveDark5'
-              : 'text-slate12 hover:bg-mauve4 dark:text-slateDark12 dark:hover:bg-mauveDark4'
-          }`}
+          className={clsx(
+            'flex items-center space-x-3 rounded-md px-2 py-1.5 hover:bg-gray-4',
+            isActive && 'bg-gray-5'
+          )}
         >
           <Icon />
           <span className="flex-1 text-sm">{label}</span>
-          {isExternal && <ExternalLinkIcon className="text-slate11 dark:text-slateDark11" />}
+          {isExternal && <ExternalLinkIcon className="text-gray-11" />}
         </a>
       </Link>
     </li>

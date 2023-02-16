@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from 'react-query'
 import toast from 'react-hot-toast'
 import { Prisma } from '@prisma/client'
 
-import { PlusIcon, SpinnerIcon } from '@/icons'
+import { CloseIcon, PlusIcon, SpinnerIcon } from '@/icons'
 import { Dialog, TextField } from '@/components'
 
 export function AddSnippetDialog() {
@@ -48,16 +48,19 @@ export function AddSnippetDialog() {
       }
     })
   }
-  if (session?.user.role === 'ADMIN') {
-    return (
-      <Dialog.Root open={open} onOpenChange={setOpen}>
-        <Dialog.Trigger className="rounded-md p-2 text-gray-12 transition duration-200 hover:bg-gray-4">
-          <PlusIcon />
-        </Dialog.Trigger>
-        <Dialog.Content
-          title="Adicione um snippet"
-          description="Preencha os campos para adicionar um snippet. Clique em salvar quando terminar"
-        >
+
+  if (session?.user.role !== 'ADMIN') return null
+  return (
+    <Dialog.Root open={open} onOpenChange={setOpen}>
+      <Dialog.Trigger className="rounded-md p-2 text-gray-11 transition duration-200 hover:bg-gray-4 hover:text-gray-12">
+        <PlusIcon />
+      </Dialog.Trigger>
+      <Dialog.Portal>
+        <Dialog.Content>
+          <Dialog.Title>Adicione um snippet</Dialog.Title>
+          <Dialog.Description>
+            Preencha os campos para adicionar um snippet. Clique em salvar quando terminar
+          </Dialog.Description>
           <form className="grid grid-cols-2 gap-5" onSubmit={onSubmit}>
             <TextField name="title" placeholder="Título" required className="col-span-2" />
             <TextField name="slug" placeholder="Slug" required className="col-span-2" />
@@ -73,16 +76,11 @@ export function AddSnippetDialog() {
               </button>
             </div>
           </form>
+          <Dialog.Close>
+            <CloseIcon />
+          </Dialog.Close>
         </Dialog.Content>
-      </Dialog.Root>
-    )
-  }
-
-  return null
+      </Dialog.Portal>
+    </Dialog.Root>
+  )
 }
-
-const Trigger = React.forwardRef<HTMLButtonElement>((props, ref) => (
-  <button {...props} ref={ref}></button>
-))
-
-Trigger.displayName = 'AddSnippetDialogTrigger'

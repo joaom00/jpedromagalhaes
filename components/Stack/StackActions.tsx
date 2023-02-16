@@ -4,12 +4,13 @@ import { useSession } from 'next-auth/react'
 import { toast } from 'react-hot-toast'
 
 import { useReactionMutation } from '@/hooks'
-
 import { DeleteIcon, EditIcon, SpinnerIcon } from '@/icons'
-import { LikeButton, AlertDialog, TextField, Textarea, Dialog } from '@/components'
+import { LikeButton, TextField, Textarea } from '@/components'
+import * as EditStack from './EditStackDialog'
+import * as DeleteStack from './DeleteStackAlertDialog'
 
-import type { StackDetail } from './Stack.types'
 import { useUpdateStackMutation, useDeleteStackMutation } from './Stack.queries'
+import type { StackDetail } from './Stack.types'
 
 type StackActionsProps = {
   stack: StackDetail
@@ -64,41 +65,24 @@ export function StackActions({ stack }: StackActionsProps) {
       <div className="flex gap-3">
         {session?.user.role === 'ADMIN' && (
           <>
-            <AlertDialog.Root open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
-              <AlertDialog.Trigger className="rounded-md px-3 text-sm text-white transition duration-100 hover:bg-red-700">
+            <DeleteStack.Root open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+              <DeleteStack.Trigger>
                 <DeleteIcon size={16} />
-              </AlertDialog.Trigger>
-              <AlertDialog.Content
-                title="Você tem certeza disso?"
-                description="Essa ação não poderá ser desfeita. A stack será excluída permanentemente."
-              >
-                <div className="mt-5 flex justify-end gap-5">
-                  <AlertDialog.Cancel
-                    className="rounded-md bg-gray-250 py-2 px-3 hover:opacity-90 dark:bg-gray-700"
-                    disabled={deleteStack.isLoading}
-                  >
-                    Cancelar
-                  </AlertDialog.Cancel>
-                  <AlertDialog.Action
-                    className="flex items-center gap-3 rounded-md bg-red-700 py-2 px-3 text-white hover:opacity-90"
-                    disabled={deleteStack.isLoading}
-                    onClick={handleDeleteStack}
-                  >
-                    {deleteStack.isLoading && <SpinnerIcon />}
-                    Deletar stack
-                  </AlertDialog.Action>
-                </div>
-              </AlertDialog.Content>
-            </AlertDialog.Root>
+              </DeleteStack.Trigger>
+              <DeleteStack.Content>
+                <DeleteStack.Cancel disabled={deleteStack.isLoading}>Cancelar</DeleteStack.Cancel>
+                <DeleteStack.Action disabled={deleteStack.isLoading} onClick={handleDeleteStack}>
+                  {deleteStack.isLoading && <SpinnerIcon />}
+                  Deletar stack
+                </DeleteStack.Action>
+              </DeleteStack.Content>
+            </DeleteStack.Root>
 
-            <Dialog.Root open={editDialogOpen} onOpenChange={setEditDialogOpen}>
-              <Dialog.Trigger className="rounded-md px-3 text-sm transition duration-100 hover:bg-gray-900">
+            <EditStack.Root open={editDialogOpen} onOpenChange={setEditDialogOpen}>
+              <EditStack.Trigger aria-label="Editar stack">
                 <EditIcon size={16} />
-              </Dialog.Trigger>
-              <Dialog.Content
-                title="Atualizar stack"
-                description="Preencha os campos para atualizar a stack. Clique em salvar quando terminar"
-              >
+              </EditStack.Trigger>
+              <EditStack.Content>
                 <form className="grid grid-cols-2 gap-5" onSubmit={handleUpdateStack}>
                   <TextField defaultValue={stack.name} name="name" placeholder="Nome" required />
                   <TextField defaultValue={stack.slug} name="slug" placeholder="Slug" required />
@@ -122,8 +106,8 @@ export function StackActions({ stack }: StackActionsProps) {
                     </button>
                   </div>
                 </form>
-              </Dialog.Content>
-            </Dialog.Root>
+              </EditStack.Content>
+            </EditStack.Root>
           </>
         )}
         <LikeButton

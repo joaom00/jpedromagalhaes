@@ -5,7 +5,7 @@ import { Prisma } from '@prisma/client'
 
 import { useCreateBookmarkMutation } from './Bookmarks.queries'
 
-import { PlusIcon, SpinnerIcon } from '@/icons'
+import { CloseIcon, PlusIcon, SpinnerIcon } from '@/icons'
 import { Dialog, TextField, Textarea } from '@/components'
 
 export function AddBookmarkDialog() {
@@ -29,19 +29,23 @@ export function AddBookmarkDialog() {
     })
   }
 
-  if (data?.user.role === 'ADMIN') {
-    return (
-      <Dialog.Root open={open} onOpenChange={setOpen}>
-        <Dialog.Trigger
-          className="rounded-md p-2 text-gray-12 transition duration-200 hover:bg-gray-4"
-          aria-label="Adicionar bookmark"
-        >
-          <PlusIcon />
-        </Dialog.Trigger>
-        <Dialog.Content
-          title="Adicionar bookmark"
-          description="Preencha os campos para adicionar um bookmark. Clique em salvar quando terminar"
-        >
+  if (data?.user.role !== 'ADMIN') return null
+
+  return (
+    <Dialog.Root open={open} onOpenChange={setOpen}>
+      <Dialog.Trigger
+        className="rounded-md p-2 text-gray-11 transition duration-200 hover:bg-gray-4 hover:text-gray-12"
+        aria-label="Adicionar bookmark"
+      >
+        <PlusIcon />
+      </Dialog.Trigger>
+      <Dialog.Portal>
+        <Dialog.Overlay />
+        <Dialog.Content>
+          <Dialog.Title>Adicionar bookmark</Dialog.Title>
+          <Dialog.Description>
+            Preencha os campos para adicionar um bookmark. Clique em salvar quando terminar
+          </Dialog.Description>
           <form className="grid grid-cols-2 gap-5" onSubmit={onSubmit}>
             <TextField name="title" placeholder="Título" required />
             <TextField name="url" placeholder="URL" required />
@@ -60,10 +64,11 @@ export function AddBookmarkDialog() {
               </button>
             </div>
           </form>
+          <Dialog.Close>
+            <CloseIcon />
+          </Dialog.Close>
         </Dialog.Content>
-      </Dialog.Root>
-    )
-  }
-
-  return null
+      </Dialog.Portal>
+    </Dialog.Root>
+  )
 }

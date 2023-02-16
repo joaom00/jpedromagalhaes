@@ -4,7 +4,7 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 
 import type { Scope } from 'shared/types'
 
-import { OptionsIcon, SpinnerIcon } from 'icons'
+import { CloseIcon, OptionsIcon, SpinnerIcon } from 'icons'
 import { Dialog, AlertDialog, Textarea } from 'components'
 
 import { useUpdateCommentMutation, useDeleteCommentMutation } from './queries'
@@ -79,29 +79,36 @@ export default function CommentMenu({ scope, identifier, comment }: CommentMenuP
               Editar
             </DropdownMenu.Item>
           </Dialog.Trigger>
-          <Dialog.Content
-            title="Editar comentário"
-            description="Após editar o comentário clique no botão para salvar as alterações."
-          >
-            <form className="space-y-5" onSubmit={handleUpdateComment}>
-              <Textarea
-                name="comment"
-                className="w-full px-4 py-2"
-                rows={6}
-                initialValue={comment.text}
-                onInputChange={(v) => setValues((s) => ({ ...s, text: v }))}
-              />
-              <div className="col-span-2 flex justify-end">
-                <button
-                  className="flex items-center gap-3 rounded-md bg-blue-500 py-2 px-4 text-white hover:opacity-95 disabled:cursor-not-allowed disabled:bg-gray-600 disabled:opacity-50"
-                  disabled={values.text === comment.text || !Boolean(values.text.trim())}
-                >
-                  {updateComment.isLoading && <SpinnerIcon />}
-                  Salvar alterações
-                </button>
-              </div>
-            </form>
-          </Dialog.Content>
+          <Dialog.Portal>
+            <Dialog.Overlay />
+            <Dialog.Content>
+              <Dialog.Title>Editar comentário</Dialog.Title>
+              <Dialog.Description>
+                Após editar o comentário clique no botão para salvar as alterações.
+              </Dialog.Description>
+              <form className="space-y-5" onSubmit={handleUpdateComment}>
+                <Textarea
+                  name="comment"
+                  className="w-full px-4 py-2"
+                  rows={6}
+                  initialValue={comment.text}
+                  onInputChange={(v) => setValues((s) => ({ ...s, text: v }))}
+                />
+                <div className="col-span-2 flex justify-end">
+                  <button
+                    className="flex items-center gap-3 rounded-md bg-blue-500 py-2 px-4 text-white hover:opacity-95 disabled:cursor-not-allowed disabled:bg-gray-600 disabled:opacity-50"
+                    disabled={values.text === comment.text || !Boolean(values.text.trim())}
+                  >
+                    {updateComment.isLoading && <SpinnerIcon />}
+                    Salvar alterações
+                  </button>
+                </div>
+              </form>
+              <Dialog.Close>
+                <CloseIcon />
+              </Dialog.Close>
+            </Dialog.Content>
+          </Dialog.Portal>
         </Dialog.Root>
 
         <AlertDialog.Root open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
@@ -113,26 +120,22 @@ export default function CommentMenu({ scope, identifier, comment }: CommentMenuP
               Deletar
             </DropdownMenu.Item>
           </AlertDialog.Trigger>
-          <AlertDialog.Content
-            title="Você tem certeza disso?"
-            description="Essa ação não poderá ser desfeita. O comentário será excluído permanentemente."
-          >
-            <div className="mt-5 flex justify-end gap-5">
-              <AlertDialog.Cancel
-                className="rounded-md bg-gray-250 py-2 px-3 hover:opacity-90 dark:bg-gray-700"
-                disabled={deleteComment.isLoading}
-              >
-                Cancelar
-              </AlertDialog.Cancel>
-              <AlertDialog.Action
-                className="flex items-center gap-3 rounded-md bg-red-700 py-2 px-3 text-white hover:opacity-90"
-                onClick={handleDeleteComment}
-              >
-                {deleteComment.isLoading && <SpinnerIcon />}
-                Deletar comentário
-              </AlertDialog.Action>
-            </div>
-          </AlertDialog.Content>
+          <AlertDialog.Portal>
+            <AlertDialog.Overlay />
+            <AlertDialog.Content>
+              <AlertDialog.Title>Você tem certeza disso?</AlertDialog.Title>
+              <AlertDialog.Description>
+                Essa ação não poderá ser desfeita. O comentário será excluído permanentemente.
+              </AlertDialog.Description>
+              <div className="mt-5 flex justify-end gap-5">
+                <AlertDialog.Cancel disabled={deleteComment.isLoading}>Cancelar</AlertDialog.Cancel>
+                <AlertDialog.Action onClick={handleDeleteComment}>
+                  {deleteComment.isLoading && <SpinnerIcon />}
+                  Deletar comentário
+                </AlertDialog.Action>
+              </div>
+            </AlertDialog.Content>
+          </AlertDialog.Portal>
         </AlertDialog.Root>
         <DropdownMenu.Arrow
           className="fill-mauve3 dark:fill-mauveDark3"

@@ -169,10 +169,10 @@ export default function Sidebar() {
             isOpenSidebar
               ? 'absolute inset-y-0 left-0 translate-x-0 shadow-lg'
               : 'absolute -translate-x-full'
-          } 3xl:w-80 z-30 flex h-full max-h-screen min-h-screen w-3/4 flex-none transform flex-col overflow-y-auto border-r border-mauve6 bg-white pb-10 transition duration-200 ease-in-out dark:border-mauveDark6 dark:bg-mauveDark1 sm:w-1/2 sm:pb-0 md:w-1/3 lg:relative lg:z-auto lg:w-56 lg:translate-x-0 2xl:w-72`}
+          } 3xl:w-80 z-30 flex h-full max-h-screen min-h-screen w-3/4 flex-none transform flex-col overflow-y-auto border-r border-gray-6 bg-gray-1 pb-10 transition duration-200 ease-in-out sm:w-1/2 sm:pb-0 md:w-1/3 lg:relative lg:z-auto lg:w-56 lg:translate-x-0 2xl:w-72`}
         >
           <div
-            className={`sticky top-0 space-y-3 border-b border-mauve6 bg-mauve1 p-3 dark:border-mauveDark6 dark:bg-mauveDark1 ${glassEffect}`}
+            className={`sticky top-0 space-y-3 border-b border-gray-6 bg-gray-1 p-3 ${glassEffect}`}
           >
             <div className="flex items-center gap-3">
               <button
@@ -203,10 +203,7 @@ export default function Sidebar() {
             {links.map((link, i) => {
               if (typeof link === 'string') {
                 return (
-                  <li
-                    key={i}
-                    className="px-2 pt-5 pb-2 text-xs font-semibold text-slate11 dark:text-slateDark11"
-                  >
+                  <li key={i} className="px-2 pt-5 pb-2 text-xs font-semibold text-gray-11">
                     {link}
                   </li>
                 )
@@ -217,7 +214,7 @@ export default function Sidebar() {
           </ul>
 
           <div
-            className={`sticky bottom-0 flex items-center justify-between border-t border-mauve6 bg-mauve1 p-3 dark:border-mauveDark6 dark:bg-mauveDark1 ${glassEffect}`}
+            className={`sticky bottom-0 flex items-center justify-between border-t border-gray-6 bg-gray-1 p-3 ${glassEffect}`}
           >
             {session ? (
               <div className="h-6 w-6 overflow-hidden rounded-full">
@@ -231,7 +228,7 @@ export default function Sidebar() {
               </div>
             ) : (
               <button
-                className="relative rounded-md bg-mauve2 px-5 py-1.5 text-sm transition duration-200 dark:bg-mauveDark2"
+                className="relative rounded-md bg-gray-2 px-5 py-1.5 text-sm transition duration-200"
                 onClick={openSignInDialog}
               >
                 Fazer login
@@ -244,7 +241,7 @@ export default function Sidebar() {
                   <DropdownMenu.Trigger asChild>
                     <button
                       aria-label="Configurações"
-                      className="rounded-lg bg-mauve4 bg-opacity-0 p-2 text-sm transition duration-200 hover:bg-opacity-100 dark:bg-mauveDark4 dark:bg-opacity-0 dark:hover:bg-opacity-100"
+                      className="rounded-lg bg-opacity-0 p-2 text-sm transition duration-200 hover:bg-gray-4"
                     >
                       <ConfigIcon aria-hidden />
                     </button>
@@ -264,26 +261,31 @@ export default function Sidebar() {
                           Deletar conta
                         </DropdownMenu.Item>
                       </AlertDialog.Trigger>
-                      <AlertDialog.Content
-                        title="Você tem certeza disso?"
-                        description="Essa ação não poderá ser desfeita. A sua conta será deletada permanentemente e os dados não poderão ser restaurados."
-                      >
-                        <div className="mt-5 flex justify-end gap-5">
-                          <AlertDialog.Cancel
-                            className="rounded-md bg-gray-3 py-2 px-3 hover:bg-gray-4"
-                            disabled={deleteAccount.isLoading}
-                          >
-                            Cancelar
-                          </AlertDialog.Cancel>
-                          <AlertDialog.Action
-                            className="flex items-center gap-3 rounded-md bg-red-700 py-2 px-3 text-white hover:opacity-90"
-                            onClick={onDeleteAccount}
-                          >
-                            {deleteAccount.isLoading && <SpinnerIcon />}
-                            Deletar conta
-                          </AlertDialog.Action>
-                        </div>
-                      </AlertDialog.Content>
+                      <AlertDialog.Portal>
+                        <AlertDialog.Overlay />
+                        <AlertDialog.Content>
+                          <AlertDialog.Title>Você tem certeza disso?</AlertDialog.Title>
+                          <AlertDialog.Description>
+                            Essa ação não poderá ser desfeita. A sua conta será deletada
+                            permanentemente e os dados não poderão ser restaurados.
+                          </AlertDialog.Description>
+                          <div className="mt-5 flex justify-end gap-5">
+                            <AlertDialog.Cancel
+                              className="rounded-md bg-gray-3 py-2 px-3 hover:bg-gray-4"
+                              disabled={deleteAccount.isLoading}
+                            >
+                              Cancelar
+                            </AlertDialog.Cancel>
+                            <AlertDialog.Action
+                              className="flex items-center gap-3 rounded-md bg-red-700 py-2 px-3 text-white hover:opacity-90"
+                              onClick={onDeleteAccount}
+                            >
+                              {deleteAccount.isLoading && <SpinnerIcon />}
+                              Deletar conta
+                            </AlertDialog.Action>
+                          </div>
+                        </AlertDialog.Content>
+                      </AlertDialog.Portal>
                     </AlertDialog.Root>
                     <DropdownMenu.Item
                       className="flex select-none items-center rounded-sm py-1.5 pl-4 pr-7 text-sm outline-none focus:bg-violet-9"

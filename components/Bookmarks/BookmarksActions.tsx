@@ -5,12 +5,12 @@ import { Prisma } from '@prisma/client'
 import { toast } from 'react-hot-toast'
 
 import { useReactionMutation } from '@/hooks'
-
 import { DeleteIcon, EditIcon, SpinnerIcon } from '@/icons'
-import { LikeButton, AlertDialog, Textarea, TextField, Dialog } from '@/components'
+import { LikeButton, Textarea, TextField } from '@/components'
+import * as EditBookmark from './EditBookmarkDialog'
+import * as DeleteBookmark from './DeleteBookmarkAlertDialog'
 
 import { useUpdateBookmarkMutation, useDeleteBookmarkMutation } from './Bookmarks.queries'
-
 import type { BookmarkDetail } from './Bookmarks.types'
 
 type BookmarksActionsProps = {
@@ -66,44 +66,29 @@ export const BookmarksActions = ({ bookmark }: BookmarksActionsProps) => {
       <div className="flex gap-3">
         {session?.user.role === 'ADMIN' && (
           <>
-            <AlertDialog.Root open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
-              <AlertDialog.Trigger className="rounded-md px-3 text-sm text-gray-11 transition duration-100 hover:bg-red-700 hover:text-white">
+            <DeleteBookmark.Root open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+              <DeleteBookmark.Trigger aria-label="Deletar bookmark">
                 <DeleteIcon size={16} />
-              </AlertDialog.Trigger>
-              <AlertDialog.Content
-                title="Você tem certeza disso?"
-                description="Essa ação não poderá ser desfeita. O bookmark será excluído permanentemente."
-              >
-                <div className="mt-5 flex justify-end gap-5">
-                  <AlertDialog.Cancel
-                    className="rounded-md bg-gray-3 py-2 px-3 hover:bg-gray-4"
-                    disabled={deleteBookmark.isLoading}
-                  >
-                    Cancelar
-                  </AlertDialog.Cancel>
-                  <AlertDialog.Action
-                    className="flex items-center gap-3 rounded-md bg-red-700 py-2 px-3 text-white hover:bg-red-600"
-                    disabled={deleteBookmark.isLoading}
-                    onClick={handleDeleteBookmark}
-                  >
-                    {deleteBookmark.isLoading && <SpinnerIcon />}
-                    Deletar bookmark
-                  </AlertDialog.Action>
-                </div>
-              </AlertDialog.Content>
-            </AlertDialog.Root>
+              </DeleteBookmark.Trigger>
+              <DeleteBookmark.Content>
+                <DeleteBookmark.Cancel disabled={deleteBookmark.isLoading}>
+                  Cancelar
+                </DeleteBookmark.Cancel>
+                <DeleteBookmark.Action
+                  disabled={deleteBookmark.isLoading}
+                  onClick={handleDeleteBookmark}
+                >
+                  {deleteBookmark.isLoading && <SpinnerIcon />}
+                  Deletar bookmark
+                </DeleteBookmark.Action>
+              </DeleteBookmark.Content>
+            </DeleteBookmark.Root>
 
-            <Dialog.Root open={editDialogOpen} onOpenChange={setEditDialogOpen}>
-              <Dialog.Trigger
-                aria-label="Editar pergunta"
-                className="rounded-md px-3 text-sm text-gray-11 transition duration-100 hover:bg-gray-4"
-              >
+            <EditBookmark.Root open={editDialogOpen} onOpenChange={setEditDialogOpen}>
+              <EditBookmark.Trigger aria-label="Editar bookmark">
                 <EditIcon size={16} />
-              </Dialog.Trigger>
-              <Dialog.Content
-                title="Editar pergunta"
-                description="Preencha os campos para fazer alguma alteração na pergunta. Clique em salvar quando terminar"
-              >
+              </EditBookmark.Trigger>
+              <EditBookmark.Content>
                 <form className="grid grid-cols-2 gap-5" onSubmit={handleUpdateBookmark}>
                   <TextField
                     defaultValue={bookmark.title}
@@ -137,8 +122,8 @@ export const BookmarksActions = ({ bookmark }: BookmarksActionsProps) => {
                     </button>
                   </div>
                 </form>
-              </Dialog.Content>
-            </Dialog.Root>
+              </EditBookmark.Content>
+            </EditBookmark.Root>
           </>
         )}
 

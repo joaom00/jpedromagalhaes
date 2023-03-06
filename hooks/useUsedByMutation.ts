@@ -28,7 +28,7 @@ export function useUsedByMutation() {
   return useMutation(toggleUsedBy, {
     onMutate: (slug) => {
       queryClient.setQueryData<Users>(
-        [{ scope: 'stack', type: 'users', identifier: slug }],
+        [{ entity: 'stack', scope: 'users', identifier: slug }],
         (old) =>
           ({
             userAlreadyUse: !old?.userAlreadyUse,
